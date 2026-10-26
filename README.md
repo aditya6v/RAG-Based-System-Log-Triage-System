@@ -1,122 +1,112 @@
-# Incident Copilot -- midterm scaffold
+# Incident Copilot
 
-RAG-based multi-agent log triage, phase 1 of the 4-agent target: two
-combined agents (triage+retrieval, root-cause+remediation) instead of
-four, single Python service instead of a Node+Python split -- both
-deliberate scope cuts for a 3-4 day build, not the final architecture.
-See the file-by-file notes below for what each piece does, and the
-"likely to break" section at the end before you demo.
-
-## One-time setup (do this first)
-
-1. **Python env**: `python3 -m venv venv && source venv/bin/activate`
-   (Windows: `venv\Scripts\activate`), then `pip install -r requirements.txt`.
-   Use a venv, not your system Python -- some of these packages have had
-   build issues on systems with unusual default Python setups.
-
-2. **MongoDB Atlas** (free tier): create a cluster at mongodb.com/atlas,
-   create a database user, and under **Network Access** add your current
-   IP (or `0.0.0.0/0` if you'll be switching networks before the demo --
-   fine for a throwaway midterm project, not something you'd do for
-   anything real). Copy the `mongodb+srv://...` connection string.
-
-3. **Qdrant Cloud** (free tier): create a cluster at cloud.qdrant.io. The
-   dashboard shows both the cluster URL and an API key.
-
-4. **Gemini API key**: aistudio.google.com -> Get API key. Free tier
-   covers both the chat model and the embedding model, which is why
-   everything here goes through one provider instead of two.
-
-5. Copy `.env.example` to `.env` and fill in the values in `<...>` (Mongo, Qdrant; Gemini only if `LLM_PROVIDER=gemini`).
-
-## Run order
+RAG-based multi-agent triage for supercomputer logs. Paste one log line from
+the BlueGene/L (BGL) system and four agents work through it:
 
 ```
-python -m ingestion.ingest sample_data/sample_logs.txt   # parse + store
-python -m embeddings.embed                                 # embed + index
-python -m agents.graph                                       # sanity-check the pipeline alone
-python app.py                                                  # start the HTTP service
-python -m pytest -q                                            # unit tests, no DB or LLM needed
+START -> retrieval -> triage --(router)--> root_cause -> remediation -> END
+                                  \
+                                   +--> no_action -> END   (normal / low severity)
 ```
 
-Then in another terminal:
+| Agent | What it does | LLM? |
+|---|---|---|
+| retrieval | Drain3 template match (read-only), embed, Qdrant top-5, Mongo counts and labels | embedding only |
+| triage | Category + severity. Nearest-neighbour vote of the retrieved incidents when it is confident, otherwise the LLM | only when the vote is unsure |
+| router | Plain function: severity from `bgl/categories.json` decides the path | no |
+| root_cause | Grounded explanation: the top hit is primary evidence, hits above 0.85 similarity are weak support, the rest are dropped | yes |
+| remediation | Concrete fix, given the root cause and the category definition | yes |
+
+Data: the Loghub BGL dataset (4,747,963 lines, 41 alert codes grouped into 8
+categories). Evaluation results, design decisions and limitations are in
+`docs/ETE_NOTES.md`; build history in `PROGRESS.md`.
+
+## Setup (once)
+
+1. **Python env** (3.12): `python -m venv venv`, then `.\venv\Scripts\Activate.ps1`
+   (if scripts are blocked: `Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned`),
+   then `pip install -r requirements.txt`.
+2. **Ollama** (default LLM, local): install it, then
+   `ollama pull llama3.2:3b` and `ollama pull nomic-embed-text`.
+3. **MongoDB Atlas** free cluster: create a database user, allow your IP under
+   Network Access, copy the `mongodb+srv://...` string.
+4. **Qdrant Cloud** free cluster: copy the cluster URL and API key. Free
+   clusters are **suspended after a few weeks unused**; open the dashboard a
+   day before a demo.
+5. Copy `.env.example` to `.env` and fill in the values in `<...>`.
+   Gemini is optional (`LLM_PROVIDER=gemini`).
+
+## Build the index (once, or after changing data or Drain3 settings)
+
+Download `BGL.zip` from https://zenodo.org/records/8196385 and extract
+`BGL.log` to `data/bgl/` (ignored by git, about 710 MB).
+
 ```
-curl -X POST http://localhost:5000/diagnose \
-  -H "Content-Type: application/json" \
-  -d '{"raw_log": "nova-compute.log.1 2017-05-16 03:12:09.112 2931 ERROR nova.compute.manager [instance: aa21] Failed to allocate network for instance, no fixed IP addresses available."}'
+python -I scripts/sample_bgl.py data/bgl/BGL.log   # -> sample_data/bgl_index.log, eval/bgl_eval.jsonl
+python -m ingestion.ingest sample_data/bgl_index.log  # Drain3 templates -> Mongo
+python -m embeddings.embed                            # templates -> Qdrant
 ```
 
-Swap `sample_data/sample_logs.txt` for a real slice of the Loghub
-OpenStack dataset (github.com/logpai/loghub) once the pipeline runs
-end-to-end on the fake data -- don't point at real data until the fake
-data path works, so you know any new failure is about the real data, not
-the plumbing.
+The sample and eval files are committed, so the first step is only needed to
+regenerate them. To start from scratch, delete `drain3_state.bin` and use an
+empty `MONGO_DB_NAME` / `QDRANT_COLLECTION` first. After re-ingesting, run
+`python -m embeddings.embed --rebuild`.
 
-## What each file does
+## Run
 
-- **config.py** -- every env var, read once, in one place. `require_all()`
-  fails loudly at startup if a key's missing, instead of failing
-  confusingly three calls deep.
-- **drain3.ini** -- Drain3's tuning knobs. `sim_th` is the one you'll
-  actually touch (see comments in the file).
-- **ingestion/parser.py** -- wraps Drain3: raw log line in, `{cluster_id,
-  template}` out. Owns the one shared `TemplateMiner` instance, persisted
-  to `drain3_state.bin` so ingestion and the live app agree on what a
-  given template looks like. `parse_line` (ingestion) learns new templates;
-  `match_line` (diagnose/eval) only looks them up and never changes the
-  saved state.
-- **ingestion/ingest.py** -- batch script. Reads a log file, writes one
-  `events` doc per line and upserts one `incidents` doc per unique
-  template into Mongo.
-- **db/mongo_client.py**, **db/qdrant_client.py** -- connection wrappers,
-  nothing else in the codebase talks to Mongo or Qdrant directly except
-  through these.
-- **embeddings/embed.py** -- batch script. Embeds every incident that
-  doesn't have a Qdrant vector yet. Safe to re-run.
-- **agents/llm.py** -- the only file that calls ollama(primary) and gemin(alternative) . Two functions:
-  `chat_text`, `embed_text`.
-- **agents/state.py** -- the `IncidentState` TypedDict that flows through
-  the graph.
-- **agents/graph.py** -- the pipeline itself. `triage_and_retrieve`
-  (classify + semantic search), `diagnose_and_remediate` (grounded root
-  cause + fix). Run directly for fast iteration without Flask in the way.
-- **app.py** -- `/diagnose` HTTP endpoint, thin wrapper around the
-  compiled graph. `/health` for a quick "is it up" check.
-- **eval/evaluate.py** -- precision/recall of the classification step
-  against a small hand-labeled set, via scikit-learn.
+```
+uvicorn api.main:app --port 8000      # or: python -m api.main
+```
 
-## What's likely to break, and how to fix it
+- http://localhost:8000: the page (sample buttons, history, per-agent timings)
+- http://localhost:8000/docs: interactive API docs
+- `POST /diagnose` with `{"raw_log": "<one BGL line>"}`; `GET /categories`; `GET /health`
 
-- **Mongo hangs instead of erroring**: your current IP isn't allow-listed
-  in Atlas, or the connection string's password has an unescaped special
-  character. This is the single most common "it worked an hour ago" bug.
-- **Qdrant upsert fails with a dimension error**: you changed
-  `GEMINI_EMBED_MODEL` without updating `config.EMBEDDING_DIM` to match.
-- **Retrieval returns nothing relevant**: either `embeddings/embed.py`
-  hasn't been run since the last ingestion, or `drain3_state.bin` is
-  missing/stale so the live app's templates don't line up with what was
-  embedded. Re-run ingestion, then embedding, in order.
-- **Gemini 429 errors**: free-tier rate limit. `embeddings/embed.py`
-  already sleeps between calls; raise the sleep if you still hit it, or
-  don't run ingestion+embedding back-to-back on a large batch right
-  before you're about to demo.
-- **The diagnosis response has a `root_cause` that's just raw text instead
-  of the expected fields**: Gemini didn't return clean JSON. This is
-  handled (see `_parse_json_response` in `agents/graph.py`) by falling
-  back to showing the raw text rather than crashing the request --
-  acceptable for a demo, but if it happens often, tighten the prompt or
-  lower temperature.
-- **A node seems to silently not run / state looks stale**: print
-  `state["notes"]` -- every node appends to it, so it tells you exactly
-  how far execution got.
+```
+curl -X POST http://localhost:8000/diagnose -H "Content-Type: application/json" \
+  -d '{"raw_log": "1125552602 2005.08.31 R23-M1-N8-I:J18-U01 2005-08-31-22.30.02.453491 R23-M1-N8-I:J18-U01 RAS KERNEL FATAL Lustre mount FAILED : bglio318 : point /p/gb1"}'
+```
 
-## Deliberately deferred (don't build these before the demo)
+### Docker
 
-- Conditional routing / branching in the graph -- the two nodes are
-  wired linearly; a router node that picks different downstream paths by
-  severity is a natural phase-2 addition, not needed to demonstrate the
-  RAG-grounding concept.
-- FastAPI migration -- Flask is fine for a demo; FastAPI is worth it
-  once you have time to learn it properly, not during a 3-4 day crunch.
-- Splitting into 4 separate agents -- explicitly framed as "phase 1 of 4"
-  in the presentation, not a hidden shortcut.
+```
+docker compose up --build             # API in a container, Ollama on the host
+docker compose --profile ollama up    # also run Ollama in a container (slower, no GPU)
+```
+
+MongoDB Atlas and Qdrant Cloud stay external; the container reads `.env`.
+
+## Test and evaluate
+
+```
+python -m pytest -q                                  # unit + API contract tests, no DB or LLM needed
+python -m eval.evaluate eval/bgl_eval.jsonl          # full eval, about 25 min on local Ollama
+python -m eval.evaluate eval/bgl_eval.jsonl --no-llm # retrieval-only classifiers, about 3 min
+python -m eval.evaluate --report eval/results/<run>.json   # rebuild a report without re-running
+python -m agents.graph                               # one line through the whole pipeline
+```
+
+## Code map
+
+- `bgl/categories.json`: the 8 categories, definitions, severities, alert codes. The one place they are defined.
+- `bgl/lines.py`: splits a BGL line; the ground-truth label token never reaches Drain3, embeddings or the LLM.
+- `ingestion/parser.py`: Drain3 wrapper. `parse_line` learns (ingestion only); `match_line` only looks up (diagnose, eval).
+- `ingestion/ingest.py`, `embeddings/embed.py`: batch jobs that build the index.
+- `agents/retrieval.py`, `agents/classify.py`: shared by the graph and the eval.
+- `agents/graph.py`: the four agents, router, evidence selection, per-agent timing.
+- `agents/llm.py`: the only file that calls an LLM (Ollama or Gemini).
+- `api/main.py`: FastAPI app, Pydantic models, JSON errors.
+- `frontend/index.html`: single page, no dependencies.
+- `eval/evaluate.py`: compares the FATAL rule, nearest-neighbour vote, LLM-only, LLM+RAG and triage.
+- `scripts/`: BGL scan and sampling scripts. Run them with `python -I`.
+
+## When something breaks
+
+- **Request hangs, then a 500 about Mongo**: your IP isn't allowed in Atlas, or the
+  password in `MONGO_URI` has an unescaped `@ : /`.
+- **500 "Connection was reset" from Qdrant**: the free cluster is suspended. Resume it in the dashboard.
+- **Connection refused on 11434**: Ollama isn't running. **"model not found"**: `ollama pull` it.
+- **Similarity scores all low / retrieval nonsense**: embeddings were made with a
+  different model, or Drain3 state doesn't match what was embedded. Re-run
+  ingest, then `embed --rebuild`.
+- **First request slow**: Ollama is loading the model into memory; later calls are faster.

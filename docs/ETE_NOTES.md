@@ -169,9 +169,12 @@ Triage per class (all 623): normal F1 0.997, memory/CPU 0.893 (precision 0.852),
 
 **Latency** (same machine, CPU only, models already loaded):
 - Retrieval median 0.25 s (p90 0.26 s); LLM classify median 0.65 s (alone) / 1.59 s (with neighbours).
-- End to end through `/diagnose` (`scripts/run_samples.py`):
-  - Normal line: about 0.3 s once warm (a cold start was 5.3 s), no LLM call.
-  - Full diagnosis: 6.3–7.9 s, of which root cause is 2.3–3.6 s and remediation 2.9–3.6 s.
+- End to end over real HTTP to the running server (`eval/results/samples-stage3-http.json`):
+  - Normal line, warm: 0.68 s, no LLM call (retrieval only).
+  - Full diagnosis, warm: 6.3–7.4 s, of which root cause is 2.1–3.7 s and remediation 3.0–3.5 s.
+  - Cold start: the first request after the server starts waits for Ollama to load each
+    model: 7.8 s for the embedding model, and 8.8 s extra on the first root-cause call
+    for the chat model. Send one request before a live demo.
 
 **Diagnosis quality** (5 demo lines, read by hand):
 - All 5 were classified correctly.

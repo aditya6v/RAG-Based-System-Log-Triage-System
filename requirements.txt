@@ -4,7 +4,9 @@ qdrant-client
 langgraph
 ollama
 google-genai
-flask
+fastapi
+uvicorn[standard]
 python-dotenv
 scikit-learn
 pytest
+httpx
