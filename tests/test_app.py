@@ -30,10 +30,10 @@ def test_diagnose_requires_raw_log(client):
 
 
 def test_diagnose_returns_the_graph_state(client, monkeypatch):
-    monkeypatch.setattr(app_module, "get_graph", lambda: FakeGraph(result={"classification": "normal operation"}))
+    monkeypatch.setattr(app_module, "get_graph", lambda: FakeGraph(result={"classification": "normal"}))
     r = client.post("/diagnose", json={"raw_log": "line"})
     assert r.status_code == 200
-    assert r.get_json()["classification"] == "normal operation"
+    assert r.get_json()["classification"] == "normal"
     assert r.get_json()["raw_log"] == "line"
 
 

@@ -70,7 +70,7 @@
 
   <div class="card">
     <label for="log">Paste a raw log line</label>
-    <textarea id="log" placeholder="nova-compute.log.1 2017-05-16 00:02:40.118 2931 ERROR nova.compute.manager [instance: 91fe] Rebuild of instance failed: ..."></textarea>
+    <textarea id="log" placeholder="1118538627 2005.06.11 R30-M0-N9-C:J16-U01 2005-06-11-18.10.27.692687 R30-M0-N9-C:J16-U01 RAS KERNEL FATAL data TLB error interrupt"></textarea>
     <div class="samples" id="samples"></div>
     <div class="row">
       <button class="primary" id="go">Diagnose</button>
@@ -104,11 +104,13 @@
 </div>
 
 <script>
+// Real lines from the held-out BGL eval set (eval/bgl_eval.jsonl), label token removed.
 const SAMPLES = [
-  {label: "Normal spawn", log: "nova-compute.log.1 2017-05-16 00:00:04.500 2931 INFO nova.compute.manager [instance: 9a3f] Took 0.26 seconds to spawn the instance on the hypervisor."},
-  {label: "Network allocation", log: "nova-compute.log.1 2017-05-16 00:01:12.009 2931 ERROR nova.compute.manager [instance: 2c88] Failed to allocate network for instance, no fixed IP addresses available."},
-  {label: "Disk space warning", log: "nova-compute.log.1 2017-05-16 00:02:03.771 2931 WARNING nova.compute.manager [instance: 9a3f] Instance destroyed successfully, but failed to free disk space."},
-  {label: "Rebuild / binding failure", log: "nova-compute.log.1 2017-05-16 00:02:40.118 2931 ERROR nova.compute.manager [instance: 91fe] Rebuild of instance failed: NovaException: Unexpected vif_type=binding_failed"}
+  {label: "FATAL but normal", log: "1118710081 2005.06.13 R03-M1-N9-C:J04-U01 2005-06-13-17.48.01.577343 R03-M1-N9-C:J04-U01 RAS KERNEL FATAL instruction address: 0x00004ed8"},
+  {label: "Memory / CPU fault", log: "1118538627 2005.06.11 R30-M0-N9-C:J16-U01 2005-06-11-18.10.27.692687 R30-M0-N9-C:J16-U01 RAS KERNEL FATAL data TLB error interrupt"},
+  {label: "Lustre mount failed", log: "1125552602 2005.08.31 R23-M1-N8-I:J18-U01 2005-08-31-22.30.02.453491 R23-M1-N8-I:J18-U01 RAS KERNEL FATAL Lustre mount FAILED : bglio318 : point /p/gb1"},
+  {label: "I/O link severed", log: "1124721545 2005.08.22 R73-M1-N4-I:J18-U01 2005-08-22-07.39.05.715470 R73-M1-N4-I:J18-U01 RAS APP FATAL ciod: Error reading message prefix after LOGIN_MESSAGE on CioStream socket to 172.16.96.116:53370: Link has been severed"},
+  {label: "Power deactivated", log: "1120673475 2005.07.06 NULL 2005-07-06-11.11.15.368928 NULL RAS KERNEL FATAL Power deactivated: R05-M0-N2"}
 ];
 
 const $ = id => document.getElementById(id);
@@ -122,11 +124,10 @@ SAMPLES.forEach(s => {
 
 function badgeClass(c){
   c = (c || "").toLowerCase();
-  if (c.includes("normal")) return "ok";
-  if (c.includes("allocation")) return "warn";
-  if (c.includes("binding")) return "bad";
-  if (c.includes("disk")) return "info";
-  return "neutral";
+  if (c === "normal") return "ok";
+  if (c.includes("memory") || c.includes("kernel") || c.includes("filesystem")) return "bad";
+  if (c === "unknown") return "neutral";
+  return "warn";
 }
 
 function text(v){ return typeof v === "string" ? v : JSON.stringify(v); }

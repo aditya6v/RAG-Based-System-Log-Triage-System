@@ -27,10 +27,9 @@ Breaks-and-fixes:
 import json
 
 from agents.state import IncidentState
-from agents.llm import chat_text, embed_text
-from ingestion.parser import match_line
-from db.mongo_client import incidents_collection
-from db.qdrant_client import get_client
+from agents.classify import triage
+from agents.llm import chat_text
+from agents.retrieval import retrieve
 import config
 
 from langgraph.graph import StateGraph, START, END
@@ -59,51 +58,21 @@ def _parse_json_response(text: str) -> dict:
 
 
 def triage_and_retrieve(state: IncidentState) -> dict:
-    parsed = match_line(state["raw_log"])
-    query_vector = embed_text(parsed["template"])
-
-    hits = get_client().query_points(
-        collection_name=config.QDRANT_COLLECTION,
-        query=query_vector,
-        limit=3,
-        with_payload=True,
-    ).points
-
-    retrieved = []
-    for hit in hits:
-        mongo_doc = incidents_collection().find_one({"_id": str(hit.id)})
-        retrieved.append({
-            "score": round(hit.score, 3),
-            "template": hit.payload.get("template", ""),
-            "example_raw": hit.payload.get("example_raw", ""),
-            "occurrence_count": mongo_doc.get("occurrence_count") if mongo_doc else None,
-        })
-
-    classify_prompt = f"""You are a log triage assistant. Classify this log line as EXACTLY ONE of the following categories (copy it exactly, verbatim):
-
-- network allocation failure
-- network binding failure
-- disk space cleanup failure
-- normal operation
-
-Log line: {state["raw_log"]}
-Extracted template: {parsed["template"]}
-
-Respond with ONLY the category text from the list above, nothing else -- no punctuation, no explanation."""
-    classification = chat_text(classify_prompt).strip()
+    r = retrieve(state["raw_log"])
+    t = triage(r["text"], r["retrieved"])
 
     template_note = (
-        f"matched template cluster {parsed['cluster_id']}" if parsed["cluster_id"] is not None
+        f"matched template cluster {r['cluster_id']}" if r["cluster_id"] is not None
         else "no matching template from ingestion, searched with the raw line"
     )
     return {
-        "cluster_id": parsed["cluster_id"],
-        "template": parsed["template"],
-        "retrieved": retrieved,
-        "classification": classification,
+        "cluster_id": r["cluster_id"],
+        "template": r["template"],
+        "retrieved": r["retrieved"],
+        "classification": t["classification"],
         "notes": state.get("notes", []) + [
-            f"triage_and_retrieve: {template_note}; classified as '{classification}', "
-            f"found {len(retrieved)} similar past incidents"
+            f"triage_and_retrieve: {template_note}; classified as '{t['classification']}' "
+            f"by {t['method']}, found {len(r['retrieved'])} similar past incidents"
         ],
     }
 
@@ -164,7 +133,7 @@ if __name__ == "__main__":
     config.require_all()
     app = build_graph()
     result = app.invoke({
-        "raw_log": "nova-compute.log.1 2017-05-16 03:12:09.112 2931 ERROR nova.compute.manager [instance: aa21] Failed to allocate network for instance, no fixed IP addresses available.",
+        "raw_log": "1125552602 2005.08.31 R23-M1-N8-I:J18-U01 2005-08-31-22.30.02.453491 R23-M1-N8-I:J18-U01 RAS KERNEL FATAL Lustre mount FAILED : bglio318 : point /p/gb1",
         "notes": [],
     })
     print(json.dumps(result, indent=2, default=str))

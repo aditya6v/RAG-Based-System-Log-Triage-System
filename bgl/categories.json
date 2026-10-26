@@ -1,0 +1,61 @@
+{
+  "_comment": "The one place BGL categories are defined. Prompts, eval, routing and the UI all read this file. Codes are the label tokens at the start of each BGL.log line ('-' = normal). KERNPROG is mapped to normal on purpose: its only message, 'program interrupt', appears 3,662 times labelled normal and 5 times labelled KERNPROG, so no model can learn it (see PLAN.md, BGL finding 3).",
+  "categories": [
+    {
+      "id": "normal",
+      "name": "normal",
+      "severity": "none",
+      "definition": "Routine operation, including noisy FATAL/ERROR-level messages that are not real alerts (core dumps being generated, ido ASSERT noise, register dumps, node card status reports).",
+      "codes": ["-", "KERNPROG"]
+    },
+    {
+      "id": "memory_cpu_fault",
+      "name": "memory / CPU fault",
+      "severity": "high",
+      "definition": "A compute node hit a processor or memory hardware fault: TLB error interrupt, data storage interrupt, machine check, floating point unavailable, DDR bit steering failure.",
+      "codes": ["KERNDTLB", "KERNSTOR", "KERNMC", "KERNTLBE", "KERNFLOAT", "KERNBIT", "MMCS"]
+    },
+    {
+      "id": "kernel_crash",
+      "name": "kernel crash / panic",
+      "severity": "high",
+      "definition": "The compute node kernel stopped: kernel panic, rts panic, kernel terminated, rts assertion failed, microloader assertion.",
+      "codes": ["KERNTERM", "KERNRTSP", "KERNPAN", "KERNRTSA", "KERNMICRO"]
+    },
+    {
+      "id": "io_connection_lost",
+      "name": "I/O node connection lost",
+      "severity": "medium",
+      "definition": "The I/O daemon (ciod) lost its socket connection to a compute node: link severed, connection reset, connection timed out, failed to read message prefix, or bad packets on the tree network.",
+      "codes": ["APPSEV", "APPREAD", "APPRES", "APPTO", "KERNREC"]
+    },
+    {
+      "id": "filesystem_mount_failure",
+      "name": "filesystem mount failure",
+      "severity": "high",
+      "definition": "A node could not mount or use its filesystem: Lustre mount FAILED, unable to mount filesystem, or Input/output error when changing into a job directory.",
+      "codes": ["KERNMNTF", "KERNMNT", "APPOUT"]
+    },
+    {
+      "id": "job_launch_failure",
+      "name": "job launch / resource failure",
+      "severity": "medium",
+      "definition": "A job could not start because ciod failed to create the node map: resource temporarily unavailable, device busy, no child processes, cannot allocate memory.",
+      "codes": ["APPUNAV", "APPBUSY", "APPCHILD", "APPALLOC"]
+    },
+    {
+      "id": "link_hardware_failure",
+      "name": "link / network hardware",
+      "severity": "medium",
+      "definition": "Interconnect hardware failed: midplane switch link card errors (iap/pap/bll failed, port disconnected), no ethernet link, uncorrectable torus error, external input interrupt.",
+      "codes": ["LINKIAP", "LINKDISC", "LINKPAP", "LINKBLL", "KERNNOETH", "APPTORUS", "KERNEXT"]
+    },
+    {
+      "id": "power_control_failure",
+      "name": "power and control system",
+      "severity": "medium",
+      "definition": "Power or service/control infrastructure failed: power deactivated, power good signal lost, power module fault, mailbox or idoproxy socket closed or connection lost, control daemons (mmcs_server, ciodb) exited, monitor exceptions.",
+      "codes": ["KERNPOW", "KERNSERV", "MONPOW", "KERNSOCK", "KERNCON", "MASABNORM", "MASNORM", "MONNULL", "MONILL"]
+    }
+  ]
+}

@@ -25,7 +25,7 @@ def test_normal_logs_skip_diagnosis_without_calling_the_llm(monkeypatch):
         raise AssertionError("LLM should not be called for a normal log")
     monkeypatch.setattr(graph, "chat_text", no_llm)
 
-    out = graph.diagnose_and_remediate({"raw_log": "x", "classification": "normal operation", "notes": []})
+    out = graph.diagnose_and_remediate({"raw_log": "x", "classification": "normal", "notes": []})
     assert out["remediation"] == "No action needed."
     assert "skipped" in out["notes"][-1]
 
@@ -33,7 +33,7 @@ def test_normal_logs_skip_diagnosis_without_calling_the_llm(monkeypatch):
 def test_failures_get_a_diagnosis_from_the_llm(monkeypatch):
     monkeypatch.setattr(graph, "chat_text", lambda p: '{"root_cause": "rc", "remediation": "fix"}')
     out = graph.diagnose_and_remediate({
-        "raw_log": "x", "classification": "network allocation failure", "notes": [],
+        "raw_log": "x", "classification": "kernel_crash", "notes": [],
         "retrieved": [{"score": 0.9, "occurrence_count": 3, "template": "t"}],
     })
     assert (out["root_cause"], out["remediation"]) == ("rc", "fix")
