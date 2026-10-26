@@ -1,0 +1,12 @@
+[
+  {"raw_log": "nova-compute.log.1 2017-05-16 00:00:04.500 2931 INFO nova.compute.manager [instance: 9a3f] Took 0.26 seconds to spawn the instance on the hypervisor.", "true_label": "normal operation"},
+  {"raw_log": "nova-compute.log.1 2017-05-16 00:00:05.512 2931 INFO nova.compute.manager [instance: 7b1c] Took 0.31 seconds to spawn the instance on the hypervisor.", "true_label": "normal operation"},
+  {"raw_log": "nova-compute.log.1 2017-05-16 00:00:06.221 2931 INFO nova.compute.manager [instance: 2c88] Took 0.29 seconds to spawn the instance on the hypervisor.", "true_label": "normal operation"},
+  {"raw_log": "nova-compute.log.1 2017-05-16 00:01:12.009 2931 ERROR nova.compute.manager [instance: 2c88] Failed to allocate network for instance, no fixed IP addresses available.", "true_label": "network allocation failure"},
+  {"raw_log": "nova-compute.log.1 2017-05-16 00:01:45.330 2931 ERROR nova.compute.manager [instance: 44ab] Failed to allocate network for instance, no fixed IP addresses available.", "true_label": "network allocation failure"},
+  {"raw_log": "nova-compute.log.1 2017-05-16 00:02:03.771 2931 WARNING nova.compute.manager [instance: 9a3f] Instance destroyed successfully, but failed to free disk space.", "true_label": "disk space cleanup failure"},
+  {"raw_log": "nova-compute.log.1 2017-05-16 00:02:40.118 2931 ERROR nova.compute.manager [instance: 91fe] Rebuild of instance failed: NovaException: Unexpected vif_type=binding_failed", "true_label": "network binding failure"},
+  {"raw_log": "nova-compute.log.1 2017-05-16 00:03:01.900 2931 ERROR nova.compute.manager [instance: 91fe] Rebuild of instance failed: NovaException: Unexpected vif_type=binding_failed", "true_label": "network binding failure"},
+  {"raw_log": "nova-compute.log.1 2017-05-16 00:03:55.442 2931 INFO nova.compute.manager [instance: 55de] Took 0.28 seconds to spawn the instance on the hypervisor.", "true_label": "normal operation"},
+  {"raw_log": "nova-compute.log.1 2017-05-16 00:04:12.667 2931 ERROR nova.compute.manager [instance: 33af] Failed to allocate network for instance, no fixed IP addresses available.", "true_label": "network allocation failure"}
+]

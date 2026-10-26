@@ -1,0 +1,7 @@
+drain3
+pymongo
+qdrant-client
+google-genai
+flask
+python-dotenv
+scikit-learn

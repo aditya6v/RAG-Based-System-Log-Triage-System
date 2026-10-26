@@ -1,0 +1,10 @@
+venv/
+__pycache__/
+*.pyc
+.env
+
+# drain3_state.bin is NOT ignored on purpose -- see README. Ingestion and
+# the live app must share this file or retrieval quality degrades.
+data/
+
+qdrant_storage/
