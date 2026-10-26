@@ -12,7 +12,7 @@ See the file-by-file notes below for what each piece does, and the
 1. **Python env**: `python3 -m venv venv && source venv/bin/activate`
    (Windows: `venv\Scripts\activate`), then `pip install -r requirements.txt`.
    Use a venv, not your system Python -- some of these packages have had
-   build i  ssues on systems with unusual default Python setups.
+   build issues on systems with unusual default Python setups.
 
 2. **MongoDB Atlas** (free tier): create a cluster at mongodb.com/atlas,
    create a database user, and under **Network Access** add your current
@@ -27,7 +27,7 @@ See the file-by-file notes below for what each piece does, and the
    covers both the chat model and the embedding model, which is why
    everything here goes through one provider instead of two.
 
-5. Copy `.env.example` to `.env` and fill in all five values.
+5. Copy `.env.example` to `.env` and fill in the values in `<...>` (Mongo, Qdrant; Gemini only if `LLM_PROVIDER=gemini`).
 
 ## Run order
 
@@ -36,6 +36,7 @@ python -m ingestion.ingest sample_data/sample_logs.txt   # parse + store
 python -m embeddings.embed                                 # embed + index
 python -m agents.graph                                       # sanity-check the pipeline alone
 python app.py                                                  # start the HTTP service
+python -m pytest -q                                            # unit tests, no DB or LLM needed
 ```
 
 Then in another terminal:
@@ -61,7 +62,9 @@ the plumbing.
 - **ingestion/parser.py** -- wraps Drain3: raw log line in, `{cluster_id,
   template}` out. Owns the one shared `TemplateMiner` instance, persisted
   to `drain3_state.bin` so ingestion and the live app agree on what a
-  given template looks like.
+  given template looks like. `parse_line` (ingestion) learns new templates;
+  `match_line` (diagnose/eval) only looks them up and never changes the
+  saved state.
 - **ingestion/ingest.py** -- batch script. Reads a log file, writes one
   `events` doc per line and upserts one `incidents` doc per unique
   template into Mongo.
