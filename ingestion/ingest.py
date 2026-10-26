@@ -42,7 +42,8 @@ def ingest_file(path: str) -> None:
             incidents.bulk_write(incident_ops)
             incident_ops.clear()
 
-    with open(path) as f:
+    # Explicit utf-8: Windows defaults to cp1252, which crashes on real log files.
+    with open(path, encoding="utf-8", errors="replace") as f:
         for raw_line in f:
             raw_line = raw_line.rstrip("\n")
             if not raw_line.strip() or raw_line.lstrip().startswith(";"):

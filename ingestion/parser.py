@@ -35,9 +35,29 @@ _miner = TemplateMiner(persistence_handler=_persistence, config=_config)
 
 
 def parse_line(raw_line: str) -> dict:
+    """Ingestion only: learns from the line (may create or widen a cluster)
+    and persists the change to drain3_state.bin."""
     result = _miner.add_log_message(raw_line)
     return {
         "raw": raw_line,
         "cluster_id": str(result["cluster_id"]),
         "template": result["template_mined"],
+    }
+
+
+def match_line(raw_line: str) -> dict:
+    """Query path (/diagnose, eval): read-only lookup against the clusters
+    learned at ingestion. Never creates or changes a cluster, so diagnosing a
+    line can't drift the templates that were embedded in Qdrant.
+
+    Drain3's match needs every non-wildcard token to agree exactly, so a
+    genuinely new kind of line returns no cluster. In that case cluster_id is
+    None and the raw line itself stands in as the template for retrieval."""
+    cluster = _miner.match(raw_line, full_search_strategy="fallback")
+    if cluster is None:
+        return {"raw": raw_line, "cluster_id": None, "template": raw_line}
+    return {
+        "raw": raw_line,
+        "cluster_id": str(cluster.cluster_id),
+        "template": cluster.get_template(),
     }

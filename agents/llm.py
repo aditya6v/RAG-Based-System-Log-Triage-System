@@ -4,9 +4,8 @@ Nothing else in the codebase should import google.genai or ollama
 directly, so if you ever swap providers, this is the only file that
 changes.
 
-Provider is picked by config.LLM_PROVIDER ("gemini", the default, or
-"ollama" for a fully local/offline setup -- see config.py and the
-README's setup section for how to switch).
+Provider is picked by config.LLM_PROVIDER ("ollama", the default, fully
+local; or "gemini" -- see config.py for how to switch).
 
 Note: we use the plain `google-genai` SDK / `ollama` client directly
 rather than going through LangChain's chat-model wrapper. LangGraph

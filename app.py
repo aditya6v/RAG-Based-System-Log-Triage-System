@@ -57,5 +57,18 @@ def diagnose():
     return jsonify(result)
 
 
+@app.errorhandler(Exception)
+def handle_error(e):
+    # Always answer in JSON so the front page can show the message instead of
+    # failing to parse Flask's HTML error page. Most failures here are a
+    # database or LLM being unreachable.
+    app.logger.exception("request failed")
+    status = getattr(e, "code", 500)
+    if not isinstance(status, int):
+        status = 500
+    return jsonify({"error": f"{type(e).__name__}: {e}"}), status
+
+
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    import os
+    app.run(debug=os.environ.get("FLASK_DEBUG") == "1", port=5000)

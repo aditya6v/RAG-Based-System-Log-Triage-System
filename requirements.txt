@@ -1,7 +1,10 @@
 drain3
 pymongo
 qdrant-client
+langgraph
+ollama
 google-genai
 flask
 python-dotenv
 scikit-learn
+pytest

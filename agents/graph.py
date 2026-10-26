@@ -28,7 +28,7 @@ import json
 
 from agents.state import IncidentState
 from agents.llm import chat_text, embed_text
-from ingestion.parser import parse_line
+from ingestion.parser import match_line
 from db.mongo_client import incidents_collection
 from db.qdrant_client import get_client
 import config
@@ -47,13 +47,19 @@ def _parse_json_response(text: str) -> dict:
         cleaned = cleaned.strip("`")
         cleaned = cleaned.split("\n", 1)[1] if "\n" in cleaned else cleaned
     try:
-        return json.loads(cleaned)
+        parsed = json.loads(cleaned)
     except json.JSONDecodeError:
-        return {"_unparsed": text}
+        # Last try: the outermost {...}, for "Here is the JSON: {...}" replies.
+        start, end = cleaned.find("{"), cleaned.rfind("}")
+        try:
+            parsed = json.loads(cleaned[start:end + 1]) if 0 <= start < end else None
+        except json.JSONDecodeError:
+            parsed = None
+    return parsed if isinstance(parsed, dict) else {"_unparsed": text}
 
 
 def triage_and_retrieve(state: IncidentState) -> dict:
-    parsed = parse_line(state["raw_log"])
+    parsed = match_line(state["raw_log"])
     query_vector = embed_text(parsed["template"])
 
     hits = get_client().query_points(
@@ -86,15 +92,21 @@ Extracted template: {parsed["template"]}
 Respond with ONLY the category text from the list above, nothing else -- no punctuation, no explanation."""
     classification = chat_text(classify_prompt).strip()
 
+    template_note = (
+        f"matched template cluster {parsed['cluster_id']}" if parsed["cluster_id"] is not None
+        else "no matching template from ingestion, searched with the raw line"
+    )
     return {
         "cluster_id": parsed["cluster_id"],
         "template": parsed["template"],
         "retrieved": retrieved,
         "classification": classification,
         "notes": state.get("notes", []) + [
-            f"triage_and_retrieve: classified as '{classification}', found {len(retrieved)} similar past incidents"
+            f"triage_and_retrieve: {template_note}; classified as '{classification}', "
+            f"found {len(retrieved)} similar past incidents"
         ],
     }
+
 
 def diagnose_and_remediate(state: IncidentState) -> dict:
     if "normal" in state.get("classification", "").lower():
@@ -104,9 +116,6 @@ def diagnose_and_remediate(state: IncidentState) -> dict:
             "notes": state.get("notes", []) + ["diagnose_and_remediate: skipped, classified as normal operation"],
         }
 
-    evidence = ...  # existing code continues unchanged
-
-def diagnose_and_remediate(state: IncidentState) -> dict:
     evidence = "\n".join(
         f"- (similarity {r['score']}, seen {r['occurrence_count']}x before) {r['template']}"
         for r in state.get("retrieved", [])
