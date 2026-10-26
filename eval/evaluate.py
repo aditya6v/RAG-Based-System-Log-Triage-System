@@ -42,7 +42,21 @@ RESULTS_DIR = Path(__file__).with_name("results")
 MULTICLASS = ["knn_vote", "llm_only", "llm_rag", "triage"]
 
 
-def run(path: str, limit: int | None, use_llm: bool) -> Path:
+def _retry(fn, *args, tries: int = 3):
+    """Transient failures (a dropped Qdrant connection, a memory hiccup while
+    decompressing a response) shouldn't kill a 25-minute run. Real errors
+    still surface after the last try."""
+    for attempt in range(tries):
+        try:
+            return fn(*args)
+        except Exception as e:
+            if attempt == tries - 1:
+                raise
+            print(f"  retrying after {type(e).__name__}: {str(e)[:120]}", file=sys.stderr)
+            time.sleep(3 * (attempt + 1))
+
+
+def run(path: str, limit: int | None, use_llm: bool, resume: str | None = None) -> Path:
     import config
     from agents import classify
     from agents.retrieval import retrieve
@@ -53,11 +67,21 @@ def run(path: str, limit: int | None, use_llm: bool) -> Path:
     if limit:
         examples = examples[:limit]
 
+    # Every finished example is appended to a .partial.jsonl straight away, so
+    # a crash loses at most one example; --resume continues from that file.
+    RESULTS_DIR.mkdir(exist_ok=True)
+    partial = Path(resume) if resume else RESULTS_DIR / f"{datetime.now():%Y%m%d-%H%M%S}.partial.jsonl"
     rows = []
+    if partial.exists():
+        rows = [json.loads(line) for line in partial.read_text(encoding="utf-8").splitlines() if line.strip()]
+        print(f"  resuming: {len(rows)} examples already done in {partial.name}", file=sys.stderr)
+    done = {r["line_no"] for r in rows}
     t_start = time.perf_counter()
     for i, ex in enumerate(examples, 1):
+        if ex["line_no"] in done:
+            continue
         t0 = time.perf_counter()
-        r = retrieve(ex["raw_log"])
+        r = _retry(retrieve, ex["raw_log"])
         t_retrieval = time.perf_counter() - t0
         vote = classify.knn_vote(r["retrieved"])
         row = {
@@ -73,17 +97,18 @@ def run(path: str, limit: int | None, use_llm: bool) -> Path:
         }
         if use_llm:
             t0 = time.perf_counter()
-            row["pred"]["llm_only"] = classify.llm_classify(r["text"])
+            row["pred"]["llm_only"] = _retry(classify.llm_classify, r["text"])
             row["seconds"]["llm_only"] = round(time.perf_counter() - t0, 3)
             t0 = time.perf_counter()
-            row["pred"]["llm_rag"] = classify.llm_classify(r["text"], r["retrieved"])
+            row["pred"]["llm_rag"] = _retry(classify.llm_classify, r["text"], r["retrieved"])
             row["seconds"]["llm_rag"] = round(time.perf_counter() - t0, 3)
         rows.append(row)
+        with open(partial, "a", encoding="utf-8") as f:
+            f.write(json.dumps(row) + "\n")
         if i % 25 == 0 or i == len(examples):
             print(f"  {i}/{len(examples)}  ({time.perf_counter() - t_start:.0f}s)", file=sys.stderr)
 
-    RESULTS_DIR.mkdir(exist_ok=True)
-    out = RESULTS_DIR / f"{datetime.now():%Y%m%d-%H%M%S}.json"
+    out = partial.with_name(partial.name.replace(".partial.jsonl", ".json"))
     with open(out, "w", encoding="utf-8") as f:
         json.dump({
             "eval_file": path,
@@ -93,7 +118,7 @@ def run(path: str, limit: int | None, use_llm: bool) -> Path:
             "chat_model": config.OLLAMA_CHAT_MODEL if config.LLM_PROVIDER == "ollama" else config.GEMINI_CHAT_MODEL,
             "embed_model": config.OLLAMA_EMBED_MODEL if config.LLM_PROVIDER == "ollama" else config.GEMINI_EMBED_MODEL,
             "qdrant_collection": config.QDRANT_COLLECTION,
-            "total_seconds": round(time.perf_counter() - t_start, 1),
+            "total_seconds": round(sum(sum(r["seconds"].values()) for r in rows), 1),  # summed per example, so resumed runs add up
             "rows": rows,
         }, f, indent=1)
     return out
@@ -200,11 +225,12 @@ if __name__ == "__main__":
     ap.add_argument("--limit", type=int)
     ap.add_argument("--no-llm", action="store_true")
     ap.add_argument("--report", help="rebuild the report from a saved results .json")
+    ap.add_argument("--resume", help="continue a crashed run from its eval/results/<run>.partial.jsonl")
     args = ap.parse_args()
     if args.report:
         print(report(Path(args.report)))
     elif args.eval_file:
-        out = run(args.eval_file, args.limit, not args.no_llm)
+        out = run(args.eval_file, args.limit, not args.no_llm, args.resume)
         print(report(out))
         print(f"saved: {out} (+ .md)")
     else:
