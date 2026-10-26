@@ -1,0 +1,39 @@
+# docker compose up --build            -> API on http://localhost:8000, Ollama on the host
+# docker compose --profile ollama up   -> also runs Ollama in a container
+#
+# External, not started here: MongoDB Atlas and Qdrant Cloud (URLs and keys
+# come from .env). Ingestion and embedding are one-off jobs, run them with:
+#   docker compose run --rm api python -m ingestion.ingest sample_data/bgl_index.log
+#   docker compose run --rm api python -m embeddings.embed
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    env_file: .env
+    environment:
+      # Inside a container "localhost" is the container itself, so point at
+      # the host's Ollama. With --profile ollama, set OLLAMA_URL_IN_DOCKER=http://ollama:11434
+      OLLAMA_BASE_URL: ${OLLAMA_URL_IN_DOCKER:-http://host.docker.internal:11434}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  ollama:
+    # Optional. On Windows/macOS Docker has no GPU access by default, so this
+    # is slower than Ollama installed on the host. Pull the models once:
+    #   docker compose exec ollama ollama pull llama3.2:3b
+    #   docker compose exec ollama ollama pull nomic-embed-text
+    image: ollama/ollama:latest
+    profiles: ["ollama"]
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_models:/root/.ollama
+
+volumes:
+  ollama_models:

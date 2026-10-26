@@ -109,6 +109,7 @@ def chat_text(prompt: str) -> str:
             model=config.OLLAMA_CHAT_MODEL,
             messages=[{"role": "user", "content": prompt}],
             options={"temperature": 0.2},
+            keep_alive=config.OLLAMA_KEEP_ALIVE,
         )
         return response["message"]["content"]
 
@@ -131,6 +132,7 @@ def embed_text(text: str) -> list[float]:
         response = _get_ollama_client().embed(
             model=config.OLLAMA_EMBED_MODEL,
             input=text,
+            keep_alive=config.OLLAMA_KEEP_ALIVE,
         )
         return response["embeddings"][0]
 

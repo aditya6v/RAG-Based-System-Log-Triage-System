@@ -210,8 +210,76 @@ Triage per class (all 623): normal F1 0.997, memory/CPU 0.893 (precision 0.852),
 
 ## 6. Known limitations
 
-_Filled in at the end of the build._
+1. **Only classification is measured.** BGL has no ground truth for root cause or
+   remediation. Diagnosis quality was checked by hand on 5 lines.
+2. **The 3B model invents specifics.** Examples: "RAS" expanded as "Redundancy and
+   Failover System" (it means Reliability, Availability, Serviceability), and config paths
+   like `/p/gb1/params` or `/etc/lustre/params.lustre` that appear nowhere in the data.
+   The explanations are reasonable in general but not trustworthy in detail. A larger model
+   (e.g. Gemini, already supported) would likely help; that was not measured.
+3. **Seen-pattern accuracy is inflated by the data.** BGL alerts have 88 distinct
+   messages in total. The fair numbers are the unseen subset and the hard negatives, and the
+   unseen alert subsets are small (3–14 lines per category).
+4. **Per-line only.** Anomalies that are visible only as a *sequence* of normal-looking lines
+   (the OpenStack case) are out of scope.
+5. **One system.** Categories, severities and the Drain3 settings are tuned for BGL. Another
+   log source needs its own `categories.json`, sampling and `sim_th` check.
+6. **Speed is CPU-bound.**
+   - A full diagnosis takes 6–7 s warm: two LLM calls of about 3 s each.
+   - A normal line takes about 0.6 s.
+   - When a model has been unloaded, the first request pays 8–9 s to reload it.
+   - `OLLAMA_KEEP_ALIVE=30m` keeps models loaded longer, at the cost of about 2.5 GB of RAM.
+7. **Memory.** The first full eval run crashed out of memory on a 16 GB laptop (1.9 GB
+   free) after 25 minutes. The eval now saves as it goes and can resume.
+8. **Free tiers.** The Qdrant Cloud free cluster suspends after a few weeks unused. Atlas
+   free tier is 512 MB, so only a sample of BGL is indexed, not all 4.7M lines.
+9. **Not deployed publicly.** It runs locally and in Docker (verified). A free cloud host
+   can't run the LLM well. A public deployment would need Gemini as the provider. The
+   optional "Ollama inside Docker" profile in `docker-compose.yml` was not tested.
 
 ## 7. Likely examiner questions
 
-_Filled in at the end of the build._
+**Q: If a nearest-neighbour vote gets 98%, why use an LLM at all?**
+A: For classification, we found we mostly don't, and the eval shows it: the LLM alone gets
+42.5%, while the vote gets 98.1%. The LLM's job is the part that can't be looked up, which is
+explaining the root cause and suggesting a fix in plain language for an operator. It is also
+the fallback when retrieval is unsure (33 of 623 lines).
+
+**Q: Isn't 100% on seen patterns just memorising?**
+A: Yes, and we report it that way. That's why the eval holds out about 10–20% of patterns entirely
+(unseen subset: 92.7%) and includes 108 hard negatives.
+
+**Q: Why not just flag FATAL lines?**
+A: Measured: that rule gets 87.6% alert-vs-normal but wrongly flags 71% of the normal lines
+that are logged at FATAL/ERROR. Triage gets 99.7% and correctly passes 98.1% of them.
+
+**Q: How do you know the label didn't leak into the input?**
+A: `bgl/lines.py` strips the label token before Drain3, embeddings or the LLM see a line.
+A test checks this, and 0 of 623 eval lines start with their label.
+
+**Q: How do you know the eval lines weren't in the index?**
+A: `scripts/sample_bgl.py` asserts that no line number is in both, and that held-out
+patterns are absent from the index.
+
+**Q: Why four agents instead of one prompt?**
+A:
+- Each step has a different tool: vector search, a vote, two separate prompts.
+- Each can be measured on its own, and the per-agent timings are in every response.
+- The router means a normal line costs 0.6 s and zero LLM calls instead of two.
+- Separate prompts let remediation build on the root cause instead of both being guessed at once.
+
+**Q: Why is the router not an LLM decision?**
+A: A route chosen by the model can be wrong in ways you can't test. Here severity comes from a
+fixed table, so the router is 3 lines and unit-tested.
+
+**Q: What happened to the midterm's "blended evidence" problem?**
+A: Weak evidence must now score >= 0.85 and share the triage label. The threshold was
+calibrated on the stored incidents, not the eval. In the 5 demo diagnoses, every evidence
+item matched the label. The midterm blamed disk space in 3 of 4.
+
+**Q: What would you do next?**
+A:
+- Sequence-level detection (windows of lines per node) for anomalies like the OpenStack case.
+- A larger or hosted model for better explanations, with a small human-rated rubric to measure that.
+- Streaming the per-agent progress to the UI.
+- A second log source to test how general the categories file approach is.

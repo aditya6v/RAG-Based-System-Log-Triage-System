@@ -10,6 +10,7 @@
     --accent:#2f6fed; --accent-text:#ffffff; --code-bg:#f0f2f5;
     --ok:#1a7f4b; --ok-bg:#e3f5ea; --warn:#a15c00; --warn-bg:#fdf0d9;
     --bad:#b3261e; --bad-bg:#fde7e5; --info:#5b3fc4; --info-bg:#ece8fb; --neutral:#4a5561; --neutral-bg:#eceff3;
+    --s1:#2f6fed; --s2:#5b3fc4; --s3:#a15c00; --s4:#1a7f4b; --s5:#7a8591;
   }
   @media (prefers-color-scheme: dark){
     :root{
@@ -17,22 +18,25 @@
       --accent:#5b8cff; --accent-text:#0e1116; --code-bg:#252b33;
       --ok:#6fd49b; --ok-bg:#16301f; --warn:#f0b865; --warn-bg:#3a2c12;
       --bad:#ff8f87; --bad-bg:#3b1a18; --info:#b3a2ff; --info-bg:#27204a; --neutral:#b4bec9; --neutral-bg:#2a313a;
+      --s1:#5b8cff; --s2:#b3a2ff; --s3:#f0b865; --s4:#6fd49b; --s5:#9aa5b1;
     }
   }
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-  .wrap{max-width:900px;margin:0 auto;padding:24px 16px 48px}
-  header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}
+  .wrap{max-width:1100px;margin:0 auto;padding:24px 16px 48px}
+  header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px;flex-wrap:wrap}
   h1{font-size:22px;margin:0}
   .sub{color:var(--muted);font-size:13px;margin-top:2px}
   .status{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted)}
   .dot{width:9px;height:9px;border-radius:50%;background:var(--muted)}
   .dot.up{background:var(--ok)} .dot.down{background:var(--bad)}
+  .layout{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:16px;align-items:start}
+  @media (max-width:820px){.layout{grid-template-columns:minmax(0,1fr)}}
   .card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:16px}
   label{display:block;font-weight:600;margin-bottom:6px}
-  textarea{width:100%;min-height:96px;resize:vertical;padding:10px;border:1px solid var(--border);border-radius:8px;
+  textarea{width:100%;min-height:84px;resize:vertical;padding:10px;border:1px solid var(--border);border-radius:8px;
     background:var(--code-bg);color:var(--text);font:13px/1.45 ui-monospace,SFMono-Regular,Consolas,monospace}
-  textarea:focus{outline:2px solid var(--accent);outline-offset:1px}
+  textarea:focus,button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
   .samples{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 14px}
   .chip{border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:999px;padding:5px 12px;font-size:13px;cursor:pointer}
   .chip:hover{border-color:var(--accent)}
@@ -41,21 +45,46 @@
   button.primary:disabled{opacity:.6;cursor:wait}
   .hint{color:var(--muted);font-size:13px}
   .badge{display:inline-block;padding:3px 12px;border-radius:999px;font-weight:600;font-size:14px}
-  .badge.ok{background:var(--ok-bg);color:var(--ok)} .badge.warn{background:var(--warn-bg);color:var(--warn)}
-  .badge.bad{background:var(--bad-bg);color:var(--bad)} .badge.info{background:var(--info-bg);color:var(--info)}
-  .badge.neutral{background:var(--neutral-bg);color:var(--neutral)}
-  .section-title{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:16px 0 4px}
+  .badge.sm{font-size:12px;padding:1px 9px;font-weight:600}
+  .sev-none{background:var(--ok-bg);color:var(--ok)} .sev-low{background:var(--info-bg);color:var(--info)}
+  .sev-medium{background:var(--warn-bg);color:var(--warn)} .sev-high{background:var(--bad-bg);color:var(--bad)}
+  .sev-unknown{background:var(--neutral-bg);color:var(--neutral)}
+  .section-title{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:18px 0 6px}
   .section-title:first-child{margin-top:0}
   p{margin:0}
   code,.mono{font:12.5px/1.45 ui-monospace,SFMono-Regular,Consolas,monospace;background:var(--code-bg);padding:2px 6px;border-radius:4px;word-break:break-all}
+  .kv{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px;color:var(--muted);margin-top:8px}
+  .kv b{color:var(--text);font-weight:600}
+  .route{border-left:3px solid var(--accent);padding:8px 12px;background:var(--code-bg);border-radius:0 8px 8px 0;font-size:14px}
+  .route.skip{border-left-color:var(--ok)}
   .hit{border:1px solid var(--border);border-radius:8px;padding:10px 12px;margin-top:8px}
+  .hit.primary{border-color:var(--accent);border-width:2px}
+  .hit.dropped{opacity:.6}
   .bar{height:6px;border-radius:3px;background:var(--code-bg);margin:6px 0 8px;overflow:hidden}
   .bar>div{height:100%;background:var(--accent)}
   .meta{display:flex;justify-content:space-between;gap:12px;font-size:13px;color:var(--muted);flex-wrap:wrap}
-  .error{background:var(--bad-bg);color:var(--bad);border-radius:8px;padding:10px 12px}
+  .tag{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:1px 7px;border-radius:4px;margin-right:6px}
+  .tag.p{background:var(--accent);color:var(--accent-text)} .tag.w{background:var(--neutral-bg);color:var(--neutral)}
+  .tag.d{border:1px dashed var(--border);color:var(--muted)}
+  .timeline{display:flex;height:14px;border-radius:4px;overflow:hidden;background:var(--code-bg);margin-top:6px}
+  .timeline>div{height:100%}
+  .legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--muted);margin-top:6px}
+  .legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+  .error{background:var(--bad-bg);color:var(--bad);border-radius:8px;padding:10px 12px;margin-bottom:16px}
+  .loading{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:14px}
+  .spin{width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:s 0.8s linear infinite}
+  @keyframes s{to{transform:rotate(360deg)}}
+  @media (prefers-reduced-motion: reduce){.spin{animation:none}}
   details{margin-top:14px;color:var(--muted);font-size:13px}
   ul{margin:6px 0 0;padding-left:20px}
   .hidden{display:none}
+  .history h2{font-size:14px;margin:0 0 8px}
+  .history ol{list-style:none;margin:0;padding:0}
+  .history li button{all:unset;display:block;width:100%;cursor:pointer;padding:7px 8px;border-radius:6px;font-size:13px}
+  .history li button:hover,.history li button:focus-visible{background:var(--code-bg)}
+  .history .h-msg{display:block;color:var(--muted);font:11.5px/1.35 ui-monospace,Consolas,monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .history .empty{color:var(--muted);font-size:13px}
+  .linkbtn{all:unset;cursor:pointer;color:var(--accent);font-size:12px}
 </style>
 </head>
 <body>
@@ -63,43 +92,61 @@
   <header>
     <div>
       <h1>Incident Copilot</h1>
-      <div class="sub">RAG-based log triage and root-cause suggestions</div>
+      <div class="sub">RAG-based multi-agent triage for BlueGene/L logs — retrieval, triage, root cause, remediation</div>
     </div>
-    <div class="status"><span class="dot" id="dot"></span><span id="statusText">checking…</span></div>
+    <div class="status"><span class="dot" id="dot"></span><span id="statusText">checking…</span> · <a href="/docs" class="hint">API docs</a></div>
   </header>
 
-  <div class="card">
-    <label for="log">Paste a raw log line</label>
-    <textarea id="log" placeholder="1118538627 2005.06.11 R30-M0-N9-C:J16-U01 2005-06-11-18.10.27.692687 R30-M0-N9-C:J16-U01 RAS KERNEL FATAL data TLB error interrupt"></textarea>
-    <div class="samples" id="samples"></div>
-    <div class="row">
-      <button class="primary" id="go">Diagnose</button>
-      <span class="hint" id="hint">Ctrl+Enter also works</span>
-    </div>
-  </div>
+  <div class="layout">
+    <main>
+      <div class="card">
+        <label for="log">Paste a BGL log line</label>
+        <textarea id="log" placeholder="1118538627 2005.06.11 R30-M0-N9-C:J16-U01 2005-06-11-18.10.27.692687 R30-M0-N9-C:J16-U01 RAS KERNEL FATAL data TLB error interrupt"></textarea>
+        <div class="samples" id="samples"></div>
+        <div class="row">
+          <button class="primary" id="go">Diagnose</button>
+          <span class="hint" id="hint">Ctrl+Enter also works</span>
+        </div>
+      </div>
 
-  <div id="error" class="error hidden"></div>
+      <div id="error" class="error hidden" role="alert"></div>
+      <div id="loading" class="card hidden"><div class="loading"><span class="spin"></span><span id="loadingText">Running…</span></div></div>
 
-  <div id="result" class="card hidden">
-    <div class="section-title">Classification</div>
-    <p><span class="badge" id="cls"></span></p>
+      <div id="result" class="card hidden">
+        <div class="section-title">Classification</div>
+        <p><span class="badge" id="cls"></span> <span class="badge sm" id="sev"></span></p>
+        <div class="kv" id="triageInfo"></div>
 
-    <div class="section-title">Root cause</div>
-    <p id="cause"></p>
+        <div class="section-title">Route</div>
+        <div class="route" id="route"></div>
 
-    <div class="section-title">Suggested remediation</div>
-    <p id="fix"></p>
+        <div class="section-title">Root cause</div>
+        <p id="cause"></p>
 
-    <div class="section-title">Log template (Drain3)</div>
-    <p><code id="tpl"></code></p>
+        <div class="section-title">Suggested remediation</div>
+        <p id="fix"></p>
 
-    <div class="section-title">Similar past incidents</div>
-    <div id="hits"></div>
+        <div class="section-title">Time per agent</div>
+        <div class="timeline" id="timeline" role="img"></div>
+        <div class="legend" id="legend"></div>
 
-    <details>
-      <summary>Pipeline trace</summary>
-      <ul id="notes"></ul>
-    </details>
+        <div class="section-title">Log template (Drain3)</div>
+        <p><code id="tpl"></code></p>
+
+        <div class="section-title">Similar past incidents</div>
+        <div id="hits"></div>
+
+        <details>
+          <summary>Pipeline trace</summary>
+          <ul id="notes"></ul>
+        </details>
+      </div>
+    </main>
+
+    <aside class="card history">
+      <div class="row" style="justify-content:space-between"><h2>History</h2><button class="linkbtn" id="clearHist" type="button">clear</button></div>
+      <ol id="history"></ol>
+    </aside>
   </div>
 </div>
 
@@ -112,8 +159,14 @@ const SAMPLES = [
   {label: "I/O link severed", log: "1124721545 2005.08.22 R73-M1-N4-I:J18-U01 2005-08-22-07.39.05.715470 R73-M1-N4-I:J18-U01 RAS APP FATAL ciod: Error reading message prefix after LOGIN_MESSAGE on CioStream socket to 172.16.96.116:53370: Link has been severed"},
   {label: "Power deactivated", log: "1120673475 2005.07.06 NULL 2005-07-06-11.11.15.368928 NULL RAS KERNEL FATAL Power deactivated: R05-M0-N2"}
 ];
-
+const AGENTS = [["retrieval","--s1"],["triage","--s2"],["root_cause","--s3"],["remediation","--s4"],["no_action","--s5"]];
+const HIST_KEY = "incident-copilot-history";
 const $ = id => document.getElementById(id);
+let CATS = {};
+
+function store(fn, fallback){ try { return fn(); } catch { return fallback; } }
+function loadHist(){ return store(() => JSON.parse(localStorage.getItem(HIST_KEY)) || [], []); }
+function saveHist(h){ store(() => localStorage.setItem(HIST_KEY, JSON.stringify(h.slice(0, 15)))); }
 
 SAMPLES.forEach(s => {
   const b = document.createElement("button");
@@ -122,17 +175,7 @@ SAMPLES.forEach(s => {
   $("samples").appendChild(b);
 });
 
-function badgeClass(c){
-  c = (c || "").toLowerCase();
-  if (c === "normal") return "ok";
-  if (c.includes("memory") || c.includes("kernel") || c.includes("filesystem")) return "bad";
-  if (c === "unknown") return "neutral";
-  return "warn";
-}
-
-function text(v){ return typeof v === "string" ? v : JSON.stringify(v); }
-
-async function checkHealth(){
+async function init(){
   try {
     const r = await fetch("/health");
     if (!r.ok) throw new Error();
@@ -140,30 +183,41 @@ async function checkHealth(){
   } catch {
     $("dot").className = "dot down"; $("statusText").textContent = "API offline";
   }
+  try {
+    const cats = await (await fetch("/categories")).json();
+    cats.forEach(c => CATS[c.id] = c);
+  } catch { /* badges fall back to the severity the API returns */ }
+  renderHistory();
 }
 
+function el(tag, cls, text){ const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+
+let ticker = null;
 async function diagnose(){
   const raw_log = $("log").value.trim();
   $("error").classList.add("hidden");
   if (!raw_log){ showError("Paste a log line first."); return; }
 
   $("go").disabled = true; $("go").textContent = "Diagnosing…";
-  $("hint").textContent = "Running triage, retrieval and diagnosis — a local model can take a few seconds.";
+  $("result").classList.add("hidden"); $("loading").classList.remove("hidden");
   const t0 = performance.now();
+  const tick = () => $("loadingText").textContent =
+    "Running retrieval → triage → (root cause → remediation)… " + ((performance.now() - t0) / 1000).toFixed(1) + "s";
+  tick(); ticker = setInterval(tick, 200);
   try {
-    const r = await fetch("/diagnose", {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({raw_log})
-    });
-    const data = await r.json();
-    if (!r.ok) throw new Error(data.error || ("Server returned " + r.status));
+    const r = await fetch("/diagnose", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({raw_log})});
+    let data;
+    try { data = await r.json(); } catch { throw new Error("server returned " + r.status + " with a non-JSON body"); }
+    if (!r.ok) throw new Error(data.error || ("server returned " + r.status));
     render(data);
-    $("hint").textContent = "Done in " + ((performance.now() - t0) / 1000).toFixed(1) + "s";
+    const h = loadHist().filter(x => x.raw_log !== raw_log);
+    h.unshift({raw_log, at: Date.now(), result: data}); saveHist(h); renderHistory();
   } catch (e) {
-    showError("Request failed: " + e.message);
-    $("hint").textContent = "Ctrl+Enter also works";
+    showError(e instanceof TypeError
+      ? "Could not reach the API. Is the server running? (" + e.message + ")"
+      : "Request failed: " + e.message);
   } finally {
+    clearInterval(ticker); $("loading").classList.add("hidden");
     $("go").disabled = false; $("go").textContent = "Diagnose";
   }
 }
@@ -174,42 +228,89 @@ function showError(msg){
   $("result").classList.add("hidden");
 }
 
+function sevOf(d){ return d.severity || (CATS[d.classification] || {}).severity || "unknown"; }
+
 function render(d){
-  $("cls").textContent = d.classification || "unknown";
-  $("cls").className = "badge " + badgeClass(d.classification);
-  $("cause").textContent = text(d.root_cause || "—");
-  $("fix").textContent = text(d.remediation || "—");
+  const sev = sevOf(d);
+  $("cls").textContent = d.category_name || (CATS[d.classification] || {}).name || d.classification || "unknown";
+  $("cls").className = "badge sev-" + sev;
+  $("sev").textContent = "severity: " + sev;
+  $("sev").className = "badge sm sev-" + sev;
+  $("cls").title = (CATS[d.classification] || {}).definition || "";
+
+  const ti = $("triageInfo"); ti.innerHTML = "";
+  const v = d.vote || {};
+  const add = (k, val) => { const s = el("span"); s.append(k + " "); s.appendChild(el("b", null, val)); ti.appendChild(s); };
+  add("decided by", d.triage_method === "vote" ? "nearest-neighbour vote" : d.triage_method === "llm" ? "LLM (vote unsure)" : "—");
+  if (v.share != null) add("vote share", Math.round(v.share * 100) + "%");
+  if (v.top_score != null) add("best match", v.top_score.toFixed(3));
+
+  const skipped = d.route === "no_action";
+  $("route").className = "route" + (skipped ? " skip" : "");
+  $("route").textContent = skipped
+    ? "retrieval → triage → no action. Severity '" + sev + "', so root cause and remediation were skipped."
+    : "retrieval → triage → root cause → remediation. Severity '" + sev + "', full diagnosis.";
+
+  $("cause").textContent = d.root_cause || "—";
+  $("fix").textContent = d.remediation || "—";
   $("tpl").textContent = d.template || "—";
 
+  const t = d.timings_ms || {}, total = Object.values(t).reduce((a, b) => a + b, 0) || 1;
+  const tl = $("timeline"), lg = $("legend"); tl.innerHTML = ""; lg.innerHTML = "";
+  AGENTS.filter(([k]) => k in t).forEach(([k, color]) => {
+    const seg = el("div"); seg.style.width = (t[k] / total * 100) + "%"; seg.style.background = "var(" + color + ")"; seg.title = k + ": " + t[k] + " ms";
+    tl.appendChild(seg);
+    const it = el("span"); const sw = el("i"); sw.style.background = "var(" + color + ")";
+    it.append(sw, k.replace("_", " ") + " " + (t[k] / 1000).toFixed(2) + "s"); lg.appendChild(it);
+  });
+  lg.appendChild(el("span", null, "total " + ((d.total_ms || total) / 1000).toFixed(2) + "s"));
+  tl.setAttribute("aria-label", Object.entries(t).map(([k, ms]) => k + " " + ms + " ms").join(", "));
+
+  const ev = d.evidence || {}, primaryId = ev.primary && ev.primary.cluster_id;
+  const supportIds = new Set((ev.supporting || []).map(s => s.cluster_id));
   const hits = $("hits"); hits.innerHTML = "";
   (d.retrieved || []).forEach((h, i) => {
-    const box = document.createElement("div"); box.className = "hit";
-    const pct = Math.max(0, Math.min(100, Math.round((h.score || 0) * 100)));
-
-    const meta = document.createElement("div"); meta.className = "meta";
-    const left = document.createElement("span"); left.textContent = "#" + (i + 1) + " · similarity " + (h.score ?? "?");
-    const right = document.createElement("span"); right.textContent = "seen " + (h.occurrence_count ?? "?") + "× before";
+    const role = skipped ? null : h.cluster_id === primaryId ? "p" : supportIds.has(h.cluster_id) ? "w" : "d";
+    const box = el("div", "hit" + (role === "p" ? " primary" : role === "d" ? " dropped" : ""));
+    const meta = el("div", "meta");
+    const left = el("span");
+    if (role) left.appendChild(el("span", "tag " + role, {p: "primary", w: "weak", d: "not used"}[role]));
+    left.append("#" + (i + 1) + " · similarity " + (h.score != null ? h.score.toFixed(3) : "?"));
+    const lab = CATS[h.label] ? CATS[h.label].name : (h.label || "unlabelled");
+    const right = el("span", null, lab + " · seen " + (h.occurrence_count ?? "?") + "×");
     meta.append(left, right);
-
-    const bar = document.createElement("div"); bar.className = "bar";
-    const fill = document.createElement("div"); fill.style.width = pct + "%";
-    bar.appendChild(fill);
-
-    const ex = document.createElement("div"); ex.className = "mono"; ex.textContent = h.example_raw || h.template || "";
-    box.append(meta, bar, ex);
+    const bar = el("div", "bar"); const fill = el("div");
+    fill.style.width = Math.max(0, Math.min(100, Math.round((h.score || 0) * 100))) + "%"; bar.appendChild(fill);
+    box.append(meta, bar, el("div", "mono", h.template || h.example_raw || ""));
     hits.appendChild(box);
   });
   if (!(d.retrieved || []).length) hits.textContent = "No similar incidents found.";
 
   const notes = $("notes"); notes.innerHTML = "";
-  (d.notes || []).forEach(n => { const li = document.createElement("li"); li.textContent = n; notes.appendChild(li); });
+  (d.notes || []).forEach(n => notes.appendChild(el("li", null, n)));
 
   $("result").classList.remove("hidden");
 }
 
+function renderHistory(){
+  const list = $("history"); list.innerHTML = "";
+  const h = loadHist();
+  if (!h.length){ list.appendChild(el("li", "empty", "Diagnosed lines show up here.")); return; }
+  h.forEach(item => {
+    const li = el("li"), b = el("button"); b.type = "button";
+    const d = item.result || {}, sev = sevOf(d);
+    const badge = el("span", "badge sm sev-" + sev, d.category_name || d.classification || "?");
+    const msg = el("span", "h-msg", item.raw_log.split(" ").slice(6).join(" ") || item.raw_log);
+    b.append(badge, msg);
+    b.onclick = () => { $("log").value = item.raw_log; $("error").classList.add("hidden"); render(d); };
+    li.appendChild(b); list.appendChild(li);
+  });
+}
+
+$("clearHist").onclick = () => { saveHist([]); renderHistory(); };
 $("go").onclick = diagnose;
 $("log").addEventListener("keydown", e => { if (e.ctrlKey && e.key === "Enter") diagnose(); });
-checkHealth();
+init();
 </script>
 </body>
 </html>

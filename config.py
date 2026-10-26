@@ -38,6 +38,9 @@ LLM_PROVIDER = os.environ.get("LLM_PROVIDER", "ollama").lower()
 OLLAMA_BASE_URL = os.environ.get("OLLAMA_BASE_URL", "http://localhost:11434")
 OLLAMA_CHAT_MODEL = os.environ.get("OLLAMA_CHAT_MODEL", "llama3.2:3b")
 OLLAMA_EMBED_MODEL = os.environ.get("OLLAMA_EMBED_MODEL", "nomic-embed-text")
+# How long Ollama keeps a model in memory after the last call. Its default
+# is 5 minutes, after which the next request waits 8+ s for a reload.
+OLLAMA_KEEP_ALIVE = os.environ.get("OLLAMA_KEEP_ALIVE", "30m")
 
 # text-embedding-004 outputs 768-dim vectors. If you ever switch embedding
 # models, this MUST match the new model's output size or Qdrant will reject
