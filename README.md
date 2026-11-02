@@ -6,7 +6,7 @@ past log events. A local LLM writes the explanation from those events.
 
 Built and evaluated on the BGL (BlueGene/L supercomputer) log from Loghub [1, 2].
 
-![Diagnosis of a Lustre mount failure](docs/img/diagnosis-lustre.png)
+![Diagnosis of an I/O node connection failure](docs/img/diagnosis.png)
 
 ## How it works
 

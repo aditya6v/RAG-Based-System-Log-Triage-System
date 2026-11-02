@@ -3,313 +3,376 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Incident Copilot</title>
+<title>Log Triage</title>
 <style>
+  /* One fixed dark palette. Colour is reserved for severity; everything else is neutral. */
   :root{
-    --bg:#f6f7f9; --card:#ffffff; --text:#1b1f24; --muted:#5b6672; --border:#e1e5ea;
-    --accent:#2f6fed; --accent-text:#ffffff; --code-bg:#f0f2f5;
-    --ok:#1a7f4b; --ok-bg:#e3f5ea; --warn:#a15c00; --warn-bg:#fdf0d9;
-    --bad:#b3261e; --bad-bg:#fde7e5; --info:#5b3fc4; --info-bg:#ece8fb; --neutral:#4a5561; --neutral-bg:#eceff3;
-    --s1:#2f6fed; --s2:#5b3fc4; --s3:#a15c00; --s4:#1a7f4b; --s5:#7a8591;
-  }
-  @media (prefers-color-scheme: dark){
-    :root{
-      --bg:#14171b; --card:#1d2127; --text:#e8ebef; --muted:#9aa5b1; --border:#2d343c;
-      --accent:#5b8cff; --accent-text:#0e1116; --code-bg:#252b33;
-      --ok:#6fd49b; --ok-bg:#16301f; --warn:#f0b865; --warn-bg:#3a2c12;
-      --bad:#ff8f87; --bad-bg:#3b1a18; --info:#b3a2ff; --info-bg:#27204a; --neutral:#b4bec9; --neutral-bg:#2a313a;
-      --s1:#5b8cff; --s2:#b3a2ff; --s3:#f0b865; --s4:#6fd49b; --s5:#9aa5b1;
-    }
+    --bg:#15171b; --raise:#1b1e23; --hover:#22262c; --line:#2a2e35; --line-strong:#3a3f47;
+    --text:#e3e5e8; --dim:#9aa1ab; --faint:#666c75;
+    --high:#ef6f6c; --medium:#d9a547; --none:#6fbf8a; --unknown:#9aa1ab;
+    --btn:#e3e5e8; --btn-text:#15171b;
+    --mono:"Cascadia Mono","JetBrains Mono",Consolas,ui-monospace,monospace;
+    --sans:"Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",sans-serif;
+    color-scheme: dark;
   }
   *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-  .wrap{max-width:1100px;margin:0 auto;padding:24px 16px 48px}
-  header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px;flex-wrap:wrap}
-  h1{font-size:22px;margin:0}
-  .sub{color:var(--muted);font-size:13px;margin-top:2px}
-  .status{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted)}
-  .dot{width:9px;height:9px;border-radius:50%;background:var(--muted)}
-  .dot.up{background:var(--ok)} .dot.down{background:var(--bad)}
-  .layout{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:16px;align-items:start}
-  @media (max-width:820px){.layout{grid-template-columns:minmax(0,1fr)}}
-  .card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:16px}
-  label{display:block;font-weight:600;margin-bottom:6px}
-  textarea{width:100%;min-height:84px;resize:vertical;padding:10px;border:1px solid var(--border);border-radius:8px;
-    background:var(--code-bg);color:var(--text);font:13px/1.45 ui-monospace,SFMono-Regular,Consolas,monospace}
-  textarea:focus,button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
-  .samples{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 14px}
-  .chip{border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:999px;padding:5px 12px;font-size:13px;cursor:pointer}
-  .chip:hover{border-color:var(--accent)}
-  .row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-  button.primary{background:var(--accent);color:var(--accent-text);border:0;border-radius:8px;padding:9px 20px;font-size:15px;font-weight:600;cursor:pointer}
-  button.primary:disabled{opacity:.6;cursor:wait}
-  .hint{color:var(--muted);font-size:13px}
-  .badge{display:inline-block;padding:3px 12px;border-radius:999px;font-weight:600;font-size:14px}
-  .badge.sm{font-size:12px;padding:1px 9px;font-weight:600}
-  .sev-none{background:var(--ok-bg);color:var(--ok)} .sev-low{background:var(--info-bg);color:var(--info)}
-  .sev-medium{background:var(--warn-bg);color:var(--warn)} .sev-high{background:var(--bad-bg);color:var(--bad)}
-  .sev-unknown{background:var(--neutral-bg);color:var(--neutral)}
-  .section-title{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:18px 0 6px}
-  .section-title:first-child{margin-top:0}
-  p{margin:0}
-  code,.mono{font:12.5px/1.45 ui-monospace,SFMono-Regular,Consolas,monospace;background:var(--code-bg);padding:2px 6px;border-radius:4px;word-break:break-all}
-  .kv{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px;color:var(--muted);margin-top:8px}
-  .kv b{color:var(--text);font-weight:600}
-  .route{border-left:3px solid var(--accent);padding:8px 12px;background:var(--code-bg);border-radius:0 8px 8px 0;font-size:14px}
-  .route.skip{border-left-color:var(--ok)}
-  .hit{border:1px solid var(--border);border-radius:8px;padding:10px 12px;margin-top:8px}
-  .hit.primary{border-color:var(--accent);border-width:2px}
-  .hit.dropped{opacity:.6}
-  .bar{height:6px;border-radius:3px;background:var(--code-bg);margin:6px 0 8px;overflow:hidden}
-  .bar>div{height:100%;background:var(--accent)}
-  .meta{display:flex;justify-content:space-between;gap:12px;font-size:13px;color:var(--muted);flex-wrap:wrap}
-  .tag{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:1px 7px;border-radius:4px;margin-right:6px}
-  .tag.p{background:var(--accent);color:var(--accent-text)} .tag.w{background:var(--neutral-bg);color:var(--neutral)}
-  .tag.d{border:1px dashed var(--border);color:var(--muted)}
-  .timeline{display:flex;height:14px;border-radius:4px;overflow:hidden;background:var(--code-bg);margin-top:6px}
-  .timeline>div{height:100%}
-  .legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--muted);margin-top:6px}
-  .legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
-  .error{background:var(--bad-bg);color:var(--bad);border-radius:8px;padding:10px 12px;margin-bottom:16px}
-  .loading{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:14px}
-  .spin{width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:s 0.8s linear infinite}
-  @keyframes s{to{transform:rotate(360deg)}}
-  @media (prefers-reduced-motion: reduce){.spin{animation:none}}
-  details{margin-top:14px;color:var(--muted);font-size:13px}
-  ul{margin:6px 0 0;padding-left:20px}
+  html,body{margin:0;background:var(--bg);color:var(--text)}
+  body{font:14px/1.5 var(--sans)}
+  button{font:inherit;color:inherit}
+  :focus-visible{outline:2px solid var(--text);outline-offset:2px}
+  .mono{font-family:var(--mono);font-size:12.5px}
+  .dim{color:var(--dim)} .faint{color:var(--faint)}
+  kbd{font:11px var(--mono);color:var(--dim);border:1px solid var(--line-strong);border-bottom-width:2px;border-radius:3px;padding:0 4px}
+
+  /* top bar */
+  .bar{display:flex;align-items:baseline;justify-content:space-between;gap:16px;
+       padding:12px 20px;border-bottom:1px solid var(--line)}
+  .bar h1{font-size:15px;font-weight:600;margin:0}
+  .bar .meta{font-size:12.5px}
+  .api{font:12px var(--mono);color:var(--dim)}
+  .api b{font-weight:400}
+  .api .ok{color:var(--none)} .api .down{color:var(--high)}
+
+  .page{display:grid;grid-template-columns:minmax(0,1fr) 300px;min-height:calc(100vh - 46px)}
+  main{padding:20px;min-width:0}
+  aside{border-left:1px solid var(--line);padding:16px 0;min-width:0}
+  @media (max-width:900px){
+    .page{grid-template-columns:minmax(0,1fr)}
+    aside{border-left:0;border-top:1px solid var(--line)}
+  }
+
+  /* input */
+  .input label{display:block;font-weight:600;margin-bottom:6px}
+  textarea{width:100%;min-height:64px;resize:vertical;padding:10px 12px;margin:0;
+    background:var(--raise);color:var(--text);border:1px solid var(--line-strong);border-radius:4px;
+    font:13px/1.5 var(--mono)}
+  textarea::placeholder{color:var(--faint)}
+  textarea:focus{outline:none;border-color:var(--dim)}
+  .actions{display:flex;align-items:center;gap:14px;margin-top:10px;flex-wrap:wrap}
+  .run{background:var(--btn);color:var(--btn-text);border:0;border-radius:4px;padding:7px 16px;font-weight:600;cursor:pointer;min-width:120px}
+  .run:disabled{cursor:progress;opacity:.75}
+  .hint{font-size:12.5px;color:var(--faint)}
+
+  .examples{margin-top:18px}
+  .examples h2,.side h2,.sect h2{font-size:13px;font-weight:600;margin:0 0 6px}
+  .ex{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;width:100%;text-align:left;
+      background:none;border:0;border-top:1px solid var(--line);padding:6px 2px;cursor:pointer}
+  .ex:last-child{border-bottom:1px solid var(--line)}
+  .ex:hover{background:var(--hover)}
+  .ex .line{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ex .lab{font-size:12px;color:var(--faint)}
+
+  /* result */
+  #out{margin-top:28px}
+  #out.busy{opacity:.45;transition:opacity .15s}
+  .empty{color:var(--faint);border-top:1px solid var(--line);padding-top:14px}
+  .err{border-left:3px solid var(--high);padding:8px 12px;background:var(--raise)}
+  .err b{display:block;margin-bottom:2px}
+
+  .verdict{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;
+           border-left:3px solid var(--unknown);padding:2px 0 2px 14px}
+  .verdict.sev-high{border-color:var(--high)} .verdict.sev-medium{border-color:var(--medium)} .verdict.sev-none{border-color:var(--none)}
+  .verdict h2{font-size:20px;font-weight:600;margin:0;line-height:1.25}
+  .verdict .why{margin-top:4px;color:var(--dim);font-size:13px}
+  .sevword{font-weight:600}
+  .sev-high .sevword{color:var(--high)} .sev-medium .sevword{color:var(--medium)} .sev-none .sevword{color:var(--none)}
+  .tool{background:none;border:1px solid var(--line-strong);border-radius:4px;padding:4px 10px;cursor:pointer;font-size:12.5px;color:var(--dim);white-space:nowrap}
+  .tool:hover{color:var(--text);border-color:var(--dim)}
+
+  .steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) auto;margin-top:18px;
+         border:1px solid var(--line);border-radius:4px}
+  .step{padding:8px 12px;border-right:1px solid var(--line)}
+  .step .n{font-size:12.5px} .step .t{font:13px var(--mono)}
+  .step.skip{color:var(--faint)} .step.skip .t{font-size:12px}
+  .step.total{border-right:0;text-align:right;color:var(--dim)}
+  @media (max-width:640px){
+    .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .step{border-bottom:1px solid var(--line)}
+    .step.total{grid-column:1/-1;text-align:left;border-bottom:0}
+  }
+
+  .tpl{margin-top:14px;font-size:12.5px;color:var(--dim)}
+  .tpl code{font-family:var(--mono);color:var(--text);word-break:break-word}
+  .v{color:var(--medium)}
+  tr.unused .v{color:#8a7448}
+
+  .prose{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:22px}
+  @media (max-width:760px){.prose{grid-template-columns:1fr}}
+  .sect p{margin:0}
+  .note{margin-top:10px;font-size:12.5px;color:var(--faint)}
+
+  table{width:100%;border-collapse:collapse;margin-top:6px}
+  th{font-size:12px;font-weight:600;color:var(--dim);text-align:left;padding:5px 8px;border-bottom:1px solid var(--line-strong);white-space:nowrap}
+  td{padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+  td.num,th.num{text-align:right;font-family:var(--mono);font-size:12.5px;white-space:nowrap}
+  tr.primary td{background:var(--raise)}
+  tr.unused td{color:var(--faint)}
+  .role{white-space:nowrap;font-size:12.5px}
+  td.cat{white-space:nowrap}
+  tr.primary .role{font-weight:600}
+  .tablewrap{overflow-x:auto}
+
+  details{margin-top:18px}
+  summary{cursor:pointer;color:var(--dim);font-size:13px}
+  details ol{margin:8px 0 0;padding-left:20px;color:var(--dim)}
+  details li{margin:2px 0}
+
+  /* history */
+  .side{padding:0 16px}
+  .side .head{display:flex;justify-content:space-between;align-items:baseline}
+  .linkbtn{background:none;border:0;padding:0;color:var(--faint);cursor:pointer;font-size:12.5px}
+  .linkbtn:hover{color:var(--text)}
+  .hist{list-style:none;margin:6px 0 0;padding:0}
+  .hist button{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 8px;width:100%;text-align:left;
+    background:none;border:0;border-top:1px solid var(--line);padding:7px 2px;cursor:pointer}
+  .hist button:hover,.hist button[aria-current="true"]{background:var(--hover)}
+  .sq{width:8px;height:8px;margin-top:6px;background:var(--unknown)}
+  .sq.sev-high{background:var(--high)} .sq.sev-medium{background:var(--medium)} .sq.sev-none{background:var(--none)}
+  .hist .c{font-size:13px}
+  .hist .m{grid-column:2;color:var(--faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .hist .when{float:right;color:var(--faint);font:11.5px var(--mono)}
+  .side .none{color:var(--faint);font-size:13px;margin-top:6px}
   .hidden{display:none}
-  .history h2{font-size:14px;margin:0 0 8px}
-  .history ol{list-style:none;margin:0;padding:0}
-  .history li button{all:unset;display:block;width:100%;cursor:pointer;padding:7px 8px;border-radius:6px;font-size:13px}
-  .history li button:hover,.history li button:focus-visible{background:var(--code-bg)}
-  .history .h-msg{display:block;color:var(--muted);font:11.5px/1.35 ui-monospace,Consolas,monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .history .empty{color:var(--muted);font-size:13px}
-  .linkbtn{all:unset;cursor:pointer;color:var(--accent);font-size:12px}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <div>
-      <h1>Incident Copilot</h1>
-      <div class="sub">RAG-based multi-agent triage for BlueGene/L logs — retrieval, triage, root cause, remediation</div>
+<div class="bar">
+  <div><h1>Log Triage</h1></div>
+  <div class="meta"><span class="api" id="api">api <b>checking</b></span> <span class="faint">&middot;</span> <a href="/docs" class="dim">API docs</a></div>
+</div>
+
+<div class="page">
+  <main>
+    <section class="input">
+      <label for="log">BGL log line</label>
+      <textarea id="log" spellcheck="false" placeholder="1118538627 2005.06.11 R30-M0-N9-C:J16-U01 2005-06-11-18.10.27.692687 R30-M0-N9-C:J16-U01 RAS KERNEL FATAL data TLB error interrupt"></textarea>
+      <div class="actions">
+        <button class="run" id="run" type="button">Diagnose</button>
+        <span class="hint"><kbd>Ctrl</kbd> <kbd>Enter</kbd> to run, <kbd>/</kbd> to focus</span>
+      </div>
+
+      <div class="examples">
+        <h2>Examples <span class="faint" style="font-weight:400">from the held-out test set, with their dataset label</span></h2>
+        <div id="examples"></div>
+      </div>
+    </section>
+
+    <section id="out" aria-live="polite">
+      <p class="empty">Results appear here: category, severity, the steps that ran, the likely cause and fix, and the past incidents they were based on.</p>
+    </section>
+  </main>
+
+  <aside>
+    <div class="side">
+      <div class="head"><h2>History</h2><button class="linkbtn" id="clear" type="button">Clear</button></div>
+      <ol class="hist" id="hist"></ol>
     </div>
-    <div class="status"><span class="dot" id="dot"></span><span id="statusText">checking…</span> · <a href="/docs" class="hint">API docs</a></div>
-  </header>
-
-  <div class="layout">
-    <main>
-      <div class="card">
-        <label for="log">Paste a BGL log line</label>
-        <textarea id="log" placeholder="1118538627 2005.06.11 R30-M0-N9-C:J16-U01 2005-06-11-18.10.27.692687 R30-M0-N9-C:J16-U01 RAS KERNEL FATAL data TLB error interrupt"></textarea>
-        <div class="samples" id="samples"></div>
-        <div class="row">
-          <button class="primary" id="go">Diagnose</button>
-          <span class="hint" id="hint">Ctrl+Enter also works</span>
-        </div>
-      </div>
-
-      <div id="error" class="error hidden" role="alert"></div>
-      <div id="loading" class="card hidden"><div class="loading"><span class="spin"></span><span id="loadingText">Running…</span></div></div>
-
-      <div id="result" class="card hidden">
-        <div class="section-title">Classification</div>
-        <p><span class="badge" id="cls"></span> <span class="badge sm" id="sev"></span></p>
-        <div class="kv" id="triageInfo"></div>
-
-        <div class="section-title">Route</div>
-        <div class="route" id="route"></div>
-
-        <div class="section-title">Root cause</div>
-        <p id="cause"></p>
-
-        <div class="section-title">Suggested remediation</div>
-        <p id="fix"></p>
-
-        <div class="section-title">Time per agent</div>
-        <div class="timeline" id="timeline" role="img"></div>
-        <div class="legend" id="legend"></div>
-
-        <div class="section-title">Log template (Drain3)</div>
-        <p><code id="tpl"></code></p>
-
-        <div class="section-title">Similar past incidents</div>
-        <div id="hits"></div>
-
-        <details>
-          <summary>Pipeline trace</summary>
-          <ul id="notes"></ul>
-        </details>
-      </div>
-    </main>
-
-    <aside class="card history">
-      <div class="row" style="justify-content:space-between"><h2>History</h2><button class="linkbtn" id="clearHist" type="button">clear</button></div>
-      <ol id="history"></ol>
-    </aside>
-  </div>
+  </aside>
 </div>
 
 <script>
-// Real lines from the held-out BGL eval set (eval/bgl_eval.jsonl), label token removed.
-const SAMPLES = [
-  {label: "FATAL but normal", log: "1118710081 2005.06.13 R03-M1-N9-C:J04-U01 2005-06-13-17.48.01.577343 R03-M1-N9-C:J04-U01 RAS KERNEL FATAL instruction address: 0x00004ed8"},
-  {label: "Memory / CPU fault", log: "1118538627 2005.06.11 R30-M0-N9-C:J16-U01 2005-06-11-18.10.27.692687 R30-M0-N9-C:J16-U01 RAS KERNEL FATAL data TLB error interrupt"},
-  {label: "Lustre mount failed", log: "1125552602 2005.08.31 R23-M1-N8-I:J18-U01 2005-08-31-22.30.02.453491 R23-M1-N8-I:J18-U01 RAS KERNEL FATAL Lustre mount FAILED : bglio318 : point /p/gb1"},
-  {label: "I/O link severed", log: "1124721545 2005.08.22 R73-M1-N4-I:J18-U01 2005-08-22-07.39.05.715470 R73-M1-N4-I:J18-U01 RAS APP FATAL ciod: Error reading message prefix after LOGIN_MESSAGE on CioStream socket to 172.16.96.116:53370: Link has been severed"},
-  {label: "Power deactivated", log: "1120673475 2005.07.06 NULL 2005-07-06-11.11.15.368928 NULL RAS KERNEL FATAL Power deactivated: R05-M0-N2"}
+// Real lines from eval/bgl_eval.jsonl (label token removed). `label` is the dataset's own label.
+const EXAMPLES = [
+  {label: "normal", log: "1118710081 2005.06.13 R03-M1-N9-C:J04-U01 2005-06-13-17.48.01.577343 R03-M1-N9-C:J04-U01 RAS KERNEL FATAL instruction address: 0x00004ed8"},
+  {label: "memory / CPU fault", log: "1118538627 2005.06.11 R30-M0-N9-C:J16-U01 2005-06-11-18.10.27.692687 R30-M0-N9-C:J16-U01 RAS KERNEL FATAL data TLB error interrupt"},
+  {label: "filesystem mount failure", log: "1125552602 2005.08.31 R23-M1-N8-I:J18-U01 2005-08-31-22.30.02.453491 R23-M1-N8-I:J18-U01 RAS KERNEL FATAL Lustre mount FAILED : bglio318 : point /p/gb1"},
+  {label: "I/O node connection lost", log: "1124721545 2005.08.22 R73-M1-N4-I:J18-U01 2005-08-22-07.39.05.715470 R73-M1-N4-I:J18-U01 RAS APP FATAL ciod: Error reading message prefix after LOGIN_MESSAGE on CioStream socket to 172.16.96.116:53370: Link has been severed"},
+  {label: "power and control system", log: "1120673475 2005.07.06 NULL 2005-07-06-11.11.15.368928 NULL RAS KERNEL FATAL Power deactivated: R05-M0-N2"}
 ];
-const AGENTS = [["retrieval","--s1"],["triage","--s2"],["root_cause","--s3"],["remediation","--s4"],["no_action","--s5"]];
-const HIST_KEY = "incident-copilot-history";
+const STEPS = [["retrieval", "Retrieval"], ["triage", "Triage"], ["root_cause", "Root cause"], ["remediation", "Remediation"]];
+const HIST_KEY = "log-triage-history";
 const $ = id => document.getElementById(id);
 let CATS = {};
+let current = null;
 
+function el(tag, cls, text){ const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
 function store(fn, fallback){ try { return fn(); } catch { return fallback; } }
 function loadHist(){ return store(() => JSON.parse(localStorage.getItem(HIST_KEY)) || [], []); }
-function saveHist(h){ store(() => localStorage.setItem(HIST_KEY, JSON.stringify(h.slice(0, 15)))); }
+function saveHist(h){ store(() => localStorage.setItem(HIST_KEY, JSON.stringify(h.slice(0, 20)))); }
+function secs(ms){ return ms == null ? "" : (ms < 1000 ? ms + " ms" : (ms / 1000).toFixed(2) + " s"); }
+function message(line){ const p = line.trim().split(/\s+/); return p.length > 9 ? p.slice(8).join(" ") : line; }
+function sevOf(d){ return d.severity || (CATS[d.classification] || {}).severity || "unknown"; }
+function nameOf(id){ return (CATS[id] || {}).name || id || "unknown"; }
 
-SAMPLES.forEach(s => {
-  const b = document.createElement("button");
-  b.className = "chip"; b.type = "button"; b.textContent = s.label;
-  b.onclick = () => { $("log").value = s.log; $("log").focus(); };
-  $("samples").appendChild(b);
+EXAMPLES.forEach(x => {
+  const b = el("button", "ex"); b.type = "button";
+  b.append(el("span", "line mono", message(x.log)), el("span", "lab", x.label));
+  b.title = x.log;
+  b.onclick = () => { $("log").value = x.log; $("log").focus(); };
+  $("examples").appendChild(b);
 });
 
 async function init(){
   try {
     const r = await fetch("/health");
-    if (!r.ok) throw new Error();
-    $("dot").className = "dot up"; $("statusText").textContent = "API online";
-  } catch {
-    $("dot").className = "dot down"; $("statusText").textContent = "API offline";
-  }
-  try {
-    const cats = await (await fetch("/categories")).json();
-    cats.forEach(c => CATS[c.id] = c);
-  } catch { /* badges fall back to the severity the API returns */ }
+    if (!r.ok) throw 0;
+    $("api").innerHTML = 'api <b class="ok">ok</b>';
+  } catch { $("api").innerHTML = 'api <b class="down">unreachable</b>'; }
+  try { (await (await fetch("/categories")).json()).forEach(c => CATS[c.id] = c); } catch {}
   renderHistory();
 }
 
-function el(tag, cls, text){ const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
-
 let ticker = null;
-async function diagnose(){
+async function run(){
   const raw_log = $("log").value.trim();
-  $("error").classList.add("hidden");
-  if (!raw_log){ showError("Paste a log line first."); return; }
-
-  $("go").disabled = true; $("go").textContent = "Diagnosing…";
-  $("result").classList.add("hidden"); $("loading").classList.remove("hidden");
-  const t0 = performance.now();
-  const tick = () => $("loadingText").textContent =
-    "Running retrieval → triage → (root cause → remediation)… " + ((performance.now() - t0) / 1000).toFixed(1) + "s";
-  tick(); ticker = setInterval(tick, 200);
+  if (!raw_log){ $("log").focus(); return; }
+  const btn = $("run"), t0 = performance.now();
+  btn.disabled = true;
+  const tick = () => btn.textContent = "Running " + ((performance.now() - t0) / 1000).toFixed(1) + " s";
+  tick(); ticker = setInterval(tick, 100);
+  $("out").classList.add("busy");
   try {
     const r = await fetch("/diagnose", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({raw_log})});
-    let data;
-    try { data = await r.json(); } catch { throw new Error("server returned " + r.status + " with a non-JSON body"); }
-    if (!r.ok) throw new Error(data.error || ("server returned " + r.status));
-    render(data);
+    let d;
+    try { d = await r.json(); } catch { throw {status: r.status, msg: "The server answered " + r.status + " without a JSON body."}; }
+    if (!r.ok) throw {status: r.status, msg: d.error || ("HTTP " + r.status)};
+    render(d);
     const h = loadHist().filter(x => x.raw_log !== raw_log);
-    h.unshift({raw_log, at: Date.now(), result: data}); saveHist(h); renderHistory();
+    h.unshift({raw_log, at: Date.now(), result: d}); saveHist(h); renderHistory(raw_log);
   } catch (e) {
-    showError(e instanceof TypeError
-      ? "Could not reach the API. Is the server running? (" + e.message + ")"
-      : "Request failed: " + e.message);
+    showError(e);
   } finally {
-    clearInterval(ticker); $("loading").classList.add("hidden");
-    $("go").disabled = false; $("go").textContent = "Diagnose";
+    clearInterval(ticker); btn.disabled = false; btn.textContent = "Diagnose";
+    $("out").classList.remove("busy");
   }
 }
 
-function showError(msg){
-  $("error").textContent = msg;
-  $("error").classList.remove("hidden");
-  $("result").classList.add("hidden");
+function showError(e){
+  const out = $("out"); out.innerHTML = "";
+  const box = el("div", "err");
+  if (e instanceof TypeError){
+    box.append(el("b", null, "Can't reach the API"), el("span", "dim", "Is the server running? Start it with "), el("code", "mono", "uvicorn api.main:app --port 8000"));
+  } else {
+    box.append(el("b", null, e.status === 400 ? "The request was rejected" : "The pipeline failed"), el("span", "mono", e.msg || String(e)));
+    if (/qdrant|reset/i.test(e.msg || "")) box.append(el("div", "dim", "Qdrant Cloud may be suspended. Resume the cluster in its dashboard."));
+    else if (/mongo|ServerSelection/i.test(e.msg || "")) box.append(el("div", "dim", "Check that this network's IP is allowed in MongoDB Atlas."));
+    else if (/11434|ollama|refused/i.test(e.msg || "")) box.append(el("div", "dim", "Ollama doesn't seem to be running."));
+  }
+  out.appendChild(box);
 }
 
-function sevOf(d){ return d.severity || (CATS[d.classification] || {}).severity || "unknown"; }
+function templateNode(t){
+  const code = el("code");
+  (t || "").split(/(<\*>|<NUM>|<HEX>|<IP>)/).forEach(part => {
+    if (!part) return;
+    code.appendChild(/^<(\*|NUM|HEX|IP)>$/.test(part) ? el("span", "v", part) : document.createTextNode(part));
+  });
+  return code;
+}
 
 function render(d){
-  const sev = sevOf(d);
-  $("cls").textContent = d.category_name || (CATS[d.classification] || {}).name || d.classification || "unknown";
-  $("cls").className = "badge sev-" + sev;
-  $("sev").textContent = "severity: " + sev;
-  $("sev").className = "badge sm sev-" + sev;
-  $("cls").title = (CATS[d.classification] || {}).definition || "";
+  current = d;
+  const out = $("out"); out.innerHTML = "";
+  const sev = sevOf(d), skipped = d.route === "no_action", v = d.vote || {};
 
-  const ti = $("triageInfo"); ti.innerHTML = "";
-  const v = d.vote || {};
-  const add = (k, val) => { const s = el("span"); s.append(k + " "); s.appendChild(el("b", null, val)); ti.appendChild(s); };
-  add("decided by", d.triage_method === "vote" ? "nearest-neighbour vote" : d.triage_method === "llm" ? "LLM (vote unsure)" : "—");
-  if (v.share != null) add("vote share", Math.round(v.share * 100) + "%");
-  if (v.top_score != null) add("best match", v.top_score.toFixed(3));
+  // verdict
+  const verdict = el("div", "verdict sev-" + sev);
+  const left = el("div");
+  const h = el("h2", null, d.category_name || nameOf(d.classification));
+  h.title = (CATS[d.classification] || {}).definition || "";
+  const why = el("div", "why");
+  why.append(el("span", "sevword", sev === "none" ? "no action" : sev + " severity"));
+  const how = d.triage_method === "vote"
+    ? "decided by the retrieved incidents: " + Math.round((v.share || 0) * 100) + "% agree, best match " + (v.top_score ?? 0).toFixed(3)
+    : d.triage_method === "llm" ? "decided by the LLM (retrieved incidents disagreed or matched weakly)" : "";
+  if (how) why.append(document.createTextNode(", " + how));
+  left.append(h, why);
+  const copy = el("button", "tool", "Copy JSON"); copy.type = "button";
+  copy.onclick = async () => {
+    const ok = await store(() => navigator.clipboard.writeText(JSON.stringify(d, null, 2)).then(() => true), Promise.resolve(false));
+    copy.textContent = ok ? "Copied" : "Copy failed"; setTimeout(() => copy.textContent = "Copy JSON", 1500);
+  };
+  verdict.append(left, copy);
+  out.appendChild(verdict);
 
-  const skipped = d.route === "no_action";
-  $("route").className = "route" + (skipped ? " skip" : "");
-  $("route").textContent = skipped
-    ? "retrieval → triage → no action. Severity '" + sev + "', so root cause and remediation were skipped."
-    : "retrieval → triage → root cause → remediation. Severity '" + sev + "', full diagnosis.";
-
-  $("cause").textContent = d.root_cause || "—";
-  $("fix").textContent = d.remediation || "—";
-  $("tpl").textContent = d.template || "—";
-
-  const t = d.timings_ms || {}, total = Object.values(t).reduce((a, b) => a + b, 0) || 1;
-  const tl = $("timeline"), lg = $("legend"); tl.innerHTML = ""; lg.innerHTML = "";
-  AGENTS.filter(([k]) => k in t).forEach(([k, color]) => {
-    const seg = el("div"); seg.style.width = (t[k] / total * 100) + "%"; seg.style.background = "var(" + color + ")"; seg.title = k + ": " + t[k] + " ms";
-    tl.appendChild(seg);
-    const it = el("span"); const sw = el("i"); sw.style.background = "var(" + color + ")";
-    it.append(sw, k.replace("_", " ") + " " + (t[k] / 1000).toFixed(2) + "s"); lg.appendChild(it);
+  // steps that ran
+  const t = d.timings_ms || {};
+  const steps = el("div", "steps");
+  STEPS.forEach(([key, label]) => {
+    const ran = key in t, s = el("div", "step" + (ran ? "" : " skip"));
+    s.append(el("div", "n", label), el("div", "t", ran ? secs(t[key]) : "skipped"));
+    steps.appendChild(s);
   });
-  lg.appendChild(el("span", null, "total " + ((d.total_ms || total) / 1000).toFixed(2) + "s"));
-  tl.setAttribute("aria-label", Object.entries(t).map(([k, ms]) => k + " " + ms + " ms").join(", "));
+  const total = el("div", "step total");
+  total.append(el("div", "n", "Total"), el("div", "t", secs(d.total_ms ?? Object.values(t).reduce((a, b) => a + b, 0))));
+  steps.appendChild(total);
+  steps.setAttribute("aria-label", "Steps: " + STEPS.map(([k, l]) => l + " " + (k in t ? secs(t[k]) : "skipped")).join(", "));
+  out.appendChild(steps);
 
-  const ev = d.evidence || {}, primaryId = ev.primary && ev.primary.cluster_id;
-  const supportIds = new Set((ev.supporting || []).map(s => s.cluster_id));
-  const hits = $("hits"); hits.innerHTML = "";
-  (d.retrieved || []).forEach((h, i) => {
-    const role = skipped ? null : h.cluster_id === primaryId ? "p" : supportIds.has(h.cluster_id) ? "w" : "d";
-    const box = el("div", "hit" + (role === "p" ? " primary" : role === "d" ? " dropped" : ""));
-    const meta = el("div", "meta");
-    const left = el("span");
-    if (role) left.appendChild(el("span", "tag " + role, {p: "primary", w: "weak", d: "not used"}[role]));
-    left.append("#" + (i + 1) + " · similarity " + (h.score != null ? h.score.toFixed(3) : "?"));
-    const lab = CATS[h.label] ? CATS[h.label].name : (h.label || "unlabelled");
-    const right = el("span", null, lab + " · seen " + (h.occurrence_count ?? "?") + "×");
-    meta.append(left, right);
-    const bar = el("div", "bar"); const fill = el("div");
-    fill.style.width = Math.max(0, Math.min(100, Math.round((h.score || 0) * 100))) + "%"; bar.appendChild(fill);
-    box.append(meta, bar, el("div", "mono", h.template || h.example_raw || ""));
-    hits.appendChild(box);
+  // template
+  const tpl = el("div", "tpl");
+  tpl.append(document.createTextNode(d.cluster_id != null ? "Template " + d.cluster_id + ": " : "No stored template matched; searched with the line itself: "), templateNode(d.template));
+  out.appendChild(tpl);
+
+  // cause and fix
+  if (skipped){
+    const s = el("div", "sect"); s.style.marginTop = "22px";
+    s.append(el("p", "dim", "Severity is '" + sev + "' for this category, so no root cause or fix was generated."));
+    out.appendChild(s);
+  } else {
+    const prose = el("div", "prose");
+    [["Likely cause", d.root_cause], ["Suggested fix", d.remediation]].forEach(([title, text]) => {
+      const s = el("div", "sect"); s.append(el("h2", null, title), el("p", null, text || "(empty)")); prose.appendChild(s);
+    });
+    out.appendChild(prose);
+    out.appendChild(el("p", "note", "Generated by the local LLM from the incidents below. It can state details that are not in the evidence, so check before acting."));
+  }
+
+  // evidence
+  const ev = d.evidence || {}, primary = ev.primary && ev.primary.cluster_id;
+  const supporting = new Set((ev.supporting || []).map(s => s.cluster_id));
+  const sect = el("div", "sect"); sect.style.marginTop = "26px";
+  sect.appendChild(el("h2", null, "Similar past incidents"));
+  const wrap = el("div", "tablewrap"), table = el("table"), thead = el("thead"), hr = el("tr");
+  // "Used as" only means something when the root-cause step ran.
+  const cols = [["#", "num"], ...(skipped ? [] : [["Used as", ""]]), ["Similarity", "num"], ["Category", ""], ["Seen", "num"], ["Template", ""]];
+  cols.forEach(([c, cls]) => hr.appendChild(el("th", cls, c)));
+  thead.appendChild(hr); table.appendChild(thead);
+  const tb = el("tbody");
+  (d.retrieved || []).forEach((r, i) => {
+    const role = skipped ? null : r.cluster_id === primary ? "primary" : supporting.has(r.cluster_id) ? "supporting" : "not used";
+    const tr = el("tr", role === "primary" ? "primary" : role === "not used" ? "unused" : "");
+    const tdT = el("td"); tdT.appendChild(templateNode(r.template)); tdT.firstChild.classList.add("mono");
+    tr.appendChild(el("td", "num", String(i + 1)));
+    if (role) tr.appendChild(el("td", "role", role));
+    tr.append(el("td", "num", (r.score ?? 0).toFixed(3)), el("td", "cat", nameOf(r.label)),
+              el("td", "num", r.occurrence_count != null ? r.occurrence_count + "x" : ""), tdT);
+    tb.appendChild(tr);
   });
-  if (!(d.retrieved || []).length) hits.textContent = "No similar incidents found.";
+  if (!(d.retrieved || []).length){ const tr = el("tr"), td = el("td", "dim", "No similar incidents found."); td.colSpan = cols.length; tr.appendChild(td); tb.appendChild(tr); }
+  table.appendChild(tb); wrap.appendChild(table); sect.appendChild(wrap);
+  if (!skipped) sect.appendChild(el("p", "note", "Only the primary match and supporting matches (similarity 0.85 or more, same category) were given to the LLM."));
+  out.appendChild(sect);
 
-  const notes = $("notes"); notes.innerHTML = "";
-  (d.notes || []).forEach(n => notes.appendChild(el("li", null, n)));
-
-  $("result").classList.remove("hidden");
+  // trace
+  if ((d.notes || []).length){
+    const det = el("details"), sum = el("summary", null, "Trace (" + d.notes.length + " steps)"), ol = el("ol", "mono");
+    d.notes.forEach(n => ol.appendChild(el("li", null, n)));
+    det.append(sum, ol); out.appendChild(det);
+  }
 }
 
-function renderHistory(){
-  const list = $("history"); list.innerHTML = "";
+function renderHistory(active){
+  const list = $("hist"); list.innerHTML = "";
   const h = loadHist();
-  if (!h.length){ list.appendChild(el("li", "empty", "Diagnosed lines show up here.")); return; }
+  if (!h.length){ list.appendChild(el("li", "none", "Nothing yet.")); return; }
   h.forEach(item => {
-    const li = el("li"), b = el("button"); b.type = "button";
-    const d = item.result || {}, sev = sevOf(d);
-    const badge = el("span", "badge sm sev-" + sev, d.category_name || d.classification || "?");
-    const msg = el("span", "h-msg", item.raw_log.split(" ").slice(6).join(" ") || item.raw_log);
-    b.append(badge, msg);
-    b.onclick = () => { $("log").value = item.raw_log; $("error").classList.add("hidden"); render(d); };
+    const d = item.result || {}, li = el("li"), b = el("button"); b.type = "button";
+    if (item.raw_log === active) b.setAttribute("aria-current", "true");
+    const c = el("span", "c", d.category_name || nameOf(d.classification));
+    c.appendChild(el("span", "when", new Date(item.at).toLocaleTimeString([], {hour: "2-digit", minute: "2-digit"})));
+    b.append(el("span", "sq sev-" + sevOf(d)), c, el("span", "m mono", message(item.raw_log)));
+    b.onclick = () => { $("log").value = item.raw_log; render(d); renderHistory(item.raw_log); };
     li.appendChild(b); list.appendChild(li);
   });
 }
 
-$("clearHist").onclick = () => { saveHist([]); renderHistory(); };
-$("go").onclick = diagnose;
-$("log").addEventListener("keydown", e => { if (e.ctrlKey && e.key === "Enter") diagnose(); });
+$("clear").onclick = () => { saveHist([]); renderHistory(); };
+$("run").onclick = run;
+$("log").addEventListener("keydown", e => { if ((e.ctrlKey || e.metaKey) && e.key === "Enter"){ e.preventDefault(); run(); } });
+document.addEventListener("keydown", e => {
+  if (e.key === "/" && document.activeElement !== $("log")){ e.preventDefault(); $("log").focus(); }
+});
 init();
 </script>
 </body>

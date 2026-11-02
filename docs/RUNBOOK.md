@@ -60,10 +60,9 @@ Use the first level that works.
    of it somewhere safe, such as a password manager, because it's **not** in git), install
    and pull the Ollama models. The databases are in the cloud, so nothing needs rebuilding.
 4. **No live system at all.** Show the recorded evidence. Everything in it came from real runs:
-   - `docs/img/diagnosis-lustre.png`: a full diagnosis on the page (Lustre mount failure)
-   - `docs/img/normal-no-action-narrow.png`: a normal line skipping diagnosis
-   - `docs/img/error-state.png`: the error state (screenshot taken before the message
-     was reworded to "Could not reach the API")
+   - `docs/img/diagnosis.png`: a full diagnosis on the page (I/O node connection lost)
+   - `docs/img/normal-line.png`: a normal FATAL-level line, with root cause and fix skipped
+   - `docs/img/api-unreachable.png`: what the page shows when the API is down
    - `eval/results/20261026-153603.md`: the full 623-line evaluation report
    - `eval/results/samples-stage3-http.json`, `samples-stage4-docker.json`: demo requests
      and their full responses

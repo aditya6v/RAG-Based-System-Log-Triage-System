@@ -81,7 +81,7 @@ def test_pipeline_failure_is_500_json(client):
 
 def test_front_page_is_served(client):
     r = client.get("/")
-    assert r.status_code == 200 and "Incident Copilot" in r.text
+    assert r.status_code == 200 and "Log Triage" in r.text
 
 
 def test_openapi_docs_exist(client):
