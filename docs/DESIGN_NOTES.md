@@ -93,6 +93,24 @@ and 5 times labelled KERNPROG. No classifier can separate these, so KERNPROG is 
 8. **CPU latency.** About 6–7 s for a full diagnosis when warm; 8–9 s extra when a model has
    to be reloaded.
 9. **No offline mode.** MongoDB Atlas and Qdrant Cloud must be reachable.
+10. **The assistant is only spot-checked.** Database facts were answered correctly in the
+    checks, but it has treated generated text as evidence (`docs/EVALUATION.md`, section 5).
+
+## Assistant
+
+A follow-up conversation about a diagnosis, on the same local model (`agents/chat.py`,
+`POST /chat`).
+
+| Decision | Reason |
+|---|---|
+| The server does the database lookups; the model only reads | A 3B model is unreliable at deciding when to call tools and with what arguments. Fixed lookups each turn (category counts, facts about the matched template, same-category incidents, a vector search on the question) are predictable and testable |
+| Numbers are computed in code | The model turned 289 of 17,552 into "0.0165%" (it is 1.65%). The context now states the percentage |
+| One incident per line, template first, every field labelled | With a compact format the model swapped fields between rows, reporting a filesystem incident as "normal, seen 1x" |
+| Question-based search only keeps hits at 0.65 or more | Prose questions match log templates poorly. Generic questions scored about 0.53 against unrelated incidents |
+| Same `num_ctx` (8192) for diagnosis and chat | Ollama reloads the model when `num_ctx` changes. Switching between the two cost about 22 s |
+| Streaming, as newline-delimited JSON | First text arrives in about 1.5–6 s instead of waiting 5–15 s for the whole answer |
+| A new diagnosis starts a new conversation | Mixing two incidents in one context makes the small model confuse them |
+| Log text sits in the context block, with an instruction not to obey it | Basic prompt-injection hygiene. A test checks that log text never becomes a user message. This doesn't prove the model can't be talked into something |
 
 ## Questions likely to come up
 

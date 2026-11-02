@@ -103,12 +103,21 @@ def _call_with_retry(fn, *args, **kwargs):
     ) from last_error
 
 
+# Ollama context window. The assistant's prompt (category definitions,
+# diagnosis, related incidents, conversation) overflows Ollama's default and
+# would be truncated silently.
+CHAT_NUM_CTX = 8192
+
+
 def chat_text(prompt: str) -> str:
     if config.LLM_PROVIDER == "ollama":
         response = _get_ollama_client().chat(
             model=config.OLLAMA_CHAT_MODEL,
             messages=[{"role": "user", "content": prompt}],
-            options={"temperature": 0.2},
+            # Same num_ctx as chat_stream: Ollama reloads the model whenever
+            # num_ctx changes, which cost ~20 s when switching between a
+            # diagnosis and the assistant.
+            options={"temperature": 0.2, "num_ctx": CHAT_NUM_CTX},
             keep_alive=config.OLLAMA_KEEP_ALIVE,
         )
         return response["message"]["content"]
@@ -119,6 +128,28 @@ def chat_text(prompt: str) -> str:
         contents=prompt,
     )
     return response.text
+
+
+def chat_stream(messages: list[dict]):
+    """Multi-turn chat; yields the reply in text chunks as they arrive.
+    `messages` is a list of {"role": "system"|"user"|"assistant", "content"}.
+    Ollama streams token by token; Gemini (no streaming here) yields the
+    whole reply as one chunk."""
+    if config.LLM_PROVIDER == "ollama":
+        for part in _get_ollama_client().chat(
+            model=config.OLLAMA_CHAT_MODEL,
+            messages=messages,
+            stream=True,
+            options={"temperature": 0.3, "num_ctx": CHAT_NUM_CTX},
+            keep_alive=config.OLLAMA_KEEP_ALIVE,
+        ):
+            chunk = part["message"]["content"]
+            if chunk:
+                yield chunk
+        return
+
+    transcript = "\n\n".join(f"{m['role'].upper()}:\n{m['content']}" for m in messages)
+    yield chat_text(transcript + "\n\nASSISTANT:")
 
 
 def embed_text(text: str) -> list[float]:

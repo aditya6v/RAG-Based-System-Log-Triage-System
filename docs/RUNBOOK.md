@@ -23,7 +23,7 @@ between these versions.
    suspend after a few weeks unused, and resuming needs the dashboard.
 2. In MongoDB Atlas, under Network Access, check that the network you'll demo from is
    allowed (a new Wi-Fi network means a new IP).
-3. `python -m pytest -q`: expect 54 passed.
+3. `python -m pytest -q`: expect 68 passed.
 
 **30 minutes before**
 1. Start the Ollama app.

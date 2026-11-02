@@ -150,14 +150,40 @@ request after Ollama has unloaded a model waits 8–9 s for it to reload.
   configuration file paths that do not appear in the data.
 - Root-cause and remediation text has **not** been scored systematically yet.
 
-## 5. Earlier baseline (synthetic data)
+## 5. Assistant (spot checks, 2026-11-03)
+
+These are hand checks of individual answers, not a scored evaluation. The setting was the
+Lustre mount failure line (template 201) diagnosed, then questions sent to `POST /chat`,
+with `llama3.2:3b` warm.
+
+| Question | Answer checked against the database | Result |
+|---|---|---|
+| How often has this happened, and on how many nodes? | 289 lines, 254 nodes, 2005.08.31 to 2005.09.16 | Correct. In the first version the model also computed the share itself and gave 0.0165%; the correct value is 1.65%. The server now computes it, and the answer was then correct |
+| Have we seen other filesystem or Lustre problems? | Templates 166 (8 lines) and 342 (6 lines) in the same category | First version: **wrong**. It mixed up fields between rows, giving template 166 as "normal, seen 1x". After rows were reformatted (template first, labelled fields) and same-category incidents were added from the database: correct |
+| Is the suggested fix backed by the evidence? | The fix named config file paths that are not in the data | Partly wrong: it concluded "partially generated", but referred to the invented paths as evidence |
+| Which categories are high severity, and how many incidents each? (no diagnosis attached) | memory/CPU 9, kernel crash 8, filesystem 3 | Correct |
+
+Timing, measured on the same runs:
+- First text arrived after 1.4–6.0 s; full answers took 4.7–14.6 s.
+- Before the diagnosis and chat calls shared one context size (`num_ctx` 8192), switching
+  between them made Ollama reload the model: 22.2 s before the first text.
+
+**Related-incident search on the question.** Generic questions such as "how often has this
+happened?" matched templates at 0.52–0.54 similarity, all unrelated. Topical questions
+scored 0.67–0.77 on the right category ("Lustre mount failures", "ciod socket errors"). A
+cut-off of 0.65 is used. This was measured on 5 questions only.
+
+In a browser, driven over the DevTools protocol, a diagnosis followed by two questions
+completed in 24.5 s, both replies streaming without errors (`docs/img/assistant.png`).
+
+## 6. Earlier baseline (synthetic data)
 
 The first version of the project was tested on 10 fabricated OpenStack-style lines that were
 also in its index: accuracy 0.90, weighted F1 0.86, macro F1 0.71 (re-run on 2026-10-26 from the
 `midterm` tag). It is listed only for comparison; those numbers say little because the test
 lines were in the index.
 
-## 6. Reproducing
+## 7. Reproducing
 
 ```
 python -I scripts/sample_bgl.py data/bgl/BGL.log      # optional: regenerate sample and test set

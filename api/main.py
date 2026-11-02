@@ -17,11 +17,13 @@ being unreachable -- the message says which).
 """
 from contextlib import asynccontextmanager
 from pathlib import Path
+from typing import Literal
+import json
 import time
 
 from fastapi import Depends, FastAPI, Request
 from fastapi.exceptions import RequestValidationError
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
 from pydantic import BaseModel, Field
 
 import config
@@ -112,7 +114,7 @@ def get_graph(request: Request):
 @app.exception_handler(RequestValidationError)
 async def bad_request(request: Request, exc: RequestValidationError):
     msg = "; ".join(f"{'.'.join(str(p) for p in e['loc'][1:]) or 'body'}: {e['msg']}" for e in exc.errors())
-    return JSONResponse(status_code=400, content={"error": f"expected JSON body with a non-empty 'raw_log' string ({msg})"})
+    return JSONResponse(status_code=400, content={"error": f"invalid request: {msg}"})
 
 
 @app.exception_handler(Exception)
@@ -147,6 +149,39 @@ def diagnose(body: DiagnoseRequest, graph=Depends(get_graph)):
         category_name=cat.get("name", state.get("classification", "unknown")),
         total_ms=round((time.perf_counter() - t0) * 1000),
     )
+
+
+class ChatMessage(BaseModel):
+    role: Literal["user", "assistant"]
+    content: str = Field(min_length=1, max_length=4000)
+
+
+class ChatRequest(BaseModel):
+    messages: list[ChatMessage] = Field(min_length=1, max_length=40,
+                                        description="The conversation so far; the last message must be from the user")
+    context: dict | None = Field(None, description="A /diagnose response to discuss, or null")
+
+
+def get_chat():
+    from agents.chat import stream_reply
+    return stream_reply
+
+
+MAX_CONTEXT_CHARS = 20_000
+
+
+@app.post("/chat")
+def chat(body: ChatRequest, stream_reply=Depends(get_chat)):
+    """Streams the assistant's reply as NDJSON events: one `context` event
+    (related incidents it looked up), then `delta` text chunks, then `done`
+    or `error`."""
+    if body.messages[-1].role != "user":
+        return JSONResponse(status_code=400, content={"error": "invalid request: the last message must be from the user"})
+    if body.context is not None and len(json.dumps(body.context)) > MAX_CONTEXT_CHARS:
+        return JSONResponse(status_code=413, content={"error": f"context larger than {MAX_CONTEXT_CHARS} characters"})
+    history = [m.model_dump() for m in body.messages]
+    events = (json.dumps(e) + "\n" for e in stream_reply(history, body.context))
+    return StreamingResponse(events, media_type="application/x-ndjson")
 
 
 if __name__ == "__main__":

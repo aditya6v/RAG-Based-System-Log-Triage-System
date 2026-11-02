@@ -35,6 +35,29 @@ flowchart LR
 The index is built offline. A sample of the log is parsed into 357 templates, stored in
 MongoDB and embedded into Qdrant.
 
+### Assistant
+
+![Assistant answering questions about a diagnosis](docs/img/assistant.png)
+
+The side panel holds a conversation about the current diagnosis, using the same local
+model. Click **Discuss** on a result, or pick one of the suggested questions. On every
+question, the server (`agents/chat.py`) builds the model's context from:
+
+- **The diagnosis on screen:** line, category, severity, cause, fix, and the retrieved
+  incidents, each marked as used or not used as evidence.
+- **Database lookups:**
+  - per-category counts and definitions
+  - for the matched template: line count and share of all lines, distinct nodes, first and
+    last date in the log
+  - the most frequent other incidents in the same category
+- **A vector search on the question itself.** Results are kept only if similarity is 0.65
+  or more, because prose questions rarely resemble log templates.
+
+The model doesn't query the database itself: a 3B model is unreliable at choosing tools.
+The server does fixed lookups, computes numbers such as percentages, and the model writes
+the answer. Replies stream as they are generated. Log text is passed as quoted data, and the
+model is told not to follow instructions inside it.
+
 ## Results
 
 623 test lines held out from the index, 8 categories. Full details, per-class scores and
@@ -100,6 +123,14 @@ The response includes:
 - `retrieved` (similar incidents with scores) and `evidence` (which of them were used)
 - `timings_ms` per step
 
+`POST /chat` takes `{"messages": [{"role": "user", "content": "..."}], "context": <a /diagnose
+response or null>}`. It streams newline-delimited JSON:
+- one `context` event listing the related incidents found for the question
+- `delta` events carrying text
+- a final `done` (or `error`) event
+
+Limits: at most 40 messages, 4,000 characters per message, and 20,000 characters of context.
+
 **Docker:**
 
 ```bash
@@ -125,7 +156,7 @@ All settings are read from `.env` (see `.env.example`).
 ## Tests and evaluation
 
 ```powershell
-python -m pytest -q                                 # 54 tests; no database or LLM needed
+python -m pytest -q                                 # 68 tests; no database or LLM needed
 python -m eval.evaluate eval/bgl_eval.jsonl --no-llm   # retrieval-only methods, about 3 min
 python -m eval.evaluate eval/bgl_eval.jsonl         # all methods, about 25 min on CPU
 python scripts/run_samples.py                       # five demo lines through the API
@@ -168,6 +199,10 @@ docs/           evaluation, design notes, runbook, references
 - **One dataset; single lines only.** Problems that show only as a sequence of normal-looking
   lines are out of scope.
 - **Cloud services required.** MongoDB and Qdrant must be reachable; there is no offline mode.
+- **The assistant can still misread its context.** Counts, dates and same-category incidents
+  come from the database and were answered correctly in the checks so far. But asked whether
+  the fix is supported by evidence, it once treated generated text as evidence. Its answers
+  have not been scored systematically.
 
 More in [docs/DESIGN_NOTES.md](docs/DESIGN_NOTES.md).
 
