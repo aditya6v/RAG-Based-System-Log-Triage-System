@@ -4,8 +4,8 @@ Usage: python scripts/run_samples.py [out.json]
 Sends the 5 front-page sample lines (real held-out BGL eval lines) through
 the real POST /diagnose -- FastAPI app in-process, real Mongo, Qdrant and
 Ollama -- and prints classification, route, per-agent timings, and the root
-cause and remediation text. Used to record end-of-stage results in
-PROGRESS.md.
+cause and remediation text. Used to record the demo results in
+docs/EVALUATION.md.
 """
 import json
 import sys

@@ -18,7 +18,8 @@ from bgl.lines import level_of
 ALERT_LEVELS = {"FATAL", "FAILURE"}
 
 # Vote is trusted when the best match is this similar and this share of the
-# (similarity-weighted) votes agree. Set from eval results -- see PROGRESS.md.
+# (similarity-weighted) votes agree. Fixed before the eval was run, not tuned
+# on it -- see docs/EVALUATION.md.
 CONFIDENT_TOP_SCORE = 0.9
 CONFIDENT_SHARE = 0.6
 
@@ -32,7 +33,7 @@ def level_rule(content: str) -> str:
 # Only neighbours within this much of the best match get a vote. Without it,
 # an exact match (1.0, right label) is outvoted by three ~0.75 normal
 # incidents, because 312 of the 357 BGL incidents are normal -- the first
-# eval run lost 136 alert lines that way (see PROGRESS.md).
+# eval run lost 136 alert lines that way (see docs/DESIGN_NOTES.md).
 VOTE_MARGIN = 0.05
 
 

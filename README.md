@@ -1,112 +1,188 @@
-# Incident Copilot
+# RAG-Based System Log Triage
 
-RAG-based multi-agent triage for supercomputer logs. Paste one log line from
-the BlueGene/L (BGL) system and four agents work through it:
+Classifies a single system log line, decides whether it needs attention, and for real
+alerts suggests a likely root cause and a fix. Classification is done by retrieving similar
+past log events. A local LLM writes the explanation from those events.
 
-```
-START -> retrieval -> triage --(router)--> root_cause -> remediation -> END
-                                  \
-                                   +--> no_action -> END   (normal / low severity)
-```
+Built and evaluated on the BGL (BlueGene/L supercomputer) log from Loghub [1, 2].
 
-| Agent | What it does | LLM? |
-|---|---|---|
-| retrieval | Drain3 template match (read-only), embed, Qdrant top-5, Mongo counts and labels | embedding only |
-| triage | Category + severity. Nearest-neighbour vote of the retrieved incidents when it is confident, otherwise the LLM | only when the vote is unsure |
-| router | Plain function: severity from `bgl/categories.json` decides the path | no |
-| root_cause | Grounded explanation: the top hit is primary evidence, hits above 0.85 similarity are weak support, the rest are dropped | yes |
-| remediation | Concrete fix, given the root cause and the category definition | yes |
+![Diagnosis of a Lustre mount failure](docs/img/diagnosis-lustre.png)
 
-Data: the Loghub BGL dataset (4,747,963 lines, 41 alert codes grouped into 8
-categories). Evaluation results, design decisions and limitations are in
-`docs/ETE_NOTES.md`; build history in `PROGRESS.md`.
+## How it works
 
-## Setup (once)
-
-1. **Python env** (3.12): `python -m venv venv`, then `.\venv\Scripts\Activate.ps1`
-   (if scripts are blocked: `Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned`),
-   then `pip install -r requirements.txt`.
-2. **Ollama** (default LLM, local): install it, then
-   `ollama pull llama3.2:3b` and `ollama pull nomic-embed-text`.
-3. **MongoDB Atlas** free cluster: create a database user, allow your IP under
-   Network Access, copy the `mongodb+srv://...` string.
-4. **Qdrant Cloud** free cluster: copy the cluster URL and API key. Free
-   clusters are **suspended after a few weeks unused**; open the dashboard a
-   day before a demo.
-5. Copy `.env.example` to `.env` and fill in the values in `<...>`.
-   Gemini is optional (`LLM_PROVIDER=gemini`).
-
-## Build the index (once, or after changing data or Drain3 settings)
-
-Download `BGL.zip` from https://zenodo.org/records/8196385 and extract
-`BGL.log` to `data/bgl/` (ignored by git, about 710 MB).
-
-```
-python -I scripts/sample_bgl.py data/bgl/BGL.log   # -> sample_data/bgl_index.log, eval/bgl_eval.jsonl
-python -m ingestion.ingest sample_data/bgl_index.log  # Drain3 templates -> Mongo
-python -m embeddings.embed                            # templates -> Qdrant
+```mermaid
+flowchart LR
+    A[log line] --> R[retrieval<br/>template match + vector search]
+    R --> T[triage<br/>nearest-neighbour vote, LLM if unsure]
+    T -->|severity none/low| N[no action]
+    T -->|severity medium/high| C[root cause<br/>LLM, grounded in retrieved events]
+    C --> M[remediation<br/>LLM]
 ```
 
-The sample and eval files are committed, so the first step is only needed to
-regenerate them. To start from scratch, delete `drain3_state.bin` and use an
-empty `MONGO_DB_NAME` / `QDRANT_COLLECTION` first. After re-ingesting, run
-`python -m embeddings.embed --rebuild`.
+1. **Retrieval.**
+   - The dataset's label token is removed.
+   - The line is matched to a known template with Drain [3, 4].
+   - The template is embedded with `nomic-embed-text`, and the 5 most similar past
+     incidents are fetched from Qdrant.
+   - Their counts and labels come from MongoDB.
+2. **Triage.** The retrieved incidents vote on one of 8 categories (`bgl/categories.json`).
+   If the vote is not confident, the LLM decides instead.
+3. **Router.** The category's severity decides the path. Normal lines stop here with no LLM call.
+4. **Root cause** and **remediation.** Two prompts to `llama3.2:3b` via Ollama. The closest
+   match is passed as primary evidence. Other matches are passed only if they are similar
+   enough and share the same category.
 
-## Run
+The index is built offline. A sample of the log is parsed into 357 templates, stored in
+MongoDB and embedded into Qdrant.
 
+## Results
+
+623 test lines held out from the index, 8 categories. Full details, per-class scores and
+confusion matrices: [docs/EVALUATION.md](docs/EVALUATION.md).
+
+| Method | Accuracy | Accuracy on unseen message patterns (151) | Normal FATAL/ERROR lines correctly left alone (108) |
+|---|---|---|---|
+| "FATAL or FAILURE means alert" | 0.876 (alert vs normal only) | n/a | 0.287 |
+| LLM only (`llama3.2:3b`) | 0.425 | 0.212 | 0.000 |
+| LLM with retrieved events | 0.639 | 0.570 | 0.028 |
+| Nearest-neighbour vote | 0.981 | 0.921 | 1.000 |
+| **Vote, LLM when unsure (used)** | **0.982** | **0.927** | 0.981 |
+
+Latency on a laptop CPU, models already loaded:
+- A normal line takes 0.2–0.7 s (no LLM call).
+- A full diagnosis takes 5.5–7.5 s.
+
+Read these numbers with the limitations below in mind. In particular, alerts that match a
+known pattern are close to a lookup.
+
+## Quickstart
+
+**Requirements**
+- Python 3.12
+- [Ollama](https://ollama.com)
+- A MongoDB Atlas cluster and a Qdrant cluster (free tiers are enough)
+
+```powershell
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+ollama pull llama3.2:3b
+ollama pull nomic-embed-text
+copy .env.example .env      # then fill in the values in <...>
 ```
-uvicorn api.main:app --port 8000      # or: python -m api.main
+
+**Build the index** (about 4 minutes):
+
+```powershell
+python -m ingestion.ingest sample_data/bgl_index.log
+python -m embeddings.embed
 ```
 
-- http://localhost:8000: the page (sample buttons, history, per-agent timings)
-- http://localhost:8000/docs: interactive API docs
-- `POST /diagnose` with `{"raw_log": "<one BGL line>"}`; `GET /categories`; `GET /health`
+**Run:**
 
+```powershell
+uvicorn api.main:app --port 8000
 ```
+
+- Web page: http://localhost:8000
+- API docs: http://localhost:8000/docs
+
+The first request takes about 10 s while Ollama loads the models.
+
+```bash
 curl -X POST http://localhost:8000/diagnose -H "Content-Type: application/json" \
   -d '{"raw_log": "1125552602 2005.08.31 R23-M1-N8-I:J18-U01 2005-08-31-22.30.02.453491 R23-M1-N8-I:J18-U01 RAS KERNEL FATAL Lustre mount FAILED : bglio318 : point /p/gb1"}'
 ```
 
-### Docker
+The response includes:
+- `classification`, `severity`, `route`
+- `root_cause`, `remediation`
+- `retrieved` (similar incidents with scores) and `evidence` (which of them were used)
+- `timings_ms` per step
 
-```
-docker compose up --build             # API in a container, Ollama on the host
-docker compose --profile ollama up    # also run Ollama in a container (slower, no GPU)
-```
+**Docker:**
 
-MongoDB Atlas and Qdrant Cloud stay external; the container reads `.env`.
-
-## Test and evaluate
-
-```
-python -m pytest -q                                  # unit + API contract tests, no DB or LLM needed
-python -m eval.evaluate eval/bgl_eval.jsonl          # full eval, about 25 min on local Ollama
-python -m eval.evaluate eval/bgl_eval.jsonl --no-llm # retrieval-only classifiers, about 3 min
-python -m eval.evaluate --report eval/results/<run>.json   # rebuild a report without re-running
-python -m agents.graph                               # one line through the whole pipeline
+```bash
+docker compose up --build
 ```
 
-## Code map
+The container uses Ollama on the host. MongoDB Atlas and Qdrant stay external.
 
-- `bgl/categories.json`: the 8 categories, definitions, severities, alert codes. The one place they are defined.
-- `bgl/lines.py`: splits a BGL line; the ground-truth label token never reaches Drain3, embeddings or the LLM.
-- `ingestion/parser.py`: Drain3 wrapper. `parse_line` learns (ingestion only); `match_line` only looks up (diagnose, eval).
-- `ingestion/ingest.py`, `embeddings/embed.py`: batch jobs that build the index.
-- `agents/retrieval.py`, `agents/classify.py`: shared by the graph and the eval.
-- `agents/graph.py`: the four agents, router, evidence selection, per-agent timing.
-- `agents/llm.py`: the only file that calls an LLM (Ollama or Gemini).
-- `api/main.py`: FastAPI app, Pydantic models, JSON errors.
-- `frontend/index.html`: single page, no dependencies.
-- `eval/evaluate.py`: compares the FATAL rule, nearest-neighbour vote, LLM-only, LLM+RAG and triage.
-- `scripts/`: BGL scan and sampling scripts. Run them with `python -I`.
+## Configuration
 
-## When something breaks
+All settings are read from `.env` (see `.env.example`).
 
-- **Request hangs, then a 500 about Mongo**: your IP isn't allowed in Atlas, or the
-  password in `MONGO_URI` has an unescaped `@ : /`.
-- **500 "Connection was reset" from Qdrant**: the free cluster is suspended. Resume it in the dashboard.
-- **Connection refused on 11434**: Ollama isn't running. **"model not found"**: `ollama pull` it.
-- **Similarity scores all low / retrieval nonsense**: embeddings were made with a
-  different model, or Drain3 state doesn't match what was embedded. Re-run
-  ingest, then `embed --rebuild`.
-- **First request slow**: Ollama is loading the model into memory; later calls are faster.
+| Variable | Default | Meaning |
+|---|---|---|
+| `MONGO_URI` | required | MongoDB connection string |
+| `MONGO_DB_NAME` | set in `.env.example` | Database for this index |
+| `QDRANT_URL`, `QDRANT_API_KEY` | required | Qdrant cluster |
+| `QDRANT_COLLECTION` | set in `.env.example` | Collection for this index |
+| `LLM_PROVIDER` | `ollama` | `ollama` or `gemini` |
+| `OLLAMA_CHAT_MODEL`, `OLLAMA_EMBED_MODEL` | `llama3.2:3b`, `nomic-embed-text` | Models. The embedding model must match the one the index was built with |
+| `OLLAMA_KEEP_ALIVE` | `30m` | How long Ollama keeps models loaded |
+
+## Tests and evaluation
+
+```powershell
+python -m pytest -q                                 # 54 tests; no database or LLM needed
+python -m eval.evaluate eval/bgl_eval.jsonl --no-llm   # retrieval-only methods, about 3 min
+python -m eval.evaluate eval/bgl_eval.jsonl         # all methods, about 25 min on CPU
+python scripts/run_samples.py                       # five demo lines through the API
+```
+
+To regenerate the index sample and test set from the full log, download `BGL.zip`
+from https://zenodo.org/records/8196385 and extract it to `data/bgl/` (not in git). Then run:
+
+```powershell
+python -I scripts/sample_bgl.py data/bgl/BGL.log
+```
+
+## Project layout
+
+```
+api/            FastAPI app: /diagnose, /categories, /health, web page at /
+agents/         pipeline: retrieval, classify (vote + LLM), graph (steps and routing), llm
+bgl/            BGL line format and the category definitions (categories.json)
+ingestion/      Drain3 wrapper and the ingest job
+embeddings/     embedding job (MongoDB -> Qdrant)
+db/             MongoDB and Qdrant clients
+eval/           evaluation script, test set, saved results
+scripts/        dataset scan, sampling, demo runner
+frontend/       single HTML page, no build step
+tests/          pytest suite
+docs/           evaluation, design notes, runbook, references
+```
+
+## Limitations
+
+- **Only classification is measured.** The dataset has no ground truth for root causes. On
+  the cases read by hand, the 3B model sometimes invents details, such as wrong expansions
+  of acronyms or file paths that aren't in the data.
+- **Matching known alerts is easy on BGL.** BGL has only 88 distinct alert messages after
+  masking numbers. Results on unseen patterns and on normal lines logged at FATAL/ERROR level
+  are the fairer measure, and the unseen alert subsets are small.
+- **Not tested on a different time period.** The test set is not split from the index by
+  time, and simple text classifiers (e.g. TF-IDF with logistic regression) have not been
+  compared yet.
+- **One dataset; single lines only.** Problems that show only as a sequence of normal-looking
+  lines are out of scope.
+- **Cloud services required.** MongoDB and Qdrant must be reachable; there is no offline mode.
+
+More in [docs/DESIGN_NOTES.md](docs/DESIGN_NOTES.md).
+
+## Documentation
+
+- [docs/EVALUATION.md](docs/EVALUATION.md): data, split, all results and how they were produced
+- [docs/DESIGN_NOTES.md](docs/DESIGN_NOTES.md): design decisions, rejected approaches, limitations
+- [docs/RUNBOOK.md](docs/RUNBOOK.md): running a demo, common faults and fixes, rebuilding the databases
+- [docs/REFERENCES.md](docs/REFERENCES.md): papers, datasets and software used
+
+## References
+
+[1] A. Oliner and J. Stearley. "What Supercomputers Say: A Study of Five System Logs." DSN 2007.<br>
+[2] J. Zhu, S. He, P. He, J. Liu, M. R. Lyu. "Loghub: A Large Collection of System Log Datasets for AI-driven Log Analytics." ISSRE 2023.<br>
+[3] P. He, J. Zhu, Z. Zheng, M. R. Lyu. "Drain: An Online Log Parsing Approach with Fixed Depth Tree." ICWS 2017.<br>
+[4] Drain3. https://github.com/logpai/Drain3
+
+Full list in [docs/REFERENCES.md](docs/REFERENCES.md).

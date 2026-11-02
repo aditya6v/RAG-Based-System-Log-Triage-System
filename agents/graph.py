@@ -45,7 +45,7 @@ from langgraph.graph import StateGraph, START, END
 # Hits below this similarity are not shown to the root-cause agent at all.
 # Calibrated for nomic-embed-text on the 357 stored BGL incidents (not the
 # eval set): among each incident's top-5 neighbours, 0.85 keeps 40% of
-# same-label pairs and 25% of different-label pairs; see PROGRESS.md.
+# same-label pairs and 25% of different-label pairs; see docs/EVALUATION.md.
 # Scores from a different embedding model are not comparable; recalibrate.
 MIN_EVIDENCE_SCORE = 0.85
 

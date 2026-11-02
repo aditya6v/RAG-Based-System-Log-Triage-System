@@ -2,7 +2,7 @@
 
 Factual notes for writing the ETE report and slides. Every number here comes
 from a command that was run. The command and the result file are named next
-to it. Build history is in `PROGRESS.md`.
+to it. Full results: `docs/EVALUATION.md`; decisions: `docs/DESIGN_NOTES.md`.
 
 ## 1. What the system does
 
@@ -54,7 +54,7 @@ embeddings, local), scikit-learn for metrics, Docker. Gemini is optional.
 
 Midterm baseline, re-run 2026-10-26 on the tagged code: accuracy 0.90, weighted F1 0.86,
 macro F1 0.71 on its 10 synthetic lines. The normal log got a made-up disk-space root
-cause, and 3 of 4 diagnoses blamed disk space. Details in `PROGRESS.md`.
+cause, and 3 of 4 diagnoses blamed disk space. Details in `docs/EVALUATION.md`.
 
 ## 3. The data story
 

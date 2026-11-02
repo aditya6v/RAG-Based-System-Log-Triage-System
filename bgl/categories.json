@@ -1,5 +1,5 @@
 {
-  "_comment": "The one place BGL categories are defined. Prompts, eval, routing and the UI all read this file. Codes are the label tokens at the start of each BGL.log line ('-' = normal). KERNPROG is mapped to normal on purpose: its only message, 'program interrupt', appears 3,662 times labelled normal and 5 times labelled KERNPROG, so no model can learn it (see PLAN.md, BGL finding 3).",
+  "_comment": "The one place BGL categories are defined. Prompts, eval, routing and the UI all read this file. Codes are the label tokens at the start of each BGL.log line ('-' = normal). KERNPROG is mapped to normal on purpose: its only message, 'program interrupt', appears 3,662 times labelled normal and 5 times labelled KERNPROG, so no model can learn it (see docs/DESIGN_NOTES.md, 'Contradictory labels').",
   "categories": [
     {
       "id": "normal",

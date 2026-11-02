@@ -67,7 +67,7 @@ Use the first level that works.
    - `eval/results/20261026-153603.md`: the full 623-line evaluation report
    - `eval/results/samples-stage3-http.json`, `samples-stage4-docker.json`: demo requests
      and their full responses
-   - `PROGRESS.md` and `docs/ETE_NOTES.md`: all numbers and how they were produced
+   - `docs/EVALUATION.md` and `docs/ETE_NOTES.md`: all numbers and how they were produced
 
 ## Rebuild the databases (if a cloud cluster is lost)
 
