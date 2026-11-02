@@ -246,6 +246,50 @@ cut-off of 0.65 is used. This was measured on 5 questions only.
 In a browser, driven over the DevTools protocol, a diagnosis followed by two questions
 completed in 24.5 s, both replies streaming without errors (`docs/img/assistant.png`).
 
+## 5b. Does the generated text invent things? (2026-11-03)
+
+There is no ground truth for root causes, so this measures one thing that *can* be checked:
+whether the root cause and fix name **specifics that appear nowhere in what the model was
+given** (the log line, the category and its definition, the evidence templates).
+
+**Method.** `python -m eval.groundedness build` picks 42 held-out lines (6 per alert category,
+seed 7) from the random-split test set, runs them through the real pipeline (`llama3.2:3b`,
+local), and saves text and evidence. `python -m eval.groundedness check` splits the root
+cause and fix into sentences and labels each one:
+- **unsupported:** names a specific not found in the context. Specifics are file paths, file
+  names, numbers of 2+ digits, IPs, hex values, code-like identifiers, and host or device names.
+- **grounded:** names only specifics that are in the context.
+- **generic:** names no specific, e.g. "check the network connection". Not wrong, but not
+  evidence-based either.
+
+**Hand check of the checker.** I read 10 sampled sentences (4 unsupported, 3 grounded,
+3 generic) against their log and evidence and agreed with 9 verdicts:
+- All 4 "unsupported" were real inventions: "PDU" for a socket error, `/etc/config`,
+  `/etc/cpuinfo`, "wait 15–30 minutes".
+- The miss: a "Power deactivated" line was told to check the "mailbox/idoproxy socket".
+  That's blended in from the category definition, which the checker counts as context.
+
+So the checker **undercounts**. It can't judge whether a general claim is true. An LLM judge
+with a larger model is planned once a hosted provider key is available.
+
+| Prompt | Sentences | Grounded | Generic | **Unsupported** | Diagnoses with ≥1 unsupported |
+|---|---|---|---|---|---|
+| Current (`eval/rubric/v1-baseline-prompt.jsonl`) | 148 | 24.3% | 70.3% | **5.4%** | 8/42 (19.0%) |
+| Stricter rules, tried and reverted (`eval/rubric/v2-grounding-rule.jsonl`) | 178 | 29.8% | 60.7% | 9.6% | 9/42 (21.4%) |
+
+The stricter prompt added two things: the log line marked as quoted data, and the rule
+"only name files, paths, hosts, devices, services, commands or numbers that appear in the
+log line or the evidence; otherwise describe what to check in general terms". It **did not
+help**:
+- It produced longer answers (90 vs 80 words on average) with more invented specifics.
+  New ones included "NIC", "PSU" and more Lustre config paths such as
+  `/etc/lustre/conf/lustre.conf`.
+- One run each at temperature 0.2 on 42 lines, so part of the difference may be noise.
+- There is no evidence it helps, so the original prompts are kept.
+
+Typical inventions under both prompts: configuration file paths (`/etc/lustre/fgl.conf`,
+`/p/gb1/lnfs/lnfsd.conf`, `/etc/config/ras.conf`) and hardware names not in the log.
+
 ## 6. LLM providers and embeddings (2026-11-03)
 
 **Tokens per call**, as reported by Ollama (`llama3.2:3b`), through the running API:

@@ -76,6 +76,12 @@ EMBEDDING_DIM = 768
 # uses the LLM's pick as the answer (the earlier behaviour).
 TRIAGE_LOW_CONFIDENCE = os.environ.get("TRIAGE_LOW_CONFIDENCE", "abstain").lower()
 
+# Which log format and category list to use: "bgl" (default) or "thunderbird".
+# Each dataset needs its own MONGO_DB_NAME, QDRANT_COLLECTION and state file.
+DATASET = os.environ.get("DATASET", "bgl").lower()
+CATEGORIES_FILE = os.environ.get("CATEGORIES_FILE", {"bgl": "bgl/categories.json",
+                                                     "thunderbird": "bgl/thunderbird_categories.json"}.get(DATASET, ""))
+
 # Drain3's learned templates. Each index (database + collection) needs its own
 # state file: the cluster ids stored in Mongo and Qdrant refer to it.
 DRAIN3_STATE_FILE = os.environ.get("DRAIN3_STATE_FILE", "drain3_state.bin")

@@ -1,13 +1,16 @@
 """
-Loads bgl/categories.json -- the single source of truth for the category
-list. Nothing else should hard-code category names: prompts, the eval, the
-router and the UI (via the API) all ask this module.
+Loads the category file -- the single source of truth for the category list:
+bgl/categories.json for BGL, another file per dataset (config.CATEGORIES_FILE).
+Nothing else should hard-code category names: prompts, the eval, the router
+and the UI (via the API) all ask this module.
 """
 import json
 from functools import lru_cache
 from pathlib import Path
 
-_PATH = Path(__file__).with_name("categories.json")
+import config
+
+_PATH = Path(__file__).resolve().parents[1] / config.CATEGORIES_FILE
 
 
 @lru_cache(maxsize=1)

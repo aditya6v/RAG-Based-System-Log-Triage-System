@@ -242,9 +242,11 @@ docs/           evaluation, design notes, runbook, references
 
 ## Limitations
 
-- **Only classification is measured.** The dataset has no ground truth for root causes. On
-  the cases read by hand, the 3B model sometimes invents details, such as wrong expansions
-  of acronyms or file paths that aren't in the data.
+- **The explanations invent details.** There's no ground truth for root causes. An automatic
+  check found that 5.4% of generated sentences, in 19% of diagnoses, name a file path,
+  number or component that appears nowhere in the evidence, such as made-up Lustre config
+  files. It undercounts. A stricter prompt made this worse (9.6%) and was reverted. Trust
+  the evidence table; treat the text as a starting point.
 - **Matching known alerts is easy on BGL.** BGL has only 88 distinct alert messages after
   masking numbers. Results on unseen patterns and on normal lines logged at FATAL/ERROR level
   are the fairer measure, and the unseen alert subsets are small.

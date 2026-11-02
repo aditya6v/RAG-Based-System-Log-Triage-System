@@ -74,3 +74,23 @@ def test_majority():
     assert categories.majority({"normal": 3, "kernel_crash": 5}) == "kernel_crash"
     assert categories.majority({}) is None
     assert categories.majority(None) is None
+
+
+TB_ALERT = ("EXT_FS 1131810726 2005.11.12 an312 Nov 12 07:52:06 an312/an312 kernel: EXT3-fs error "
+            "(device sda5) in start_transaction: Journal has aborted")
+
+
+def test_thunderbird_lines(monkeypatch):
+    import config
+    monkeypatch.setattr(config, "DATASET", "thunderbird")
+    sp = split_line(TB_ALERT)
+    assert sp["label"] == "EXT_FS"                      # underscore codes are labels too
+    assert "EXT_FS" not in sp["text"] and "EXT_FS" not in sp["content"]
+    assert sp["content"] == "kernel: EXT3-fs error (device sda5) in start_transaction: Journal has aborted"
+    assert level_of(sp["content"]) is None             # Thunderbird has no level field
+    assert has_message("kernel: oops")
+
+
+def test_underscore_label_is_never_left_in_bgl_text():
+    sp = split_line("SOME_CODE 1118538627 2005.06.11 R30 2005-06-11-18.10.27.692687 R30 RAS KERNEL FATAL x y")
+    assert sp["label"] == "SOME_CODE" and not sp["text"].startswith("SOME_CODE")

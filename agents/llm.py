@@ -56,8 +56,9 @@ log = logging.getLogger("llm")
 # diagnosis, related incidents, conversation) overflows Ollama's old default
 # and would be truncated silently. Measured prompts: diagnosis calls under
 # 700 tokens, assistant turns about 1,550 plus history, so 4096 leaves room.
-# At 8192, Ollama reported llama3.2:3b at 3.25 GB loaded and the 16 GB laptop
-# ran out of free memory. The same value is used for every call because
+# Ollama reported llama3.2:3b at 3,251 MB loaded with 8192 and 2,800 MB with
+# 4096; at 8192 the 16 GB laptop ran out of free memory during long evals.
+# The same value is used for every call because
 # Ollama reloads the model whenever num_ctx changes (~20 s).
 CHAT_NUM_CTX = 4096
 

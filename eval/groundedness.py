@@ -44,7 +44,8 @@ SENT = re.compile(r"(?<=[.!?])\s+(?=[A-Z(])")
 
 # Common words that the IDENT pattern would otherwise flag.
 ALLOWED = {"RAS", "CPU", "TLB", "DDR", "API", "LLM", "FATAL", "ERROR", "INFO", "WARNING", "SEVERE", "FAILURE",
-           "KERNEL", "APP", "BGL", "NOTE", "IMPORTANT", "JSON", "TCP", "UDP", "DNS", "MPI", "RAM", "IO", "NFS"}
+           "KERNEL", "APP", "BGL", "NOTE", "IMPORTANT", "JSON", "TCP", "UDP", "DNS", "MPI", "RAM", "IO", "NFS",
+           "BlueGene"}  # the system name is given in every prompt
 
 
 def specifics(sentence: str) -> set[str]:
@@ -72,7 +73,8 @@ def sentences(text: str) -> list[str]:
 
 
 def check_one(d: dict) -> list[dict]:
-    context = " ".join([d["text"], d.get("definition", ""), *d.get("evidence", [])]).lower()
+    # the category id and definition are in the prompt, so repeating them is not an invention
+    context = " ".join([d["text"], d.get("classification", ""), d.get("definition", ""), *d.get("evidence", [])]).lower()
     out = []
     for field in ("root_cause", "remediation"):
         for s in sentences(d.get(field, "")):

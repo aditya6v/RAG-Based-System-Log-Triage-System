@@ -78,8 +78,10 @@ and 5 times labelled KERNPROG. No classifier can separate these, so KERNPROG is 
 
 ## Limitations
 
-1. **Only classification is measured.** The dataset has no ground truth for root cause or
-   remediation. The text was read by hand on 5 cases only.
+1. **Root-cause text is only checked for invented specifics.** The dataset has no ground
+   truth for root causes. An automatic check finds that 5.4% of generated sentences, in 19%
+   of diagnoses, name a file, path, number or component that appears nowhere in the evidence.
+   It undercounts, and can't judge general claims.
 2. **The 3B model invents specifics.** Examples: a wrong expansion of "RAS", and file paths
    that don't appear in the data. The explanations are plausible in general, not reliable
    in detail.
@@ -99,6 +101,16 @@ and 5 times labelled KERNPROG. No classifier can separate these, so KERNPROG is 
 9. **No offline mode.** MongoDB Atlas and Qdrant Cloud must be reachable.
 10. **The assistant is only spot-checked.** Database facts were answered correctly in the
     checks, but it has treated generated text as evidence (`docs/EVALUATION.md`, section 5).
+
+## Grounding the generated text
+
+| Tried | Result |
+|---|---|
+| Primary/weak evidence, plus a label filter on weak evidence | Stopped the midterm's habit of blending unrelated incidents into the cause (checked by hand) |
+| A stricter prompt: "only name files, paths, hosts… that appear in the log or evidence", with the log marked as quoted data | **Worse:** sentences with an invented specific went from 5.4% to 9.6% over 42 diagnoses, and answers got longer. Reverted. Telling a 3B model what not to mention seems to prime it to mention such things |
+
+The honest position: the explanations are useful as a starting point, and the evidence table
+next to them is what an engineer should trust.
 
 ## LLM providers
 
