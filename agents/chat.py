@@ -134,8 +134,11 @@ def diagnosis_block(ctx: dict) -> str:
     used = {(ev.get("primary") or {}).get("cluster_id")} | {s.get("cluster_id") for s in ev.get("supporting") or []}
     lines = [
         f"Log line: {ctx.get('text') or ctx.get('raw_log', '')}",
-        f"Category: {ctx.get('classification')} (severity {ctx.get('severity')}), decided by "
-        f"{'a vote of similar past incidents' if ctx.get('triage_method') == 'vote' else 'the language model'}",
+        (f"Category: unknown. No past incident matched closely enough (confidence {ctx.get('confidence')}); "
+         f"a language model suggests {ctx.get('suggestion')!r}, which is unverified. Treat the category as uncertain."
+         if ctx.get("classification") == "unknown" else
+         f"Category: {ctx.get('classification')} (severity {ctx.get('severity')}), decided by "
+         f"{'a vote of similar past incidents' if ctx.get('triage_method') == 'vote' else 'the language model'}"),
         f"Route: {'root cause and fix skipped (no action needed)' if ctx.get('route') == 'no_action' else 'full diagnosis'}",
     ]
     if ctx.get("route") != "no_action":

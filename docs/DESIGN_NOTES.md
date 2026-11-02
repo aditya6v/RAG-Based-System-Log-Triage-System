@@ -33,6 +33,8 @@ Retrieval runs before triage because the vote needs the retrieved labels.
 |---|---|
 | Per-line classification on BGL | BGL labels every line [1, 2], which matches a "paste one line, get a diagnosis" workflow |
 | Retrieval classifies, the LLM explains | Measured: the vote scores 0.981, the 3B LLM alone 0.425 |
+| Abstain ("unknown") when the vote is weak, instead of asking the LLM | On a time-ordered split, the LLM fallback dropped accuracy from 0.888 to 0.699 by labelling unfamiliar normal lines as alerts. Abstaining below a threshold chosen on validation gave 0.971 precision on 86.6% of lines. The LLM's pick is still shown, labelled unverified: it was right on 60 of 85 abstained lines, including every never-seen filesystem failure |
+| Keep retrieval although TF-IDF + logistic regression ties it | Same accuracy, but retrieval gives the explanation step its evidence and needs no retraining to add incidents |
 | Deterministic routing | A route chosen by a model can't be tested; a severity table can |
 | Drain3 read-only at query time | `add_log_message` changes the parser state on every query, so templates drift away from what was embedded. Queries use `match()`; a test checks the saved state stays unchanged |
 | One embedding model everywhere | Vectors from different models are not comparable, even at the same dimension |
@@ -84,10 +86,12 @@ and 5 times labelled KERNPROG. No classifier can separate these, so KERNPROG is 
 3. **Seen-pattern accuracy is high because of the data.** BGL has only 88 distinct alert
    messages. The unseen subset and the hard negatives are the fair test, and the unseen alert
    subsets are small.
-4. **Random-style split.** The test set is not separated by time from the index. A
-   time-ordered split has not been run yet.
-5. **No comparison with simple text classifiers yet**, such as majority class or TF-IDF with
-   logistic regression [5].
+4. **Accuracy drops on later logs.** On the time-ordered split, retrieval falls from 0.981
+   to 0.888. A category absent from the older logs (filesystem failures) can't be named:
+   at best it is answered "unknown" (38 of 50).
+5. **A plain text classifier is as accurate.** TF-IDF with logistic regression [5] ties the
+   vote on both splits. The retrieval design is justified by grounding and updatability,
+   not by classification accuracy.
 6. **One dataset.** Categories and the parser settings are tuned for BGL.
 7. **Per line only.** Sequence anomalies are out of scope.
 8. **CPU latency.** About 6–7 s for a full diagnosis when warm; 8–9 s extra when a model has
@@ -152,9 +156,22 @@ the index.
 - The router lets normal lines skip both LLM calls: 0.6 s instead of 6–7 s.
 - The fix is written after, and based on, the root cause.
 
+**A TF-IDF model gets the same accuracy. Why build retrieval at all?**
+On BGL, it doesn't win on accuracy, and the evaluation says so (0.982 vs 0.981 random,
+0.884 vs 0.888 time-ordered). Retrieval gives two things a classifier doesn't:
+- the past incidents that the explanation is grounded in, shown to the user
+- new knowledge without retraining: adding an incident is an insert
+
+The second still has to be measured (the feedback loop).
+
+**What happens with a failure type the system has never seen?**
+On the time split, filesystem failures never occur in the index period. With
+abstaining, 38 of 50 were answered "unknown" and 12 were wrongly called normal. The
+LLM's unverified suggestion named all 38 abstained ones correctly.
+
 **What would you do next?**
-- A time-ordered split.
-- Simple text-classifier baselines.
-- A second per-line-labelled dataset (Thunderbird [1]).
-- A measured groundedness check on the root-cause text.
+- A second per-line-labelled dataset (Thunderbird [1]). A 10-million-line prefix turned out
+  to be 99.96% one alert type, so the whole log has to be streamed.
+- A larger judge model for the groundedness check, and a scored assistant evaluation.
+- The feedback loop: measure whether adding corrected incidents fixes later lines.
 - Sequence-level detection for cases like OpenStack.

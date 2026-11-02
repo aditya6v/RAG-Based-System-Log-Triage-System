@@ -38,10 +38,27 @@ def test_triage_uses_vote_when_confident(monkeypatch):
     assert (out["classification"], out["method"]) == ("kernel_crash", "vote")
 
 
-def test_triage_falls_back_to_llm_when_unsure(monkeypatch):
+def test_triage_abstains_when_unsure_and_attaches_the_llm_suggestion(monkeypatch):
     prompts = []
     monkeypatch.setattr(classify, "chat_text", lambda p: prompts.append(p) or "power_control_failure")
+    # confidence = 0.8 x share(~0.5) = ~0.4, below ABSTAIN_BELOW
     out = classify.triage("line", [hit(0.8, "normal"), hit(0.79, "kernel_crash")])
-    assert (out["classification"], out["method"]) == ("power_control_failure", "llm")
+    assert (out["classification"], out["method"]) == ("unknown", "abstain")
+    assert out["suggestion"] == "power_control_failure" and out["confidence"] < classify.ABSTAIN_BELOW
     # the LLM is shown every category definition and the retrieved evidence
     assert "memory_cpu_fault:" in prompts[0] and "labelled kernel_crash" in prompts[0]
+
+
+def test_abstain_threshold_boundary(monkeypatch):
+    monkeypatch.setattr(classify, "chat_text", lambda p: "normal")
+    just_above = classify.triage("line", [hit(classify.ABSTAIN_BELOW, "kernel_crash")])
+    assert (just_above["classification"], just_above["confidence"]) == ("kernel_crash", classify.ABSTAIN_BELOW)
+    just_below = classify.triage("line", [hit(classify.ABSTAIN_BELOW - 0.001, "kernel_crash")])
+    assert just_below["classification"] == "unknown"
+
+
+def test_llm_fallback_mode_is_still_available(monkeypatch):
+    monkeypatch.setattr(classify.config, "TRIAGE_LOW_CONFIDENCE", "llm")
+    monkeypatch.setattr(classify, "chat_text", lambda p: "power_control_failure")
+    out = classify.triage("line", [hit(0.8, "normal"), hit(0.79, "kernel_crash")])
+    assert (out["classification"], out["method"], out["suggestion"]) == ("power_control_failure", "llm", None)

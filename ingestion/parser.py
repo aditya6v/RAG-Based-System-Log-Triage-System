@@ -28,9 +28,11 @@ from drain3 import TemplateMiner
 from drain3.template_miner_config import TemplateMinerConfig
 from drain3.file_persistence import FilePersistence
 
+import config
+
 _config = TemplateMinerConfig()
 _config.load("drain3.ini")
-_persistence = FilePersistence("drain3_state.bin")
+_persistence = FilePersistence(config.DRAIN3_STATE_FILE)
 _miner = TemplateMiner(persistence_handler=_persistence, config=_config)
 
 

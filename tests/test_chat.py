@@ -157,3 +157,9 @@ def test_oversized_context_is_refused(client):
     app.dependency_overrides[get_chat] = lambda: fake_stream
     r = client.post("/chat", json={"messages": [user("q")], "context": {"text": "x" * 25_000}})
     assert r.status_code == 413
+
+
+def test_unknown_category_is_described_as_uncertain():
+    ctx = chat.build_messages([user("q")], {**DIAGNOSIS, "classification": "unknown", "confidence": 0.41,
+                                            "suggestion": "filesystem_mount_failure"}, [])[1]["content"]
+    assert "Category: unknown" in ctx and "'filesystem_mount_failure', which is unverified" in ctx

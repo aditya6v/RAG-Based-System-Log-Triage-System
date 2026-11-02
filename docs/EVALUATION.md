@@ -67,44 +67,114 @@ label matches their own:
 
 ## 2. Classification results
 
-Command: `python -m eval.evaluate eval/bgl_eval.jsonl`. Results:
-`eval/results/20261026-153603.json` (every prediction) and `.md` (full report,
-including per-class scores and confusion matrices). Run time: 1,609 s.
-
-All classifiers see exactly the same retrieval results:
+All classifiers see exactly the same retrieval results. Predictions from the LLM runs are
+saved, so the rules derived from them (triage variants, baselines) are recomputed without
+calling the model again (`python -m eval.evaluate --report <results>.json`).
 
 | Classifier | What it does |
 |---|---|
 | level_rule | FATAL or FAILURE means alert (binary only) |
+| majority | Always the most common category in the index lines (`normal`) |
+| tfidf_lr | TF-IDF (word 1–2 grams and character 3–5 grams) and logistic regression, trained on the index lines [5] (`eval/baselines.py`) |
 | knn_vote | Similarity-weighted vote of the 5 retrieved incidents' labels; only hits within 0.05 of the best match vote |
 | llm_only | The LLM picks a category from the definitions alone |
 | llm_rag | The LLM also sees the 5 retrieved incidents and their labels |
-| triage | Used by the service: knn_vote when the top score is at least 0.9 and the vote share at least 0.6, otherwise llm_rag |
+| vote_llm_fallback | The earlier service rule: knn_vote when the top score is at least 0.9 and the vote share at least 0.6, otherwise llm_rag |
+| **triage** | The current service rule: knn_vote when confidence (best similarity × vote share) is at least 0.712, otherwise `unknown`, with llm_rag's pick shown as an unverified suggestion |
 
-| Classifier | Accuracy (8 classes) | Macro F1 | Accuracy, unseen (151) | Alert vs normal accuracy | Hard negatives correct (108) |
+### 2a. Random split (623 held-out lines)
+
+Results: `eval/results/20261103-baselines-random-split.json` and `.md` (the LLM predictions
+are from the 2026-10-26 run, `20261026-153603`, plus the baselines).
+
+| Classifier | Accuracy | Macro F1 | Accuracy, unseen (151) | Alert vs normal | Hard negatives correct (108) |
 |---|---|---|---|---|---|
 | level_rule | n/a | n/a | n/a | 0.876 | 0.287 |
+| majority | 0.482 | 0.081 | 0.662 | n/a | 1.000 |
+| tfidf_lr | **0.982** | **0.982** | **0.927** | 0.982 | 1.000 |
 | knn_vote | 0.981 | 0.981 | 0.921 | 0.981 | 1.000 |
 | llm_only | 0.425 | 0.446 | 0.212 | 0.650 | 0.000 |
 | llm_rag | 0.639 | 0.755 | 0.570 | 0.727 | 0.028 |
-| **triage** | **0.982** | 0.974 | **0.927** | **0.997** | 0.981 |
+| vote_llm_fallback | **0.982** | 0.974 | **0.927** | 0.997 | 0.981 |
+| triage | 0.970 (precision 0.993 on the 97.6% answered) | 0.866 | n/a | n/a | n/a |
 
-Triage F1 per class: normal 0.997, memory_cpu_fault 0.893 (precision 0.852), kernel_crash
-0.970, io_connection_lost 1.000, filesystem_mount_failure 1.000, job_launch_failure 1.000,
-link_hardware_failure 0.958 (recall 0.919), power_control_failure 0.971.
+### 2b. Time-ordered split (index from older logs, test on newer)
 
-**How to read this**
-- On the 472 **seen** lines, knn_vote and triage both score 1.000. That is close to a lookup,
-  so the meaningful numbers are the **unseen** subset and the **hard negatives**. Unseen
-  alert subsets are small (3–14 lines per category), so per-class unseen numbers are
-  indicative only.
-- The 3B model on its own labels every FATAL-level normal line as an alert. Showing it the
-  retrieved incidents helps (0.425 to 0.639) but it still trails the vote by a wide margin.
-  Retrieval does the classifying; the LLM is used for the explanation.
-- Triage fell back to the LLM on 33 of 623 lines. There the LLM was right 22 times and the
-  vote would have been right 21 times, so the fallback changes little. The thresholds were
-  fixed before this run and were not tuned on it.
-- The level rule looks reasonable on accuracy (0.876) but marks 71% of hard negatives as alerts.
+`scripts/sample_bgl_time.py` cuts the log by line position, which is time order:
+- **Index:** the first 60%, 2005-06-03 to 2005-07-28. 5,161 sampled lines became 225 templates.
+- **Validation:** the next 10%, to 2005-09-02, 410 lines. Used only to choose the abstain threshold.
+- **Test:** the last 30%, to 2006-01-04, 632 lines. Used once.
+
+Built into its own database, collection and parser state (`incident_copilot_bgl_time`,
+`bgl_time`, `sample_data/bgl_time_drain3_state.bin`).
+
+Two facts about this split, known from a scan before running anything:
+- **Filesystem mount failures never occur in the index period.** Their first line is around
+  60% into the log, so no retrieval or text classifier trained on the index can name them.
+- **Most test lines are new patterns:** 500 of 632 have a message pattern that never occurred
+  in the index period, including 254 of the 300 normal lines.
+
+Results: `eval/results/20261103-time-test.json` and `.md` (test, all classifiers) and
+`20261103-time-val.json` (validation, retrieval and baselines only).
+
+| Classifier | Accuracy | Macro F1 | Accuracy, unseen (500) | Alert vs normal | Hard negatives correct (150) |
+|---|---|---|---|---|---|
+| level_rule | n/a | n/a | n/a | 0.840 | 0.327 |
+| majority | 0.475 | 0.080 | 0.508 | n/a | 1.000 |
+| tfidf_lr | 0.884 | 0.830 | 0.858 | 0.884 | 1.000 |
+| knn_vote | **0.888** | 0.828 | **0.858** | **0.896** | 0.993 |
+| llm_only | 0.432 | 0.465 | 0.424 | 0.690 | 0.000 |
+| llm_rag | 0.492 | 0.687 | 0.470 | 0.571 | 0.027 |
+| vote_llm_fallback | 0.699 | 0.819 | 0.620 | 0.715 | 0.413 |
+| triage | 0.840 (precision **0.971** on the 86.6% answered) | 0.744 | n/a | n/a | n/a |
+
+All three retrieval and text classifiers labelled the 50 filesystem lines `normal`.
+
+### 2c. Abstaining (`python -m eval.abstain <val> <test>`)
+
+Confidence = best similarity × vote share. The target precision of 0.95 was fixed before
+looking at test. The lowest threshold reaching it **on validation** is 0.712:
+
+| Set | Precision on answered lines | Coverage | Precision if always answering |
+|---|---|---|---|
+| Validation | 0.953 | 0.944 (387/410) | 0.912 |
+| **Test** | **0.971** | **0.866** (547/632) | 0.888 |
+| Random split (same threshold) | 0.993 | 0.976 (608/623) | 0.981 |
+
+On the time-split test, per category:
+
+| Category | Lines | Answered right | Answered wrong | Abstained |
+|---|---|---|---|---|
+| filesystem_mount_failure (never indexed) | 50 | 0 | 12 | 38 |
+| normal | 300 | 269 | 1 | 30 |
+| io_connection_lost | 50 | 45 | 0 | 5 |
+| power_control_failure | 50 | 38 | 2 | 10 |
+| the other four | 182 | 179 | 1 | 2 |
+
+The full precision-vs-coverage table and curve are in
+`eval/results/20261103-time-test-abstain.md` / `.svg`. When the system abstains, llm_rag's
+pick, shown to the user as an unverified suggestion, was right on 60 of 85 time-split lines
+(including all 38 abstained filesystem lines) and on 9 of 15 random-split lines.
+
+### How to read section 2
+
+- **A simple text classifier ties retrieval on BGL.** TF-IDF with logistic regression
+  matches knn_vote on both splits (0.982 vs 0.981, then 0.884 vs 0.888) and trains in
+  10 seconds. BGL's alert text varies so little that this is expected. Retrieval earns its
+  place elsewhere: it supplies the evidence the explanation is grounded in, and it can
+  absorb new incidents without retraining (not measured yet).
+- **The random split flatters every method.** On older-index-newer-test, accuracy drops by
+  about 0.1, and one category is impossible to name.
+- **The earlier LLM fallback hurts under drift.** On the time split, the vote was unsure for
+  328 of 632 lines and the 3B model then labelled most new normal lines as alerts (normal
+  recall 0.40). It did name all 50 never-seen filesystem lines correctly, which no other
+  method could. Hence the change: **abstain, and show the LLM's pick as a suggestion.** The
+  service now does this by default (`TRIAGE_LOW_CONFIDENCE=abstain`); `=llm` restores the
+  old rule.
+- **On the random split, seen lines are close to a lookup:** 472 of 623 score 1.000 for
+  knn_vote. The unseen subsets and hard negatives are the meaningful numbers there.
+- The level rule looks fine on accuracy but marks about 70% of the alarming-looking normal
+  lines as alerts on both splits.
 
 **An earlier, wrong version.** The first knn_vote weighted all 5 hits equally by similarity.
 312 of the 357 indexed incidents are normal, so an exact match (score 1.0) was often outvoted

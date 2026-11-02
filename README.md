@@ -94,23 +94,39 @@ model is told not to follow instructions inside it.
 
 ## Results
 
-623 test lines held out from the index, 8 categories. Full details, per-class scores and
-confusion matrices: [docs/EVALUATION.md](docs/EVALUATION.md).
+8 categories. Two test sets, both held out from the index:
+- **Random split:** 623 lines sampled from the whole log.
+- **Time split:** the index is built from the first 60% of the log (June–July 2005) and the
+  test set is 632 lines from the last 30% (September 2005 – January 2006).
 
-| Method | Accuracy | Accuracy on unseen message patterns (151) | Normal FATAL/ERROR lines correctly left alone (108) |
+Full details, per-class scores and confusion matrices: [docs/EVALUATION.md](docs/EVALUATION.md).
+
+| Method | Random split | Time split | Time split, normal FATAL/ERROR lines left alone (150) |
 |---|---|---|---|
-| "FATAL or FAILURE means alert" | 0.876 (alert vs normal only) | n/a | 0.287 |
-| LLM only (`llama3.2:3b`) | 0.425 | 0.212 | 0.000 |
-| LLM with retrieved events | 0.639 | 0.570 | 0.028 |
-| Nearest-neighbour vote | 0.981 | 0.921 | 1.000 |
-| **Vote, LLM when unsure (used)** | **0.982** | **0.927** | 0.981 |
+| Always "normal" (majority class) | 0.482 | 0.475 | 1.000 |
+| "FATAL or FAILURE means alert" (alert vs normal only) | 0.876 | 0.840 | 0.327 |
+| LLM only (`llama3.2:3b`) | 0.425 | 0.432 | 0.000 |
+| LLM with retrieved events | 0.639 | 0.492 | 0.027 |
+| TF-IDF + logistic regression | 0.982 | 0.884 | 1.000 |
+| Nearest-neighbour vote | 0.981 | 0.888 | 0.993 |
+| Vote, LLM when unsure (earlier rule) | 0.982 | 0.699 | 0.413 |
+| **Vote, "unknown" when unsure (used)** | **0.993 precision**, answers 97.6% | **0.971 precision**, answers 86.6% | n/a |
+
+What these show:
+- **A plain text classifier is as accurate as retrieval here.** TF-IDF with logistic
+  regression ties the nearest-neighbour vote, because BGL's alert messages barely vary.
+  Retrieval's value in this system is the evidence behind each explanation, not higher
+  accuracy.
+- **Testing on later logs costs about 0.1 accuracy**, and one category (filesystem
+  failures) never occurs in the older logs at all.
+- **The service abstains instead of guessing.** Below a confidence threshold, chosen on a
+  separate validation period, it answers "unknown" and shows the LLM's pick as an
+  unverified suggestion. The earlier rule, which used the LLM's pick as the answer, fell to
+  0.699 on later logs because the 3B model labels unfamiliar normal lines as alerts.
 
 Latency on a laptop CPU, models already loaded:
 - A normal line takes 0.2–0.7 s (no LLM call).
 - A full diagnosis takes 5.5–7.5 s.
-
-Read these numbers with the limitations below in mind. In particular, alerts that match a
-known pattern are close to a lookup.
 
 ## Quickstart
 
@@ -232,9 +248,10 @@ docs/           evaluation, design notes, runbook, references
 - **Matching known alerts is easy on BGL.** BGL has only 88 distinct alert messages after
   masking numbers. Results on unseen patterns and on normal lines logged at FATAL/ERROR level
   are the fairer measure, and the unseen alert subsets are small.
-- **Not tested on a different time period.** The test set is not split from the index by
-  time, and simple text classifiers (e.g. TF-IDF with logistic regression) have not been
-  compared yet.
+- **New failure types can't be named.** A category absent from the index (filesystem
+  failures, on the time split) is at best answered "unknown": 38 of 50 were, and 12 were
+  wrongly called normal. The abstain threshold was tuned on one validation period of one
+  dataset.
 - **One dataset; single lines only.** Problems that show only as a sequence of normal-looking
   lines are out of scope.
 - **Cloud services required.** MongoDB and Qdrant must be reachable; there is no offline mode.

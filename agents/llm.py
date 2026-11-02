@@ -53,10 +53,13 @@ from agents.redact import redact_messages
 log = logging.getLogger("llm")
 
 # Ollama context window. The assistant's prompt (category definitions,
-# diagnosis, related incidents, conversation) overflows Ollama's default and
-# would be truncated silently. The same value is used for every call because
+# diagnosis, related incidents, conversation) overflows Ollama's old default
+# and would be truncated silently. Measured prompts: diagnosis calls under
+# 700 tokens, assistant turns about 1,550 plus history, so 4096 leaves room.
+# At 8192, Ollama reported llama3.2:3b at 3.25 GB loaded and the 16 GB laptop
+# ran out of free memory. The same value is used for every call because
 # Ollama reloads the model whenever num_ctx changes (~20 s).
-CHAT_NUM_CTX = 8192
+CHAT_NUM_CTX = 4096
 
 RETRIES_PER_PROVIDER = 2      # attempts per provider = 1 + this
 BACKOFF_S = (1.0, 3.0)

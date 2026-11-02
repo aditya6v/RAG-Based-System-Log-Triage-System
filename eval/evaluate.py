@@ -39,7 +39,7 @@ from sklearn.metrics import classification_report, confusion_matrix, precision_r
 from bgl import categories
 
 RESULTS_DIR = Path(__file__).with_name("results")
-MULTICLASS = ["knn_vote", "llm_only", "llm_rag", "triage"]
+MULTICLASS = ["majority", "tfidf_lr", "knn_vote", "llm_only", "llm_rag", "vote_llm_fallback", "triage"]
 
 
 def _retry(fn, *args, tries: int = 3):
@@ -127,15 +127,24 @@ def run(path: str, limit: int | None, use_llm: bool, resume: str | None = None) 
 
 
 def _with_triage(rows: list[dict]) -> None:
-    """triage = vote when confident, else llm_rag. Derived from saved fields so
-    the confidence thresholds can be tuned without re-running the LLM."""
+    """Derived from saved fields, so thresholds can change without re-running
+    the LLM (llm_rag is exactly what triage would ask the LLM).
+
+      triage           -- the service's default: the vote when confidence
+                          (best similarity x share) >= ABSTAIN_BELOW, else
+                          'unknown' (counted as wrong in accuracy)
+      vote_llm_fallback -- the earlier rule: the vote when is_confident(),
+                          else the LLM's pick
+    """
     from agents import classify
     for r in rows:
-        if "llm_rag" not in r["pred"]:
-            continue
-        confident = classify.is_confident({"top_score": r["top_score"], "share": r["vote_share"]})
-        r["pred"]["triage"] = r["pred"]["knn_vote"] if confident else r["pred"]["llm_rag"]
-        r["triage_method"] = "vote" if confident else "llm"
+        vote = {"top_score": r["top_score"], "share": r["vote_share"]}
+        answered = classify.confidence(vote) >= classify.ABSTAIN_BELOW
+        r["pred"]["triage"] = r["pred"]["knn_vote"] if answered else "unknown"
+        r["triage_method"] = "vote" if answered else "abstain"
+        if "llm_rag" in r["pred"]:
+            confident = classify.is_confident(vote)
+            r["pred"]["vote_llm_fallback"] = r["pred"]["knn_vote"] if confident else r["pred"]["llm_rag"]
 
 
 def _binary(label: str) -> str:
@@ -205,9 +214,11 @@ def report(results_path: Path) -> str:
             md.append(f"{lab:26}" + " ".join(f"{v:>10}" for v in row))
         md.append("```")
 
-    if any("triage_method" in r for r in rows):
-        methods = Counter(r["triage_method"] for r in rows if "triage_method" in r)
-        md += ["", f"triage used the vote for {methods['vote']} examples and the LLM for {methods['llm']}."]
+    answered = [r for r in rows if r.get("triage_method") == "vote"]
+    if answered:
+        right = sum(r["pred"]["triage"] == r["true_label"] for r in answered)
+        md += ["", f"triage answered {len(answered)} of {len(rows)} examples (coverage {len(answered) / len(rows):.3f}) "
+                   f"with precision {right / len(answered):.3f}, and abstained ('unknown') on {len(rows) - len(answered)}."]
 
     secs = [r["seconds"] for r in rows]
     md += ["", "## Latency per example (seconds)", ""]

@@ -21,6 +21,8 @@ class IncidentState(TypedDict, total=False):
     classification: str     # triage: category id from bgl/categories.json
     triage_method: str      # triage: "vote" or "llm"
     vote: dict              # triage: nearest-neighbour vote details
+    confidence: float       # triage: best similarity x vote share
+    suggestion: str | None  # triage: LLM's pick when it abstained ('unknown'), unverified
     severity: str           # triage: none/low/medium/high, from categories.json
     route: str              # "full" or "no_action"
     evidence: dict          # root_cause: {"primary": hit|None, "supporting": [hits]}

@@ -1,0 +1,7809 @@
+{
+ "eval_file": "eval/bgl_time_val.jsonl",
+ "n": 410,
+ "used_llm": false,
+ "llm_provider_chain": [
+  "ollama"
+ ],
+ "chat_model": null,
+ "embed_model": "nomic-embed-text",
+ "qdrant_collection": "bgl_time",
+ "total_seconds": 136.9,
+ "rows": [
+  {
+   "line_no": 2865341,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "6",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 6.879
+   }
+  },
+  {
+   "line_no": 2866411,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "6",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.945
+   }
+  },
+  {
+   "line_no": 2867657,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "6",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 1.057
+   }
+  },
+  {
+   "line_no": 2868263,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "6",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.716
+   }
+  },
+  {
+   "line_no": 2868308,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "6",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 1.6
+   }
+  },
+  {
+   "line_no": 2869420,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "6",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.344
+   }
+  },
+  {
+   "line_no": 2879579,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "6",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.306
+   }
+  },
+  {
+   "line_no": 2880123,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "6",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.298
+   }
+  },
+  {
+   "line_no": 2884446,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "6",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 1.368
+   }
+  },
+  {
+   "line_no": 2885399,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "6",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.242
+   }
+  },
+  {
+   "line_no": 2886481,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "6",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.246
+   }
+  },
+  {
+   "line_no": 2895675,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "6",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.269
+   }
+  },
+  {
+   "line_no": 2895720,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "6",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.321
+   }
+  },
+  {
+   "line_no": 2896621,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "6",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.327
+   }
+  },
+  {
+   "line_no": 2898951,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "6",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.297
+   }
+  },
+  {
+   "line_no": 2899718,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "6",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.311
+   }
+  },
+  {
+   "line_no": 2911639,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": true,
+   "matched_cluster": "145",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.31
+   }
+  },
+  {
+   "line_no": 2913835,
+   "true_label": "power_control_failure",
+   "code": "MASNORM",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "153",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "power_control_failure",
+    "majority": "normal",
+    "tfidf_lr": "power_control_failure"
+   },
+   "seconds": {
+    "retrieval": 0.343
+   }
+  },
+  {
+   "line_no": 2914548,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": null,
+   "top_score": 0.836,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.325
+   }
+  },
+  {
+   "line_no": 2915191,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": null,
+   "top_score": 0.846,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.303
+   }
+  },
+  {
+   "line_no": 2915536,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": null,
+   "top_score": 0.845,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.285
+   }
+  },
+  {
+   "line_no": 2916334,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": null,
+   "top_score": 0.847,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.283
+   }
+  },
+  {
+   "line_no": 2918521,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": null,
+   "top_score": 0.842,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.896
+   }
+  },
+  {
+   "line_no": 2921481,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": null,
+   "top_score": 0.846,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.283
+   }
+  },
+  {
+   "line_no": 2921601,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": null,
+   "top_score": 0.85,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.32
+   }
+  },
+  {
+   "line_no": 2925808,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": true,
+   "matched_cluster": "112",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.358
+   }
+  },
+  {
+   "line_no": 2926881,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": true,
+   "matched_cluster": "140",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.241
+   }
+  },
+  {
+   "line_no": 2930056,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": true,
+   "matched_cluster": "140",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.227
+   }
+  },
+  {
+   "line_no": 2931123,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": true,
+   "matched_cluster": "140",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.219
+   }
+  },
+  {
+   "line_no": 2933192,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": true,
+   "matched_cluster": "112",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.302
+   }
+  },
+  {
+   "line_no": 2933681,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": true,
+   "matched_cluster": "112",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.301
+   }
+  },
+  {
+   "line_no": 2934729,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": true,
+   "matched_cluster": "140",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.254
+   }
+  },
+  {
+   "line_no": 2937460,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": null,
+   "top_score": 0.744,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.291
+   }
+  },
+  {
+   "line_no": 2941315,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": null,
+   "top_score": 0.744,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.289
+   }
+  },
+  {
+   "line_no": 2941450,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": null,
+   "top_score": 0.744,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.287
+   }
+  },
+  {
+   "line_no": 2945549,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": null,
+   "top_score": 0.744,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.291
+   }
+  },
+  {
+   "line_no": 2945895,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": null,
+   "top_score": 0.744,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.298
+   }
+  },
+  {
+   "line_no": 2946947,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": null,
+   "top_score": 0.744,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.292
+   }
+  },
+  {
+   "line_no": 2947524,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": null,
+   "top_score": 0.744,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.313
+   }
+  },
+  {
+   "line_no": 2948053,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": null,
+   "top_score": 0.744,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.293
+   }
+  },
+  {
+   "line_no": 2948642,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": null,
+   "top_score": 0.744,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.302
+   }
+  },
+  {
+   "line_no": 2949076,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": null,
+   "top_score": 0.744,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.294
+   }
+  },
+  {
+   "line_no": 2951675,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": null,
+   "top_score": 0.744,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.298
+   }
+  },
+  {
+   "line_no": 2952259,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": null,
+   "top_score": 0.744,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.526
+   }
+  },
+  {
+   "line_no": 2952817,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": true,
+   "matched_cluster": "218",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.22
+   }
+  },
+  {
+   "line_no": 2954516,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": null,
+   "top_score": 0.744,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.31
+   }
+  },
+  {
+   "line_no": 2954555,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": null,
+   "top_score": 0.744,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.285
+   }
+  },
+  {
+   "line_no": 2956524,
+   "true_label": "memory_cpu_fault",
+   "code": "KERNMC",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "21",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "memory_cpu_fault",
+    "majority": "normal",
+    "tfidf_lr": "memory_cpu_fault"
+   },
+   "seconds": {
+    "retrieval": 0.245
+   }
+  },
+  {
+   "line_no": 2956570,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": true,
+   "matched_cluster": "88",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.335
+   }
+  },
+  {
+   "line_no": 2956647,
+   "true_label": "memory_cpu_fault",
+   "code": "KERNMC",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "21",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "memory_cpu_fault",
+    "majority": "normal",
+    "tfidf_lr": "memory_cpu_fault"
+   },
+   "seconds": {
+    "retrieval": 0.264
+   }
+  },
+  {
+   "line_no": 2959175,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": "105",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.281
+   }
+  },
+  {
+   "line_no": 2959827,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": true,
+   "matched_cluster": "140",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.236
+   }
+  },
+  {
+   "line_no": 2960970,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "169",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.221
+   }
+  },
+  {
+   "line_no": 2961182,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": true,
+   "matched_cluster": "140",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.239
+   }
+  },
+  {
+   "line_no": 2961321,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": true,
+   "matched_cluster": "140",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.245
+   }
+  },
+  {
+   "line_no": 2961582,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": true,
+   "matched_cluster": "112",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.418
+   }
+  },
+  {
+   "line_no": 2961615,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": true,
+   "matched_cluster": "112",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.317
+   }
+  },
+  {
+   "line_no": 2962386,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": true,
+   "matched_cluster": "140",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.22
+   }
+  },
+  {
+   "line_no": 2963382,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": true,
+   "matched_cluster": "112",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.305
+   }
+  },
+  {
+   "line_no": 2963534,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.908,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.301
+   }
+  },
+  {
+   "line_no": 2963561,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.919,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.316
+   }
+  },
+  {
+   "line_no": 2967036,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": true,
+   "matched_cluster": "112",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.292
+   }
+  },
+  {
+   "line_no": 2967689,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": true,
+   "matched_cluster": "112",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.299
+   }
+  },
+  {
+   "line_no": 2968823,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.914,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.289
+   }
+  },
+  {
+   "line_no": 2968876,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "169",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.214
+   }
+  },
+  {
+   "line_no": 2969183,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": true,
+   "matched_cluster": "140",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.221
+   }
+  },
+  {
+   "line_no": 2969400,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": true,
+   "matched_cluster": "140",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.244
+   }
+  },
+  {
+   "line_no": 2969610,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": true,
+   "matched_cluster": "112",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.336
+   }
+  },
+  {
+   "line_no": 2970831,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": true,
+   "matched_cluster": "140",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.236
+   }
+  },
+  {
+   "line_no": 2972174,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": true,
+   "matched_cluster": "112",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.558
+   }
+  },
+  {
+   "line_no": 2972442,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "169",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.227
+   }
+  },
+  {
+   "line_no": 2975585,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": true,
+   "matched_cluster": "73",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.303
+   }
+  },
+  {
+   "line_no": 2975694,
+   "true_label": "memory_cpu_fault",
+   "code": "KERNMC",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "21",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "memory_cpu_fault",
+    "majority": "normal",
+    "tfidf_lr": "memory_cpu_fault"
+   },
+   "seconds": {
+    "retrieval": 0.289
+   }
+  },
+  {
+   "line_no": 2977613,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "15",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.297
+   }
+  },
+  {
+   "line_no": 2978187,
+   "true_label": "memory_cpu_fault",
+   "code": "KERNMC",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "194",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "memory_cpu_fault",
+    "majority": "normal",
+    "tfidf_lr": "memory_cpu_fault"
+   },
+   "seconds": {
+    "retrieval": 0.222
+   }
+  },
+  {
+   "line_no": 2978188,
+   "true_label": "memory_cpu_fault",
+   "code": "KERNMC",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "194",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "memory_cpu_fault",
+    "majority": "normal",
+    "tfidf_lr": "memory_cpu_fault"
+   },
+   "seconds": {
+    "retrieval": 0.344
+   }
+  },
+  {
+   "line_no": 2979442,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": true,
+   "matched_cluster": "145",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.226
+   }
+  },
+  {
+   "line_no": 2979558,
+   "true_label": "filesystem_mount_failure",
+   "code": "KERNMNT",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.753,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.334
+   }
+  },
+  {
+   "line_no": 2979731,
+   "true_label": "filesystem_mount_failure",
+   "code": "KERNMNT",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.753,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.266
+   }
+  },
+  {
+   "line_no": 2981488,
+   "true_label": "filesystem_mount_failure",
+   "code": "KERNMNT",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.753,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.27
+   }
+  },
+  {
+   "line_no": 2983378,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "15",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.398
+   }
+  },
+  {
+   "line_no": 2985609,
+   "true_label": "io_connection_lost",
+   "code": "APPRES",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.915,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "io_connection_lost",
+    "majority": "normal",
+    "tfidf_lr": "io_connection_lost"
+   },
+   "seconds": {
+    "retrieval": 0.336
+   }
+  },
+  {
+   "line_no": 2985746,
+   "true_label": "memory_cpu_fault",
+   "code": "KERNMC",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "194",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "memory_cpu_fault",
+    "majority": "normal",
+    "tfidf_lr": "memory_cpu_fault"
+   },
+   "seconds": {
+    "retrieval": 0.22
+   }
+  },
+  {
+   "line_no": 2985827,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "16",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.502
+   }
+  },
+  {
+   "line_no": 2986498,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.902,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.533
+   }
+  },
+  {
+   "line_no": 2986719,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": true,
+   "matched_cluster": "140",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.231
+   }
+  },
+  {
+   "line_no": 2986990,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": true,
+   "matched_cluster": "140",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.226
+   }
+  },
+  {
+   "line_no": 2987478,
+   "true_label": "link_hardware_failure",
+   "code": "KERNNOETH",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "173",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "link_hardware_failure",
+    "majority": "normal",
+    "tfidf_lr": "link_hardware_failure"
+   },
+   "seconds": {
+    "retrieval": 0.236
+   }
+  },
+  {
+   "line_no": 2988520,
+   "true_label": "memory_cpu_fault",
+   "code": "KERNMC",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "21",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "memory_cpu_fault",
+    "majority": "normal",
+    "tfidf_lr": "memory_cpu_fault"
+   },
+   "seconds": {
+    "retrieval": 0.276
+   }
+  },
+  {
+   "line_no": 2988521,
+   "true_label": "memory_cpu_fault",
+   "code": "KERNMC",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "21",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "memory_cpu_fault",
+    "majority": "normal",
+    "tfidf_lr": "memory_cpu_fault"
+   },
+   "seconds": {
+    "retrieval": 0.281
+   }
+  },
+  {
+   "line_no": 2989883,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": "105",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.279
+   }
+  },
+  {
+   "line_no": 2992098,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": true,
+   "matched_cluster": "112",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.399
+   }
+  },
+  {
+   "line_no": 2992631,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": true,
+   "matched_cluster": "140",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.223
+   }
+  },
+  {
+   "line_no": 2993304,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": true,
+   "matched_cluster": "140",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.251
+   }
+  },
+  {
+   "line_no": 2998821,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": null,
+   "top_score": 0.716,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "kernel_crash",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.26
+   }
+  },
+  {
+   "line_no": 2999294,
+   "true_label": "memory_cpu_fault",
+   "code": "KERNMC",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "21",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "memory_cpu_fault",
+    "majority": "normal",
+    "tfidf_lr": "memory_cpu_fault"
+   },
+   "seconds": {
+    "retrieval": 0.248
+   }
+  },
+  {
+   "line_no": 2999523,
+   "true_label": "memory_cpu_fault",
+   "code": "KERNMC",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "194",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "memory_cpu_fault",
+    "majority": "normal",
+    "tfidf_lr": "memory_cpu_fault"
+   },
+   "seconds": {
+    "retrieval": 0.237
+   }
+  },
+  {
+   "line_no": 2999975,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "128",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.252
+   }
+  },
+  {
+   "line_no": 3000790,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "15",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.255
+   }
+  },
+  {
+   "line_no": 3000909,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "45",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.278
+   }
+  },
+  {
+   "line_no": 3000916,
+   "true_label": "memory_cpu_fault",
+   "code": "KERNMC",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "194",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "memory_cpu_fault",
+    "majority": "normal",
+    "tfidf_lr": "memory_cpu_fault"
+   },
+   "seconds": {
+    "retrieval": 0.24
+   }
+  },
+  {
+   "line_no": 3002368,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "15",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.303
+   }
+  },
+  {
+   "line_no": 3007511,
+   "true_label": "power_control_failure",
+   "code": "MASNORM",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "153",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "power_control_failure",
+    "majority": "normal",
+    "tfidf_lr": "power_control_failure"
+   },
+   "seconds": {
+    "retrieval": 0.273
+   }
+  },
+  {
+   "line_no": 3008326,
+   "true_label": "memory_cpu_fault",
+   "code": "KERNMC",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "216",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "memory_cpu_fault",
+    "majority": "normal",
+    "tfidf_lr": "memory_cpu_fault"
+   },
+   "seconds": {
+    "retrieval": 0.281
+   }
+  },
+  {
+   "line_no": 3008473,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "45",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.274
+   }
+  },
+  {
+   "line_no": 3009180,
+   "true_label": "kernel_crash",
+   "code": "KERNRTSP",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "8",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "kernel_crash",
+    "majority": "normal",
+    "tfidf_lr": "kernel_crash"
+   },
+   "seconds": {
+    "retrieval": 0.226
+   }
+  },
+  {
+   "line_no": 3009359,
+   "true_label": "memory_cpu_fault",
+   "code": "KERNMC",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "194",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "memory_cpu_fault",
+    "majority": "normal",
+    "tfidf_lr": "memory_cpu_fault"
+   },
+   "seconds": {
+    "retrieval": 0.228
+   }
+  },
+  {
+   "line_no": 3009511,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "16",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.28
+   }
+  },
+  {
+   "line_no": 3010671,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "16",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.289
+   }
+  },
+  {
+   "line_no": 3014278,
+   "true_label": "power_control_failure",
+   "code": "MASABNORM",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.845,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "power_control_failure",
+    "majority": "normal",
+    "tfidf_lr": "power_control_failure"
+   },
+   "seconds": {
+    "retrieval": 0.294
+   }
+  },
+  {
+   "line_no": 3014288,
+   "true_label": "power_control_failure",
+   "code": "MASABNORM",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "204",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "power_control_failure",
+    "majority": "normal",
+    "tfidf_lr": "power_control_failure"
+   },
+   "seconds": {
+    "retrieval": 0.301
+   }
+  },
+  {
+   "line_no": 3014527,
+   "true_label": "power_control_failure",
+   "code": "MASABNORM",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "204",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "power_control_failure",
+    "majority": "normal",
+    "tfidf_lr": "power_control_failure"
+   },
+   "seconds": {
+    "retrieval": 0.285
+   }
+  },
+  {
+   "line_no": 3015784,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "2",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.306
+   }
+  },
+  {
+   "line_no": 3015803,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "2",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.328
+   }
+  },
+  {
+   "line_no": 3020358,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "205",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.276
+   }
+  },
+  {
+   "line_no": 3020382,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "205",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.277
+   }
+  },
+  {
+   "line_no": 3020699,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "205",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.282
+   }
+  },
+  {
+   "line_no": 3021927,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "205",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.297
+   }
+  },
+  {
+   "line_no": 3022014,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "205",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.276
+   }
+  },
+  {
+   "line_no": 3023318,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "205",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.283
+   }
+  },
+  {
+   "line_no": 3027181,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "205",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.289
+   }
+  },
+  {
+   "line_no": 3028974,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "205",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.29
+   }
+  },
+  {
+   "line_no": 3029606,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "205",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.302
+   }
+  },
+  {
+   "line_no": 3030125,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "205",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.305
+   }
+  },
+  {
+   "line_no": 3030816,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "205",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.304
+   }
+  },
+  {
+   "line_no": 3030840,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "205",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.308
+   }
+  },
+  {
+   "line_no": 3030990,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "205",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.302
+   }
+  },
+  {
+   "line_no": 3031853,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "205",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.292
+   }
+  },
+  {
+   "line_no": 3032339,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "205",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.275
+   }
+  },
+  {
+   "line_no": 3032533,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "205",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.272
+   }
+  },
+  {
+   "line_no": 3032569,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "205",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.271
+   }
+  },
+  {
+   "line_no": 3034771,
+   "true_label": "io_connection_lost",
+   "code": "APPSEV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.925,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "io_connection_lost",
+    "majority": "normal",
+    "tfidf_lr": "io_connection_lost"
+   },
+   "seconds": {
+    "retrieval": 0.284
+   }
+  },
+  {
+   "line_no": 3034826,
+   "true_label": "io_connection_lost",
+   "code": "APPSEV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.923,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "io_connection_lost",
+    "majority": "normal",
+    "tfidf_lr": "io_connection_lost"
+   },
+   "seconds": {
+    "retrieval": 0.322
+   }
+  },
+  {
+   "line_no": 3034970,
+   "true_label": "io_connection_lost",
+   "code": "APPSEV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.925,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "io_connection_lost",
+    "majority": "normal",
+    "tfidf_lr": "io_connection_lost"
+   },
+   "seconds": {
+    "retrieval": 0.291
+   }
+  },
+  {
+   "line_no": 3035882,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "205",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.299
+   }
+  },
+  {
+   "line_no": 3036570,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "205",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.386
+   }
+  },
+  {
+   "line_no": 3038542,
+   "true_label": "io_connection_lost",
+   "code": "APPSEV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.926,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "io_connection_lost",
+    "majority": "normal",
+    "tfidf_lr": "io_connection_lost"
+   },
+   "seconds": {
+    "retrieval": 0.271
+   }
+  },
+  {
+   "line_no": 3038605,
+   "true_label": "io_connection_lost",
+   "code": "APPSEV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.922,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "io_connection_lost",
+    "majority": "normal",
+    "tfidf_lr": "io_connection_lost"
+   },
+   "seconds": {
+    "retrieval": 0.318
+   }
+  },
+  {
+   "line_no": 3038851,
+   "true_label": "io_connection_lost",
+   "code": "APPSEV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.924,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "io_connection_lost",
+    "majority": "normal",
+    "tfidf_lr": "io_connection_lost"
+   },
+   "seconds": {
+    "retrieval": 0.827
+   }
+  },
+  {
+   "line_no": 3038926,
+   "true_label": "io_connection_lost",
+   "code": "APPSEV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.926,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "io_connection_lost",
+    "majority": "normal",
+    "tfidf_lr": "io_connection_lost"
+   },
+   "seconds": {
+    "retrieval": 0.375
+   }
+  },
+  {
+   "line_no": 3039322,
+   "true_label": "io_connection_lost",
+   "code": "APPSEV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.924,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "io_connection_lost",
+    "majority": "normal",
+    "tfidf_lr": "io_connection_lost"
+   },
+   "seconds": {
+    "retrieval": 0.437
+   }
+  },
+  {
+   "line_no": 3039574,
+   "true_label": "io_connection_lost",
+   "code": "APPSEV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.924,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "io_connection_lost",
+    "majority": "normal",
+    "tfidf_lr": "io_connection_lost"
+   },
+   "seconds": {
+    "retrieval": 0.274
+   }
+  },
+  {
+   "line_no": 3039725,
+   "true_label": "io_connection_lost",
+   "code": "APPSEV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.924,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "io_connection_lost",
+    "majority": "normal",
+    "tfidf_lr": "io_connection_lost"
+   },
+   "seconds": {
+    "retrieval": 0.281
+   }
+  },
+  {
+   "line_no": 3040098,
+   "true_label": "io_connection_lost",
+   "code": "APPSEV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.924,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "io_connection_lost",
+    "majority": "normal",
+    "tfidf_lr": "io_connection_lost"
+   },
+   "seconds": {
+    "retrieval": 0.276
+   }
+  },
+  {
+   "line_no": 3040388,
+   "true_label": "io_connection_lost",
+   "code": "APPSEV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.944,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "io_connection_lost",
+    "majority": "normal",
+    "tfidf_lr": "io_connection_lost"
+   },
+   "seconds": {
+    "retrieval": 0.302
+   }
+  },
+  {
+   "line_no": 3040975,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "5",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.274
+   }
+  },
+  {
+   "line_no": 3041213,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "5",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.294
+   }
+  },
+  {
+   "line_no": 3041314,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "5",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.31
+   }
+  },
+  {
+   "line_no": 3044995,
+   "true_label": "kernel_crash",
+   "code": "KERNTERM",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.878,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "kernel_crash",
+    "majority": "normal",
+    "tfidf_lr": "kernel_crash"
+   },
+   "seconds": {
+    "retrieval": 0.22
+   }
+  },
+  {
+   "line_no": 3045107,
+   "true_label": "kernel_crash",
+   "code": "KERNTERM",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.887,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "kernel_crash",
+    "majority": "normal",
+    "tfidf_lr": "kernel_crash"
+   },
+   "seconds": {
+    "retrieval": 0.223
+   }
+  },
+  {
+   "line_no": 3045140,
+   "true_label": "kernel_crash",
+   "code": "KERNTERM",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.887,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "kernel_crash",
+    "majority": "normal",
+    "tfidf_lr": "kernel_crash"
+   },
+   "seconds": {
+    "retrieval": 0.221
+   }
+  },
+  {
+   "line_no": 3045638,
+   "true_label": "kernel_crash",
+   "code": "KERNTERM",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.887,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "kernel_crash",
+    "majority": "normal",
+    "tfidf_lr": "kernel_crash"
+   },
+   "seconds": {
+    "retrieval": 0.249
+   }
+  },
+  {
+   "line_no": 3046900,
+   "true_label": "io_connection_lost",
+   "code": "APPSEV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.944,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "io_connection_lost",
+    "majority": "normal",
+    "tfidf_lr": "io_connection_lost"
+   },
+   "seconds": {
+    "retrieval": 0.266
+   }
+  },
+  {
+   "line_no": 3047048,
+   "true_label": "io_connection_lost",
+   "code": "APPSEV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.946,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "io_connection_lost",
+    "majority": "normal",
+    "tfidf_lr": "io_connection_lost"
+   },
+   "seconds": {
+    "retrieval": 0.276
+   }
+  },
+  {
+   "line_no": 3047359,
+   "true_label": "io_connection_lost",
+   "code": "APPSEV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.948,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "io_connection_lost",
+    "majority": "normal",
+    "tfidf_lr": "io_connection_lost"
+   },
+   "seconds": {
+    "retrieval": 0.274
+   }
+  },
+  {
+   "line_no": 3048447,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": null,
+   "top_score": 0.726,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "kernel_crash",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.314
+   }
+  },
+  {
+   "line_no": 3048506,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": null,
+   "top_score": 0.712,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "kernel_crash",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.334
+   }
+  },
+  {
+   "line_no": 3049414,
+   "true_label": "job_launch_failure",
+   "code": "APPUNAV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.986,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "job_launch_failure",
+    "majority": "normal",
+    "tfidf_lr": "job_launch_failure"
+   },
+   "seconds": {
+    "retrieval": 0.274
+   }
+  },
+  {
+   "line_no": 3049453,
+   "true_label": "job_launch_failure",
+   "code": "APPUNAV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.986,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "job_launch_failure",
+    "majority": "normal",
+    "tfidf_lr": "job_launch_failure"
+   },
+   "seconds": {
+    "retrieval": 0.776
+   }
+  },
+  {
+   "line_no": 3049557,
+   "true_label": "job_launch_failure",
+   "code": "APPUNAV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.986,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "job_launch_failure",
+    "majority": "normal",
+    "tfidf_lr": "job_launch_failure"
+   },
+   "seconds": {
+    "retrieval": 0.265
+   }
+  },
+  {
+   "line_no": 3049598,
+   "true_label": "job_launch_failure",
+   "code": "APPUNAV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.986,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "job_launch_failure",
+    "majority": "normal",
+    "tfidf_lr": "job_launch_failure"
+   },
+   "seconds": {
+    "retrieval": 0.281
+   }
+  },
+  {
+   "line_no": 3049667,
+   "true_label": "job_launch_failure",
+   "code": "APPUNAV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.986,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "job_launch_failure",
+    "majority": "normal",
+    "tfidf_lr": "job_launch_failure"
+   },
+   "seconds": {
+    "retrieval": 0.262
+   }
+  },
+  {
+   "line_no": 3049692,
+   "true_label": "job_launch_failure",
+   "code": "APPUNAV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.986,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "job_launch_failure",
+    "majority": "normal",
+    "tfidf_lr": "job_launch_failure"
+   },
+   "seconds": {
+    "retrieval": 0.302
+   }
+  },
+  {
+   "line_no": 3049830,
+   "true_label": "job_launch_failure",
+   "code": "APPUNAV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.986,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "job_launch_failure",
+    "majority": "normal",
+    "tfidf_lr": "job_launch_failure"
+   },
+   "seconds": {
+    "retrieval": 0.285
+   }
+  },
+  {
+   "line_no": 3050057,
+   "true_label": "job_launch_failure",
+   "code": "APPUNAV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.986,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "job_launch_failure",
+    "majority": "normal",
+    "tfidf_lr": "job_launch_failure"
+   },
+   "seconds": {
+    "retrieval": 0.284
+   }
+  },
+  {
+   "line_no": 3050227,
+   "true_label": "job_launch_failure",
+   "code": "APPUNAV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.986,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "job_launch_failure",
+    "majority": "normal",
+    "tfidf_lr": "job_launch_failure"
+   },
+   "seconds": {
+    "retrieval": 0.328
+   }
+  },
+  {
+   "line_no": 3050266,
+   "true_label": "job_launch_failure",
+   "code": "APPUNAV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.986,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "job_launch_failure",
+    "majority": "normal",
+    "tfidf_lr": "job_launch_failure"
+   },
+   "seconds": {
+    "retrieval": 0.286
+   }
+  },
+  {
+   "line_no": 3050269,
+   "true_label": "job_launch_failure",
+   "code": "APPUNAV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.986,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "job_launch_failure",
+    "majority": "normal",
+    "tfidf_lr": "job_launch_failure"
+   },
+   "seconds": {
+    "retrieval": 0.287
+   }
+  },
+  {
+   "line_no": 3050276,
+   "true_label": "job_launch_failure",
+   "code": "APPUNAV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.986,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "job_launch_failure",
+    "majority": "normal",
+    "tfidf_lr": "job_launch_failure"
+   },
+   "seconds": {
+    "retrieval": 0.279
+   }
+  },
+  {
+   "line_no": 3050300,
+   "true_label": "job_launch_failure",
+   "code": "APPUNAV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.986,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "job_launch_failure",
+    "majority": "normal",
+    "tfidf_lr": "job_launch_failure"
+   },
+   "seconds": {
+    "retrieval": 0.321
+   }
+  },
+  {
+   "line_no": 3050315,
+   "true_label": "job_launch_failure",
+   "code": "APPUNAV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.986,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "job_launch_failure",
+    "majority": "normal",
+    "tfidf_lr": "job_launch_failure"
+   },
+   "seconds": {
+    "retrieval": 0.277
+   }
+  },
+  {
+   "line_no": 3050322,
+   "true_label": "job_launch_failure",
+   "code": "APPUNAV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.986,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "job_launch_failure",
+    "majority": "normal",
+    "tfidf_lr": "job_launch_failure"
+   },
+   "seconds": {
+    "retrieval": 0.281
+   }
+  },
+  {
+   "line_no": 3050364,
+   "true_label": "job_launch_failure",
+   "code": "APPUNAV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.986,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "job_launch_failure",
+    "majority": "normal",
+    "tfidf_lr": "job_launch_failure"
+   },
+   "seconds": {
+    "retrieval": 0.28
+   }
+  },
+  {
+   "line_no": 3050408,
+   "true_label": "job_launch_failure",
+   "code": "APPUNAV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.986,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "job_launch_failure",
+    "majority": "normal",
+    "tfidf_lr": "job_launch_failure"
+   },
+   "seconds": {
+    "retrieval": 0.302
+   }
+  },
+  {
+   "line_no": 3050457,
+   "true_label": "job_launch_failure",
+   "code": "APPUNAV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.986,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "job_launch_failure",
+    "majority": "normal",
+    "tfidf_lr": "job_launch_failure"
+   },
+   "seconds": {
+    "retrieval": 0.393
+   }
+  },
+  {
+   "line_no": 3050468,
+   "true_label": "job_launch_failure",
+   "code": "APPUNAV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.986,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "job_launch_failure",
+    "majority": "normal",
+    "tfidf_lr": "job_launch_failure"
+   },
+   "seconds": {
+    "retrieval": 0.287
+   }
+  },
+  {
+   "line_no": 3050512,
+   "true_label": "job_launch_failure",
+   "code": "APPUNAV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.986,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "job_launch_failure",
+    "majority": "normal",
+    "tfidf_lr": "job_launch_failure"
+   },
+   "seconds": {
+    "retrieval": 0.284
+   }
+  },
+  {
+   "line_no": 3050533,
+   "true_label": "job_launch_failure",
+   "code": "APPUNAV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.986,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "job_launch_failure",
+    "majority": "normal",
+    "tfidf_lr": "job_launch_failure"
+   },
+   "seconds": {
+    "retrieval": 0.306
+   }
+  },
+  {
+   "line_no": 3050581,
+   "true_label": "job_launch_failure",
+   "code": "APPUNAV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.986,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "job_launch_failure",
+    "majority": "normal",
+    "tfidf_lr": "job_launch_failure"
+   },
+   "seconds": {
+    "retrieval": 0.3
+   }
+  },
+  {
+   "line_no": 3050636,
+   "true_label": "job_launch_failure",
+   "code": "APPUNAV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.986,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "job_launch_failure",
+    "majority": "normal",
+    "tfidf_lr": "job_launch_failure"
+   },
+   "seconds": {
+    "retrieval": 0.282
+   }
+  },
+  {
+   "line_no": 3050690,
+   "true_label": "job_launch_failure",
+   "code": "APPUNAV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.986,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "job_launch_failure",
+    "majority": "normal",
+    "tfidf_lr": "job_launch_failure"
+   },
+   "seconds": {
+    "retrieval": 0.352
+   }
+  },
+  {
+   "line_no": 3050703,
+   "true_label": "job_launch_failure",
+   "code": "APPUNAV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.986,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "job_launch_failure",
+    "majority": "normal",
+    "tfidf_lr": "job_launch_failure"
+   },
+   "seconds": {
+    "retrieval": 0.287
+   }
+  },
+  {
+   "line_no": 3050710,
+   "true_label": "job_launch_failure",
+   "code": "APPUNAV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.986,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "job_launch_failure",
+    "majority": "normal",
+    "tfidf_lr": "job_launch_failure"
+   },
+   "seconds": {
+    "retrieval": 0.286
+   }
+  },
+  {
+   "line_no": 3050723,
+   "true_label": "job_launch_failure",
+   "code": "APPUNAV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.986,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "job_launch_failure",
+    "majority": "normal",
+    "tfidf_lr": "job_launch_failure"
+   },
+   "seconds": {
+    "retrieval": 0.318
+   }
+  },
+  {
+   "line_no": 3050730,
+   "true_label": "job_launch_failure",
+   "code": "APPUNAV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.986,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "job_launch_failure",
+    "majority": "normal",
+    "tfidf_lr": "job_launch_failure"
+   },
+   "seconds": {
+    "retrieval": 0.318
+   }
+  },
+  {
+   "line_no": 3050750,
+   "true_label": "job_launch_failure",
+   "code": "APPUNAV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.986,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "job_launch_failure",
+    "majority": "normal",
+    "tfidf_lr": "job_launch_failure"
+   },
+   "seconds": {
+    "retrieval": 0.284
+   }
+  },
+  {
+   "line_no": 3050865,
+   "true_label": "job_launch_failure",
+   "code": "APPUNAV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.986,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "job_launch_failure",
+    "majority": "normal",
+    "tfidf_lr": "job_launch_failure"
+   },
+   "seconds": {
+    "retrieval": 0.287
+   }
+  },
+  {
+   "line_no": 3051236,
+   "true_label": "kernel_crash",
+   "code": "KERNTERM",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.887,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "kernel_crash",
+    "majority": "normal",
+    "tfidf_lr": "kernel_crash"
+   },
+   "seconds": {
+    "retrieval": 0.224
+   }
+  },
+  {
+   "line_no": 3051557,
+   "true_label": "kernel_crash",
+   "code": "KERNTERM",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.887,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "kernel_crash",
+    "majority": "normal",
+    "tfidf_lr": "kernel_crash"
+   },
+   "seconds": {
+    "retrieval": 0.279
+   }
+  },
+  {
+   "line_no": 3051728,
+   "true_label": "kernel_crash",
+   "code": "KERNTERM",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.887,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "kernel_crash",
+    "majority": "normal",
+    "tfidf_lr": "kernel_crash"
+   },
+   "seconds": {
+    "retrieval": 0.31
+   }
+  },
+  {
+   "line_no": 3051743,
+   "true_label": "kernel_crash",
+   "code": "KERNTERM",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.887,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "kernel_crash",
+    "majority": "normal",
+    "tfidf_lr": "kernel_crash"
+   },
+   "seconds": {
+    "retrieval": 0.227
+   }
+  },
+  {
+   "line_no": 3051892,
+   "true_label": "kernel_crash",
+   "code": "KERNTERM",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.887,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "kernel_crash",
+    "majority": "normal",
+    "tfidf_lr": "kernel_crash"
+   },
+   "seconds": {
+    "retrieval": 0.243
+   }
+  },
+  {
+   "line_no": 3052960,
+   "true_label": "kernel_crash",
+   "code": "KERNTERM",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.887,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "kernel_crash",
+    "majority": "normal",
+    "tfidf_lr": "kernel_crash"
+   },
+   "seconds": {
+    "retrieval": 0.254
+   }
+  },
+  {
+   "line_no": 3052974,
+   "true_label": "kernel_crash",
+   "code": "KERNTERM",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.887,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "kernel_crash",
+    "majority": "normal",
+    "tfidf_lr": "kernel_crash"
+   },
+   "seconds": {
+    "retrieval": 0.264
+   }
+  },
+  {
+   "line_no": 3053144,
+   "true_label": "memory_cpu_fault",
+   "code": "KERNDTLB",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "46",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "memory_cpu_fault",
+    "majority": "normal",
+    "tfidf_lr": "memory_cpu_fault"
+   },
+   "seconds": {
+    "retrieval": 0.296
+   }
+  },
+  {
+   "line_no": 3053516,
+   "true_label": "memory_cpu_fault",
+   "code": "KERNDTLB",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "46",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "memory_cpu_fault",
+    "majority": "normal",
+    "tfidf_lr": "memory_cpu_fault"
+   },
+   "seconds": {
+    "retrieval": 0.275
+   }
+  },
+  {
+   "line_no": 3053544,
+   "true_label": "memory_cpu_fault",
+   "code": "KERNDTLB",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "46",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "memory_cpu_fault",
+    "majority": "normal",
+    "tfidf_lr": "memory_cpu_fault"
+   },
+   "seconds": {
+    "retrieval": 0.814
+   }
+  },
+  {
+   "line_no": 3053796,
+   "true_label": "memory_cpu_fault",
+   "code": "KERNMC",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "21",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "memory_cpu_fault",
+    "majority": "normal",
+    "tfidf_lr": "memory_cpu_fault"
+   },
+   "seconds": {
+    "retrieval": 0.402
+   }
+  },
+  {
+   "line_no": 3054000,
+   "true_label": "filesystem_mount_failure",
+   "code": "KERNMNTF",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.666,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.266
+   }
+  },
+  {
+   "line_no": 3054011,
+   "true_label": "filesystem_mount_failure",
+   "code": "KERNMNTF",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.657,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.264
+   }
+  },
+  {
+   "line_no": 3054872,
+   "true_label": "kernel_crash",
+   "code": "KERNTERM",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.887,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "kernel_crash",
+    "majority": "normal",
+    "tfidf_lr": "kernel_crash"
+   },
+   "seconds": {
+    "retrieval": 0.224
+   }
+  },
+  {
+   "line_no": 3055099,
+   "true_label": "kernel_crash",
+   "code": "KERNTERM",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.887,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "kernel_crash",
+    "majority": "normal",
+    "tfidf_lr": "kernel_crash"
+   },
+   "seconds": {
+    "retrieval": 0.222
+   }
+  },
+  {
+   "line_no": 3055437,
+   "true_label": "kernel_crash",
+   "code": "KERNTERM",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.887,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "kernel_crash",
+    "majority": "normal",
+    "tfidf_lr": "kernel_crash"
+   },
+   "seconds": {
+    "retrieval": 0.759
+   }
+  },
+  {
+   "line_no": 3055626,
+   "true_label": "kernel_crash",
+   "code": "KERNTERM",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.887,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "kernel_crash",
+    "majority": "normal",
+    "tfidf_lr": "kernel_crash"
+   },
+   "seconds": {
+    "retrieval": 0.258
+   }
+  },
+  {
+   "line_no": 3056397,
+   "true_label": "kernel_crash",
+   "code": "KERNTERM",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.887,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "kernel_crash",
+    "majority": "normal",
+    "tfidf_lr": "kernel_crash"
+   },
+   "seconds": {
+    "retrieval": 0.263
+   }
+  },
+  {
+   "line_no": 3056458,
+   "true_label": "kernel_crash",
+   "code": "KERNTERM",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.887,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "kernel_crash",
+    "majority": "normal",
+    "tfidf_lr": "kernel_crash"
+   },
+   "seconds": {
+    "retrieval": 0.259
+   }
+  },
+  {
+   "line_no": 3056526,
+   "true_label": "kernel_crash",
+   "code": "KERNTERM",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.887,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "kernel_crash",
+    "majority": "normal",
+    "tfidf_lr": "kernel_crash"
+   },
+   "seconds": {
+    "retrieval": 0.283
+   }
+  },
+  {
+   "line_no": 3056607,
+   "true_label": "kernel_crash",
+   "code": "KERNTERM",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.887,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "kernel_crash",
+    "majority": "normal",
+    "tfidf_lr": "kernel_crash"
+   },
+   "seconds": {
+    "retrieval": 0.261
+   }
+  },
+  {
+   "line_no": 3057200,
+   "true_label": "kernel_crash",
+   "code": "KERNTERM",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.887,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "kernel_crash",
+    "majority": "normal",
+    "tfidf_lr": "kernel_crash"
+   },
+   "seconds": {
+    "retrieval": 0.266
+   }
+  },
+  {
+   "line_no": 3057266,
+   "true_label": "memory_cpu_fault",
+   "code": "KERNDTLB",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "46",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "memory_cpu_fault",
+    "majority": "normal",
+    "tfidf_lr": "memory_cpu_fault"
+   },
+   "seconds": {
+    "retrieval": 0.277
+   }
+  },
+  {
+   "line_no": 3057570,
+   "true_label": "kernel_crash",
+   "code": "KERNTERM",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.878,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "kernel_crash",
+    "majority": "normal",
+    "tfidf_lr": "kernel_crash"
+   },
+   "seconds": {
+    "retrieval": 0.327
+   }
+  },
+  {
+   "line_no": 3057736,
+   "true_label": "memory_cpu_fault",
+   "code": "KERNDTLB",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "46",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "memory_cpu_fault",
+    "majority": "normal",
+    "tfidf_lr": "memory_cpu_fault"
+   },
+   "seconds": {
+    "retrieval": 0.322
+   }
+  },
+  {
+   "line_no": 3059014,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "128",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.636
+   }
+  },
+  {
+   "line_no": 3060966,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "5",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.337
+   }
+  },
+  {
+   "line_no": 3062124,
+   "true_label": "power_control_failure",
+   "code": "KERNSOCK",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "152",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "power_control_failure",
+    "majority": "normal",
+    "tfidf_lr": "power_control_failure"
+   },
+   "seconds": {
+    "retrieval": 0.319
+   }
+  },
+  {
+   "line_no": 3062131,
+   "true_label": "power_control_failure",
+   "code": "KERNSOCK",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "152",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "power_control_failure",
+    "majority": "normal",
+    "tfidf_lr": "power_control_failure"
+   },
+   "seconds": {
+    "retrieval": 0.281
+   }
+  },
+  {
+   "line_no": 3062132,
+   "true_label": "power_control_failure",
+   "code": "KERNSOCK",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "152",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "power_control_failure",
+    "majority": "normal",
+    "tfidf_lr": "power_control_failure"
+   },
+   "seconds": {
+    "retrieval": 0.385
+   }
+  },
+  {
+   "line_no": 3062135,
+   "true_label": "power_control_failure",
+   "code": "KERNSOCK",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "152",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "power_control_failure",
+    "majority": "normal",
+    "tfidf_lr": "power_control_failure"
+   },
+   "seconds": {
+    "retrieval": 0.282
+   }
+  },
+  {
+   "line_no": 3062136,
+   "true_label": "power_control_failure",
+   "code": "KERNSOCK",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "152",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "power_control_failure",
+    "majority": "normal",
+    "tfidf_lr": "power_control_failure"
+   },
+   "seconds": {
+    "retrieval": 0.315
+   }
+  },
+  {
+   "line_no": 3062140,
+   "true_label": "power_control_failure",
+   "code": "KERNSOCK",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "152",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "power_control_failure",
+    "majority": "normal",
+    "tfidf_lr": "power_control_failure"
+   },
+   "seconds": {
+    "retrieval": 0.28
+   }
+  },
+  {
+   "line_no": 3062146,
+   "true_label": "power_control_failure",
+   "code": "KERNSOCK",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "152",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "power_control_failure",
+    "majority": "normal",
+    "tfidf_lr": "power_control_failure"
+   },
+   "seconds": {
+    "retrieval": 0.809
+   }
+  },
+  {
+   "line_no": 3062147,
+   "true_label": "power_control_failure",
+   "code": "KERNSOCK",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "152",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "power_control_failure",
+    "majority": "normal",
+    "tfidf_lr": "power_control_failure"
+   },
+   "seconds": {
+    "retrieval": 0.346
+   }
+  },
+  {
+   "line_no": 3062150,
+   "true_label": "power_control_failure",
+   "code": "KERNSOCK",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "152",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "power_control_failure",
+    "majority": "normal",
+    "tfidf_lr": "power_control_failure"
+   },
+   "seconds": {
+    "retrieval": 0.364
+   }
+  },
+  {
+   "line_no": 3062153,
+   "true_label": "power_control_failure",
+   "code": "KERNSOCK",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "152",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "power_control_failure",
+    "majority": "normal",
+    "tfidf_lr": "power_control_failure"
+   },
+   "seconds": {
+    "retrieval": 0.302
+   }
+  },
+  {
+   "line_no": 3062160,
+   "true_label": "power_control_failure",
+   "code": "KERNSOCK",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "152",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "power_control_failure",
+    "majority": "normal",
+    "tfidf_lr": "power_control_failure"
+   },
+   "seconds": {
+    "retrieval": 0.315
+   }
+  },
+  {
+   "line_no": 3062161,
+   "true_label": "power_control_failure",
+   "code": "KERNSOCK",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "152",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "power_control_failure",
+    "majority": "normal",
+    "tfidf_lr": "power_control_failure"
+   },
+   "seconds": {
+    "retrieval": 0.275
+   }
+  },
+  {
+   "line_no": 3062162,
+   "true_label": "power_control_failure",
+   "code": "KERNSOCK",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "152",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "power_control_failure",
+    "majority": "normal",
+    "tfidf_lr": "power_control_failure"
+   },
+   "seconds": {
+    "retrieval": 0.274
+   }
+  },
+  {
+   "line_no": 3062164,
+   "true_label": "power_control_failure",
+   "code": "KERNSOCK",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "152",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "power_control_failure",
+    "majority": "normal",
+    "tfidf_lr": "power_control_failure"
+   },
+   "seconds": {
+    "retrieval": 0.294
+   }
+  },
+  {
+   "line_no": 3062165,
+   "true_label": "power_control_failure",
+   "code": "KERNSOCK",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "152",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "power_control_failure",
+    "majority": "normal",
+    "tfidf_lr": "power_control_failure"
+   },
+   "seconds": {
+    "retrieval": 0.283
+   }
+  },
+  {
+   "line_no": 3062167,
+   "true_label": "power_control_failure",
+   "code": "KERNSOCK",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "152",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "power_control_failure",
+    "majority": "normal",
+    "tfidf_lr": "power_control_failure"
+   },
+   "seconds": {
+    "retrieval": 0.327
+   }
+  },
+  {
+   "line_no": 3062169,
+   "true_label": "power_control_failure",
+   "code": "KERNSOCK",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "152",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "power_control_failure",
+    "majority": "normal",
+    "tfidf_lr": "power_control_failure"
+   },
+   "seconds": {
+    "retrieval": 0.309
+   }
+  },
+  {
+   "line_no": 3062170,
+   "true_label": "power_control_failure",
+   "code": "KERNSOCK",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "152",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "power_control_failure",
+    "majority": "normal",
+    "tfidf_lr": "power_control_failure"
+   },
+   "seconds": {
+    "retrieval": 0.295
+   }
+  },
+  {
+   "line_no": 3062191,
+   "true_label": "power_control_failure",
+   "code": "KERNSOCK",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "152",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "power_control_failure",
+    "majority": "normal",
+    "tfidf_lr": "power_control_failure"
+   },
+   "seconds": {
+    "retrieval": 0.278
+   }
+  },
+  {
+   "line_no": 3062192,
+   "true_label": "power_control_failure",
+   "code": "KERNSOCK",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "152",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "power_control_failure",
+    "majority": "normal",
+    "tfidf_lr": "power_control_failure"
+   },
+   "seconds": {
+    "retrieval": 0.279
+   }
+  },
+  {
+   "line_no": 3062733,
+   "true_label": "memory_cpu_fault",
+   "code": "KERNDTLB",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "46",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "memory_cpu_fault",
+    "majority": "normal",
+    "tfidf_lr": "memory_cpu_fault"
+   },
+   "seconds": {
+    "retrieval": 0.239
+   }
+  },
+  {
+   "line_no": 3063338,
+   "true_label": "kernel_crash",
+   "code": "KERNTERM",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.88,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "kernel_crash",
+    "majority": "normal",
+    "tfidf_lr": "kernel_crash"
+   },
+   "seconds": {
+    "retrieval": 0.233
+   }
+  },
+  {
+   "line_no": 3063389,
+   "true_label": "memory_cpu_fault",
+   "code": "KERNDTLB",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "46",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "memory_cpu_fault",
+    "majority": "normal",
+    "tfidf_lr": "memory_cpu_fault"
+   },
+   "seconds": {
+    "retrieval": 0.227
+   }
+  },
+  {
+   "line_no": 3063540,
+   "true_label": "memory_cpu_fault",
+   "code": "KERNDTLB",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "46",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "memory_cpu_fault",
+    "majority": "normal",
+    "tfidf_lr": "memory_cpu_fault"
+   },
+   "seconds": {
+    "retrieval": 0.248
+   }
+  },
+  {
+   "line_no": 3063548,
+   "true_label": "memory_cpu_fault",
+   "code": "KERNDTLB",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "46",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "memory_cpu_fault",
+    "majority": "normal",
+    "tfidf_lr": "memory_cpu_fault"
+   },
+   "seconds": {
+    "retrieval": 0.25
+   }
+  },
+  {
+   "line_no": 3063701,
+   "true_label": "memory_cpu_fault",
+   "code": "KERNDTLB",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "46",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "memory_cpu_fault",
+    "majority": "normal",
+    "tfidf_lr": "memory_cpu_fault"
+   },
+   "seconds": {
+    "retrieval": 0.269
+   }
+  },
+  {
+   "line_no": 3063915,
+   "true_label": "kernel_crash",
+   "code": "KERNTERM",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.887,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "kernel_crash",
+    "majority": "normal",
+    "tfidf_lr": "kernel_crash"
+   },
+   "seconds": {
+    "retrieval": 0.25
+   }
+  },
+  {
+   "line_no": 3068731,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "5",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.409
+   }
+  },
+  {
+   "line_no": 3068839,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "5",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.28
+   }
+  },
+  {
+   "line_no": 3068878,
+   "true_label": "io_connection_lost",
+   "code": "APPSEV",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "220",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "io_connection_lost",
+    "majority": "normal",
+    "tfidf_lr": "io_connection_lost"
+   },
+   "seconds": {
+    "retrieval": 0.265
+   }
+  },
+  {
+   "line_no": 3069035,
+   "true_label": "io_connection_lost",
+   "code": "APPSEV",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "220",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "io_connection_lost",
+    "majority": "normal",
+    "tfidf_lr": "io_connection_lost"
+   },
+   "seconds": {
+    "retrieval": 0.263
+   }
+  },
+  {
+   "line_no": 3069408,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "5",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.284
+   }
+  },
+  {
+   "line_no": 3069603,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "5",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.291
+   }
+  },
+  {
+   "line_no": 3070172,
+   "true_label": "io_connection_lost",
+   "code": "APPSEV",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "220",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "io_connection_lost",
+    "majority": "normal",
+    "tfidf_lr": "io_connection_lost"
+   },
+   "seconds": {
+    "retrieval": 0.789
+   }
+  },
+  {
+   "line_no": 3070950,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.737,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.325
+   }
+  },
+  {
+   "line_no": 3072354,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.748,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.449
+   }
+  },
+  {
+   "line_no": 3073959,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "15",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.281
+   }
+  },
+  {
+   "line_no": 3075933,
+   "true_label": "io_connection_lost",
+   "code": "APPSEV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.946,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "io_connection_lost",
+    "majority": "normal",
+    "tfidf_lr": "io_connection_lost"
+   },
+   "seconds": {
+    "retrieval": 0.439
+   }
+  },
+  {
+   "line_no": 3075938,
+   "true_label": "io_connection_lost",
+   "code": "APPSEV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.945,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "io_connection_lost",
+    "majority": "normal",
+    "tfidf_lr": "io_connection_lost"
+   },
+   "seconds": {
+    "retrieval": 0.316
+   }
+  },
+  {
+   "line_no": 3077607,
+   "true_label": "memory_cpu_fault",
+   "code": "KERNMC",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "194",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "memory_cpu_fault",
+    "majority": "normal",
+    "tfidf_lr": "memory_cpu_fault"
+   },
+   "seconds": {
+    "retrieval": 0.236
+   }
+  },
+  {
+   "line_no": 3080054,
+   "true_label": "io_connection_lost",
+   "code": "APPRES",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.914,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "io_connection_lost",
+    "majority": "normal",
+    "tfidf_lr": "io_connection_lost"
+   },
+   "seconds": {
+    "retrieval": 0.294
+   }
+  },
+  {
+   "line_no": 3080847,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "5",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.301
+   }
+  },
+  {
+   "line_no": 3081520,
+   "true_label": "io_connection_lost",
+   "code": "APPSEV",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "220",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "io_connection_lost",
+    "majority": "normal",
+    "tfidf_lr": "io_connection_lost"
+   },
+   "seconds": {
+    "retrieval": 0.297
+   }
+  },
+  {
+   "line_no": 3082511,
+   "true_label": "io_connection_lost",
+   "code": "APPSEV",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "220",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "io_connection_lost",
+    "majority": "normal",
+    "tfidf_lr": "io_connection_lost"
+   },
+   "seconds": {
+    "retrieval": 0.31
+   }
+  },
+  {
+   "line_no": 3082905,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "5",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.282
+   }
+  },
+  {
+   "line_no": 3083494,
+   "true_label": "io_connection_lost",
+   "code": "APPSEV",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "220",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "io_connection_lost",
+    "majority": "normal",
+    "tfidf_lr": "io_connection_lost"
+   },
+   "seconds": {
+    "retrieval": 0.282
+   }
+  },
+  {
+   "line_no": 3083784,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "5",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.278
+   }
+  },
+  {
+   "line_no": 3084249,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "5",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.282
+   }
+  },
+  {
+   "line_no": 3085004,
+   "true_label": "io_connection_lost",
+   "code": "APPSEV",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "220",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "io_connection_lost",
+    "majority": "normal",
+    "tfidf_lr": "io_connection_lost"
+   },
+   "seconds": {
+    "retrieval": 0.31
+   }
+  },
+  {
+   "line_no": 3085156,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "5",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.314
+   }
+  },
+  {
+   "line_no": 3085703,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "5",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.301
+   }
+  },
+  {
+   "line_no": 3086014,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "5",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.317
+   }
+  },
+  {
+   "line_no": 3086741,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.738,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.295
+   }
+  },
+  {
+   "line_no": 3088130,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "2",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.285
+   }
+  },
+  {
+   "line_no": 3088818,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "2",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.292
+   }
+  },
+  {
+   "line_no": 3089015,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "2",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.392
+   }
+  },
+  {
+   "line_no": 3090875,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.73,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.283
+   }
+  },
+  {
+   "line_no": 3099038,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "5",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.286
+   }
+  },
+  {
+   "line_no": 3100161,
+   "true_label": "io_connection_lost",
+   "code": "APPSEV",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "220",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "io_connection_lost",
+    "majority": "normal",
+    "tfidf_lr": "io_connection_lost"
+   },
+   "seconds": {
+    "retrieval": 0.307
+   }
+  },
+  {
+   "line_no": 3100380,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "5",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.31
+   }
+  },
+  {
+   "line_no": 3107617,
+   "true_label": "kernel_crash",
+   "code": "KERNTERM",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.887,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "kernel_crash",
+    "majority": "normal",
+    "tfidf_lr": "kernel_crash"
+   },
+   "seconds": {
+    "retrieval": 0.419
+   }
+  },
+  {
+   "line_no": 3107839,
+   "true_label": "kernel_crash",
+   "code": "KERNTERM",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.887,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "kernel_crash",
+    "majority": "normal",
+    "tfidf_lr": "kernel_crash"
+   },
+   "seconds": {
+    "retrieval": 0.404
+   }
+  },
+  {
+   "line_no": 3108003,
+   "true_label": "kernel_crash",
+   "code": "KERNTERM",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.887,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "kernel_crash",
+    "majority": "normal",
+    "tfidf_lr": "kernel_crash"
+   },
+   "seconds": {
+    "retrieval": 0.761
+   }
+  },
+  {
+   "line_no": 3108502,
+   "true_label": "power_control_failure",
+   "code": "KERNSOCK",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "152",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "power_control_failure",
+    "majority": "normal",
+    "tfidf_lr": "power_control_failure"
+   },
+   "seconds": {
+    "retrieval": 0.516
+   }
+  },
+  {
+   "line_no": 3108507,
+   "true_label": "power_control_failure",
+   "code": "KERNSOCK",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "152",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "power_control_failure",
+    "majority": "normal",
+    "tfidf_lr": "power_control_failure"
+   },
+   "seconds": {
+    "retrieval": 0.369
+   }
+  },
+  {
+   "line_no": 3108511,
+   "true_label": "power_control_failure",
+   "code": "KERNSOCK",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "152",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "power_control_failure",
+    "majority": "normal",
+    "tfidf_lr": "power_control_failure"
+   },
+   "seconds": {
+    "retrieval": 0.333
+   }
+  },
+  {
+   "line_no": 3108623,
+   "true_label": "memory_cpu_fault",
+   "code": "KERNMC",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "28",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "memory_cpu_fault",
+    "majority": "normal",
+    "tfidf_lr": "memory_cpu_fault"
+   },
+   "seconds": {
+    "retrieval": 0.278
+   }
+  },
+  {
+   "line_no": 3108865,
+   "true_label": "memory_cpu_fault",
+   "code": "KERNMC",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "194",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "memory_cpu_fault",
+    "majority": "normal",
+    "tfidf_lr": "memory_cpu_fault"
+   },
+   "seconds": {
+    "retrieval": 0.247
+   }
+  },
+  {
+   "line_no": 3109483,
+   "true_label": "filesystem_mount_failure",
+   "code": "KERNMNTF",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.668,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.337
+   }
+  },
+  {
+   "line_no": 3109586,
+   "true_label": "filesystem_mount_failure",
+   "code": "KERNMNTF",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.665,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.301
+   }
+  },
+  {
+   "line_no": 3110065,
+   "true_label": "filesystem_mount_failure",
+   "code": "KERNMNTF",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.677,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.285
+   }
+  },
+  {
+   "line_no": 3110215,
+   "true_label": "memory_cpu_fault",
+   "code": "KERNMC",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "216",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "memory_cpu_fault",
+    "majority": "normal",
+    "tfidf_lr": "memory_cpu_fault"
+   },
+   "seconds": {
+    "retrieval": 0.287
+   }
+  },
+  {
+   "line_no": 3117204,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.717,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 1.338
+   }
+  },
+  {
+   "line_no": 3122226,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.722,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.459
+   }
+  },
+  {
+   "line_no": 3124884,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.721,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.3
+   }
+  },
+  {
+   "line_no": 3131493,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "3",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.297
+   }
+  },
+  {
+   "line_no": 3133104,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "3",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.243
+   }
+  },
+  {
+   "line_no": 3139899,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.723,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.341
+   }
+  },
+  {
+   "line_no": 3140194,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.721,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.45
+   }
+  },
+  {
+   "line_no": 3140211,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.717,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.285
+   }
+  },
+  {
+   "line_no": 3141431,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.717,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.285
+   }
+  },
+  {
+   "line_no": 3143617,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.713,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.292
+   }
+  },
+  {
+   "line_no": 3150119,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.722,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.288
+   }
+  },
+  {
+   "line_no": 3151254,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "3",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.257
+   }
+  },
+  {
+   "line_no": 3154938,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "3",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.23
+   }
+  },
+  {
+   "line_no": 3157242,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.709,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.333
+   }
+  },
+  {
+   "line_no": 3159566,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "3",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.239
+   }
+  },
+  {
+   "line_no": 3162089,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.72,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.338
+   }
+  },
+  {
+   "line_no": 3164400,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.723,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.337
+   }
+  },
+  {
+   "line_no": 3165028,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "3",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.242
+   }
+  },
+  {
+   "line_no": 3165220,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.718,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.306
+   }
+  },
+  {
+   "line_no": 3173914,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.719,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.281
+   }
+  },
+  {
+   "line_no": 3180271,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "3",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.224
+   }
+  },
+  {
+   "line_no": 3180323,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "3",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.228
+   }
+  },
+  {
+   "line_no": 3184664,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.71,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.279
+   }
+  },
+  {
+   "line_no": 3187536,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.719,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.311
+   }
+  },
+  {
+   "line_no": 3191168,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.703,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.333
+   }
+  },
+  {
+   "line_no": 3196533,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.71,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.295
+   }
+  },
+  {
+   "line_no": 3201837,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.747,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.292
+   }
+  },
+  {
+   "line_no": 3208332,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "3",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.256
+   }
+  },
+  {
+   "line_no": 3209733,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "3",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.237
+   }
+  },
+  {
+   "line_no": 3210879,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "3",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.258
+   }
+  },
+  {
+   "line_no": 3213934,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "3",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.227
+   }
+  },
+  {
+   "line_no": 3218274,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "3",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.229
+   }
+  },
+  {
+   "line_no": 3222174,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "3",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.259
+   }
+  },
+  {
+   "line_no": 3225388,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.721,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.266
+   }
+  },
+  {
+   "line_no": 3226102,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.722,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.376
+   }
+  },
+  {
+   "line_no": 3226972,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.729,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.259
+   }
+  },
+  {
+   "line_no": 3232391,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "3",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.247
+   }
+  },
+  {
+   "line_no": 3233349,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "3",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.247
+   }
+  },
+  {
+   "line_no": 3235595,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "3",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.246
+   }
+  },
+  {
+   "line_no": 3235916,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "3",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.303
+   }
+  },
+  {
+   "line_no": 3238431,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "3",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.265
+   }
+  },
+  {
+   "line_no": 3246178,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "3",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.25
+   }
+  },
+  {
+   "line_no": 3251158,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "3",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.261
+   }
+  },
+  {
+   "line_no": 3255583,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "3",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.261
+   }
+  },
+  {
+   "line_no": 3256246,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "3",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.27
+   }
+  },
+  {
+   "line_no": 3262156,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "3",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.247
+   }
+  },
+  {
+   "line_no": 3262338,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "3",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.247
+   }
+  },
+  {
+   "line_no": 3263455,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "3",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.342
+   }
+  },
+  {
+   "line_no": 3276583,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.728,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.295
+   }
+  },
+  {
+   "line_no": 3283249,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.727,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.43
+   }
+  },
+  {
+   "line_no": 3289569,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.722,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.262
+   }
+  },
+  {
+   "line_no": 3289596,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.727,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.259
+   }
+  },
+  {
+   "line_no": 3289933,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.714,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.261
+   }
+  },
+  {
+   "line_no": 3291396,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.718,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.259
+   }
+  },
+  {
+   "line_no": 3294193,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.728,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.262
+   }
+  },
+  {
+   "line_no": 3295579,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.715,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.223
+   }
+  },
+  {
+   "line_no": 3297330,
+   "true_label": "memory_cpu_fault",
+   "code": "KERNMC",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "21",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "memory_cpu_fault",
+    "majority": "normal",
+    "tfidf_lr": "memory_cpu_fault"
+   },
+   "seconds": {
+    "retrieval": 0.269
+   }
+  },
+  {
+   "line_no": 3298349,
+   "true_label": "io_connection_lost",
+   "code": "APPSEV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.946,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "io_connection_lost",
+    "majority": "normal",
+    "tfidf_lr": "io_connection_lost"
+   },
+   "seconds": {
+    "retrieval": 0.347
+   }
+  },
+  {
+   "line_no": 3298472,
+   "true_label": "io_connection_lost",
+   "code": "APPSEV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.945,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "io_connection_lost",
+    "majority": "normal",
+    "tfidf_lr": "io_connection_lost"
+   },
+   "seconds": {
+    "retrieval": 0.281
+   }
+  },
+  {
+   "line_no": 3299810,
+   "true_label": "kernel_crash",
+   "code": "KERNMICRO",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.763,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.222
+   }
+  },
+  {
+   "line_no": 3299860,
+   "true_label": "kernel_crash",
+   "code": "KERNMICRO",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.763,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.223
+   }
+  },
+  {
+   "line_no": 3299936,
+   "true_label": "kernel_crash",
+   "code": "KERNMICRO",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.763,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.223
+   }
+  },
+  {
+   "line_no": 3300316,
+   "true_label": "io_connection_lost",
+   "code": "APPSEV",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.948,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "io_connection_lost",
+    "majority": "normal",
+    "tfidf_lr": "io_connection_lost"
+   },
+   "seconds": {
+    "retrieval": 0.278
+   }
+  },
+  {
+   "line_no": 3303935,
+   "true_label": "memory_cpu_fault",
+   "code": "KERNMC",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "216",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "memory_cpu_fault",
+    "majority": "normal",
+    "tfidf_lr": "memory_cpu_fault"
+   },
+   "seconds": {
+    "retrieval": 0.275
+   }
+  },
+  {
+   "line_no": 3304293,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.633,
+   "vote_share": 0.801,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.291
+   }
+  },
+  {
+   "line_no": 3305999,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "15",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.347
+   }
+  },
+  {
+   "line_no": 3309457,
+   "true_label": "power_control_failure",
+   "code": "MASABNORM",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "224",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "power_control_failure",
+    "majority": "normal",
+    "tfidf_lr": "power_control_failure"
+   },
+   "seconds": {
+    "retrieval": 0.839
+   }
+  },
+  {
+   "line_no": 3309464,
+   "true_label": "power_control_failure",
+   "code": "KERNSOCK",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "152",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "power_control_failure",
+    "majority": "normal",
+    "tfidf_lr": "power_control_failure"
+   },
+   "seconds": {
+    "retrieval": 0.296
+   }
+  },
+  {
+   "line_no": 3309568,
+   "true_label": "filesystem_mount_failure",
+   "code": "KERNMNTF",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.711,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.287
+   }
+  },
+  {
+   "line_no": 3309980,
+   "true_label": "filesystem_mount_failure",
+   "code": "KERNMNTF",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.71,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.309
+   }
+  },
+  {
+   "line_no": 3310203,
+   "true_label": "filesystem_mount_failure",
+   "code": "KERNMNTF",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.702,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.278
+   }
+  },
+  {
+   "line_no": 3310216,
+   "true_label": "filesystem_mount_failure",
+   "code": "KERNMNTF",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.71,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.297
+   }
+  },
+  {
+   "line_no": 3310288,
+   "true_label": "filesystem_mount_failure",
+   "code": "KERNMNTF",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.714,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.283
+   }
+  },
+  {
+   "line_no": 3310514,
+   "true_label": "filesystem_mount_failure",
+   "code": "KERNMNTF",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.706,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.354
+   }
+  },
+  {
+   "line_no": 3311048,
+   "true_label": "filesystem_mount_failure",
+   "code": "KERNMNTF",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.711,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.287
+   }
+  },
+  {
+   "line_no": 3311401,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": true,
+   "matched_cluster": "78",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.276
+   }
+  },
+  {
+   "line_no": 3311905,
+   "true_label": "filesystem_mount_failure",
+   "code": "KERNMNTF",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.714,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.305
+   }
+  },
+  {
+   "line_no": 3312383,
+   "true_label": "filesystem_mount_failure",
+   "code": "KERNMNTF",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.713,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.288
+   }
+  },
+  {
+   "line_no": 3312426,
+   "true_label": "filesystem_mount_failure",
+   "code": "KERNMNTF",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.698,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.307
+   }
+  },
+  {
+   "line_no": 3312766,
+   "true_label": "filesystem_mount_failure",
+   "code": "KERNMNTF",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.711,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.323
+   }
+  },
+  {
+   "line_no": 3315238,
+   "true_label": "link_hardware_failure",
+   "code": "LINKIAP",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.912,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "link_hardware_failure",
+    "majority": "normal",
+    "tfidf_lr": "link_hardware_failure"
+   },
+   "seconds": {
+    "retrieval": 0.283
+   }
+  },
+  {
+   "line_no": 3315251,
+   "true_label": "link_hardware_failure",
+   "code": "LINKIAP",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.912,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "link_hardware_failure",
+    "majority": "normal",
+    "tfidf_lr": "link_hardware_failure"
+   },
+   "seconds": {
+    "retrieval": 0.281
+   }
+  },
+  {
+   "line_no": 3315252,
+   "true_label": "link_hardware_failure",
+   "code": "LINKIAP",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.912,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "link_hardware_failure",
+    "majority": "normal",
+    "tfidf_lr": "link_hardware_failure"
+   },
+   "seconds": {
+    "retrieval": 0.308
+   }
+  },
+  {
+   "line_no": 3315255,
+   "true_label": "link_hardware_failure",
+   "code": "LINKIAP",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.912,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "link_hardware_failure",
+    "majority": "normal",
+    "tfidf_lr": "link_hardware_failure"
+   },
+   "seconds": {
+    "retrieval": 0.439
+   }
+  },
+  {
+   "line_no": 3315257,
+   "true_label": "link_hardware_failure",
+   "code": "LINKIAP",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.912,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "link_hardware_failure",
+    "majority": "normal",
+    "tfidf_lr": "link_hardware_failure"
+   },
+   "seconds": {
+    "retrieval": 0.284
+   }
+  },
+  {
+   "line_no": 3315259,
+   "true_label": "link_hardware_failure",
+   "code": "LINKIAP",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.912,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "link_hardware_failure",
+    "majority": "normal",
+    "tfidf_lr": "link_hardware_failure"
+   },
+   "seconds": {
+    "retrieval": 0.347
+   }
+  },
+  {
+   "line_no": 3315264,
+   "true_label": "link_hardware_failure",
+   "code": "LINKIAP",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.912,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "link_hardware_failure",
+    "majority": "normal",
+    "tfidf_lr": "link_hardware_failure"
+   },
+   "seconds": {
+    "retrieval": 0.286
+   }
+  },
+  {
+   "line_no": 3315266,
+   "true_label": "link_hardware_failure",
+   "code": "LINKIAP",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.912,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "link_hardware_failure",
+    "majority": "normal",
+    "tfidf_lr": "link_hardware_failure"
+   },
+   "seconds": {
+    "retrieval": 0.272
+   }
+  },
+  {
+   "line_no": 3315269,
+   "true_label": "link_hardware_failure",
+   "code": "LINKIAP",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.912,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "link_hardware_failure",
+    "majority": "normal",
+    "tfidf_lr": "link_hardware_failure"
+   },
+   "seconds": {
+    "retrieval": 0.276
+   }
+  },
+  {
+   "line_no": 3315275,
+   "true_label": "link_hardware_failure",
+   "code": "LINKIAP",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.912,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "link_hardware_failure",
+    "majority": "normal",
+    "tfidf_lr": "link_hardware_failure"
+   },
+   "seconds": {
+    "retrieval": 0.278
+   }
+  },
+  {
+   "line_no": 3315277,
+   "true_label": "link_hardware_failure",
+   "code": "LINKIAP",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.912,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "link_hardware_failure",
+    "majority": "normal",
+    "tfidf_lr": "link_hardware_failure"
+   },
+   "seconds": {
+    "retrieval": 0.286
+   }
+  },
+  {
+   "line_no": 3315285,
+   "true_label": "link_hardware_failure",
+   "code": "LINKIAP",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.912,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "link_hardware_failure",
+    "majority": "normal",
+    "tfidf_lr": "link_hardware_failure"
+   },
+   "seconds": {
+    "retrieval": 0.33
+   }
+  },
+  {
+   "line_no": 3315286,
+   "true_label": "link_hardware_failure",
+   "code": "LINKIAP",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.912,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "link_hardware_failure",
+    "majority": "normal",
+    "tfidf_lr": "link_hardware_failure"
+   },
+   "seconds": {
+    "retrieval": 0.311
+   }
+  },
+  {
+   "line_no": 3315297,
+   "true_label": "link_hardware_failure",
+   "code": "LINKIAP",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.912,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "link_hardware_failure",
+    "majority": "normal",
+    "tfidf_lr": "link_hardware_failure"
+   },
+   "seconds": {
+    "retrieval": 0.281
+   }
+  },
+  {
+   "line_no": 3315298,
+   "true_label": "link_hardware_failure",
+   "code": "LINKIAP",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.912,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "link_hardware_failure",
+    "majority": "normal",
+    "tfidf_lr": "link_hardware_failure"
+   },
+   "seconds": {
+    "retrieval": 0.282
+   }
+  },
+  {
+   "line_no": 3315307,
+   "true_label": "link_hardware_failure",
+   "code": "LINKIAP",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.912,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "link_hardware_failure",
+    "majority": "normal",
+    "tfidf_lr": "link_hardware_failure"
+   },
+   "seconds": {
+    "retrieval": 0.298
+   }
+  },
+  {
+   "line_no": 3315308,
+   "true_label": "link_hardware_failure",
+   "code": "LINKIAP",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.912,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "link_hardware_failure",
+    "majority": "normal",
+    "tfidf_lr": "link_hardware_failure"
+   },
+   "seconds": {
+    "retrieval": 0.288
+   }
+  },
+  {
+   "line_no": 3315315,
+   "true_label": "link_hardware_failure",
+   "code": "LINKIAP",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.912,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "link_hardware_failure",
+    "majority": "normal",
+    "tfidf_lr": "link_hardware_failure"
+   },
+   "seconds": {
+    "retrieval": 0.274
+   }
+  },
+  {
+   "line_no": 3315359,
+   "true_label": "link_hardware_failure",
+   "code": "LINKIAP",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.912,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "link_hardware_failure",
+    "majority": "normal",
+    "tfidf_lr": "link_hardware_failure"
+   },
+   "seconds": {
+    "retrieval": 0.345
+   }
+  },
+  {
+   "line_no": 3315363,
+   "true_label": "link_hardware_failure",
+   "code": "LINKIAP",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.912,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "link_hardware_failure",
+    "majority": "normal",
+    "tfidf_lr": "link_hardware_failure"
+   },
+   "seconds": {
+    "retrieval": 0.291
+   }
+  },
+  {
+   "line_no": 3315365,
+   "true_label": "link_hardware_failure",
+   "code": "LINKIAP",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.912,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "link_hardware_failure",
+    "majority": "normal",
+    "tfidf_lr": "link_hardware_failure"
+   },
+   "seconds": {
+    "retrieval": 0.315
+   }
+  },
+  {
+   "line_no": 3315451,
+   "true_label": "link_hardware_failure",
+   "code": "LINKIAP",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.912,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "link_hardware_failure",
+    "majority": "normal",
+    "tfidf_lr": "link_hardware_failure"
+   },
+   "seconds": {
+    "retrieval": 0.289
+   }
+  },
+  {
+   "line_no": 3315471,
+   "true_label": "link_hardware_failure",
+   "code": "LINKIAP",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.912,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "link_hardware_failure",
+    "majority": "normal",
+    "tfidf_lr": "link_hardware_failure"
+   },
+   "seconds": {
+    "retrieval": 0.283
+   }
+  },
+  {
+   "line_no": 3315544,
+   "true_label": "link_hardware_failure",
+   "code": "LINKIAP",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.912,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "link_hardware_failure",
+    "majority": "normal",
+    "tfidf_lr": "link_hardware_failure"
+   },
+   "seconds": {
+    "retrieval": 0.289
+   }
+  },
+  {
+   "line_no": 3315545,
+   "true_label": "link_hardware_failure",
+   "code": "LINKIAP",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.912,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "link_hardware_failure",
+    "majority": "normal",
+    "tfidf_lr": "link_hardware_failure"
+   },
+   "seconds": {
+    "retrieval": 0.275
+   }
+  },
+  {
+   "line_no": 3315547,
+   "true_label": "link_hardware_failure",
+   "code": "LINKIAP",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.912,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "link_hardware_failure",
+    "majority": "normal",
+    "tfidf_lr": "link_hardware_failure"
+   },
+   "seconds": {
+    "retrieval": 0.279
+   }
+  },
+  {
+   "line_no": 3315551,
+   "true_label": "link_hardware_failure",
+   "code": "LINKIAP",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.912,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "link_hardware_failure",
+    "majority": "normal",
+    "tfidf_lr": "link_hardware_failure"
+   },
+   "seconds": {
+    "retrieval": 0.271
+   }
+  },
+  {
+   "line_no": 3318399,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "5",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.324
+   }
+  },
+  {
+   "line_no": 3319473,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "5",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.276
+   }
+  },
+  {
+   "line_no": 3320343,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "unseen",
+   "hard_negative": true,
+   "matched_cluster": "5",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.343
+   }
+  },
+  {
+   "line_no": 3320953,
+   "true_label": "filesystem_mount_failure",
+   "code": "KERNMNTF",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.697,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.318
+   }
+  },
+  {
+   "line_no": 3321618,
+   "true_label": "filesystem_mount_failure",
+   "code": "KERNMNTF",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.711,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.285
+   }
+  },
+  {
+   "line_no": 3321627,
+   "true_label": "filesystem_mount_failure",
+   "code": "KERNMNTF",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.714,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.277
+   }
+  },
+  {
+   "line_no": 3321833,
+   "true_label": "filesystem_mount_failure",
+   "code": "KERNMNTF",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.713,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.28
+   }
+  },
+  {
+   "line_no": 3322202,
+   "true_label": "link_hardware_failure",
+   "code": "LINKIAP",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.912,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "link_hardware_failure",
+    "majority": "normal",
+    "tfidf_lr": "link_hardware_failure"
+   },
+   "seconds": {
+    "retrieval": 0.324
+   }
+  },
+  {
+   "line_no": 3322204,
+   "true_label": "link_hardware_failure",
+   "code": "LINKIAP",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.912,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "link_hardware_failure",
+    "majority": "normal",
+    "tfidf_lr": "link_hardware_failure"
+   },
+   "seconds": {
+    "retrieval": 0.316
+   }
+  },
+  {
+   "line_no": 3322597,
+   "true_label": "filesystem_mount_failure",
+   "code": "KERNMNTF",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.708,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.274
+   }
+  },
+  {
+   "line_no": 3322806,
+   "true_label": "filesystem_mount_failure",
+   "code": "KERNMNTF",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.705,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.282
+   }
+  },
+  {
+   "line_no": 3322968,
+   "true_label": "filesystem_mount_failure",
+   "code": "KERNMNTF",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.715,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.322
+   }
+  },
+  {
+   "line_no": 3323050,
+   "true_label": "filesystem_mount_failure",
+   "code": "KERNMNTF",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.708,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.286
+   }
+  },
+  {
+   "line_no": 3323061,
+   "true_label": "filesystem_mount_failure",
+   "code": "KERNMNTF",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.714,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.292
+   }
+  },
+  {
+   "line_no": 3323263,
+   "true_label": "filesystem_mount_failure",
+   "code": "KERNMNTF",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.714,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.28
+   }
+  },
+  {
+   "line_no": 3323431,
+   "true_label": "normal",
+   "code": "-",
+   "subset": "seen",
+   "hard_negative": false,
+   "matched_cluster": "45",
+   "top_score": 1.0,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "normal",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.3
+   }
+  },
+  {
+   "line_no": 3323572,
+   "true_label": "filesystem_mount_failure",
+   "code": "KERNMNTF",
+   "subset": "unseen",
+   "hard_negative": false,
+   "matched_cluster": null,
+   "top_score": 0.716,
+   "vote_share": 1.0,
+   "pred": {
+    "level_rule": "alert",
+    "knn_vote": "normal",
+    "majority": "normal",
+    "tfidf_lr": "normal"
+   },
+   "seconds": {
+    "retrieval": 0.32
+   }
+  }
+ ],
+ "baselines": {
+  "index_file": "sample_data/bgl_time_index.log",
+  "index_lines": 5161,
+  "majority_class": "normal"
+ }
+}

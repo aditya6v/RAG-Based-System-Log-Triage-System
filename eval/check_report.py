@@ -18,11 +18,13 @@ EXPECTED = {
     ("knn_vote", "unseen", "accuracy"): 0.921,
     ("llm_only", "all", "accuracy"): 0.425,
     ("llm_rag", "all", "accuracy"): 0.639,
-    ("triage", "all", "accuracy"): 0.982,
-    ("triage", "unseen", "accuracy"): 0.927,
-    ("triage", "all", "binary_accuracy"): 0.997,
+    ("vote_llm_fallback", "all", "accuracy"): 0.982,
+    ("vote_llm_fallback", "unseen", "accuracy"): 0.927,
+    ("vote_llm_fallback", "all", "binary_accuracy"): 0.997,
+    ("vote_llm_fallback", "hard_negative", "called_normal"): 0.981,
+    ("triage", "all", "answered_precision"): 0.993,
+    ("triage", "all", "coverage"): 0.976,
     ("level_rule", "all", "binary_accuracy"): 0.876,
-    ("triage", "hard_negative", "called_normal"): 0.981,
     ("knn_vote", "hard_negative", "called_normal"): 1.000,
     ("level_rule", "hard_negative", "called_normal"): 0.287,
 }
@@ -47,6 +49,11 @@ def compute(rows: list[dict], clf: str, subset: str, metric: str) -> float:
         return sum(pred(r) == _binary(r["true_label"]) for r in rs) / len(rs)
     if metric == "called_normal":
         return sum(pred(r) == "normal" for r in rs) / len(rs)
+    if metric in ("answered_precision", "coverage"):
+        answered = [r for r in rs if r["pred"][clf] != "unknown"]
+        if metric == "coverage":
+            return len(answered) / len(rs)
+        return sum(r["pred"][clf] == r["true_label"] for r in answered) / len(answered)
     raise ValueError(metric)
 
 
@@ -58,7 +65,7 @@ def main(path: str) -> int:
         got = round(compute(rows, clf, subset, metric), 3)
         ok = abs(got - expected) < 1e-9
         bad += not ok
-        print(f"{'ok  ' if ok else 'FAIL'} {clf:10} {subset:13} {metric:15} expected {expected:.3f} got {got:.3f}")
+        print(f"{'ok  ' if ok else 'FAIL'} {clf:18} {subset:13} {metric:18} expected {expected:.3f} got {got:.3f}")
     print(f"\n{len(EXPECTED) - bad}/{len(EXPECTED)} headline numbers match")
     return 1 if bad else 0
 

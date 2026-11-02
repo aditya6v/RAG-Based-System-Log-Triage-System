@@ -71,6 +71,15 @@ OLLAMA_KEEP_ALIVE = os.environ.get("OLLAMA_KEEP_ALIVE", "30m")
 # every upsert with a dimension-mismatch error.
 EMBEDDING_DIM = 768
 
+# When the retrieved incidents don't agree strongly enough: "abstain" answers
+# "unknown" and attaches the LLM's pick as an unverified suggestion; "llm"
+# uses the LLM's pick as the answer (the earlier behaviour).
+TRIAGE_LOW_CONFIDENCE = os.environ.get("TRIAGE_LOW_CONFIDENCE", "abstain").lower()
+
+# Drain3's learned templates. Each index (database + collection) needs its own
+# state file: the cluster ids stored in Mongo and Qdrant refer to it.
+DRAIN3_STATE_FILE = os.environ.get("DRAIN3_STATE_FILE", "drain3_state.bin")
+
 
 def require_all():
     required = ["MONGO_URI"]

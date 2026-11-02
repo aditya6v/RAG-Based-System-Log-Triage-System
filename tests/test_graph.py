@@ -94,3 +94,23 @@ def test_failure_goes_through_all_four_agents(fake_pipeline):
     # remediation sees the root cause
     assert "root cause: rc" in fake_pipeline[1]
     assert len(out["notes"]) == 4
+
+
+def test_weak_evidence_gives_unknown_with_suggestion_and_a_full_diagnosis(monkeypatch):
+    prompts = []
+
+    def fake_llm(prompt):
+        prompts.append(prompt)
+        return "filesystem_mount_failure" if "Respond with ONLY the category id" in prompt else \
+            '{"root_cause": "rc", "remediation": "fix"}'
+
+    monkeypatch.setattr(graph, "retrieve", lambda raw: {
+        "text": raw, "content": raw, "cluster_id": None, "template": raw,
+        "retrieved": [hit(0.70, "normal", "1"), hit(0.68, "kernel_crash", "2")]})
+    monkeypatch.setattr(graph, "chat_text", fake_llm)
+    monkeypatch.setattr(classify, "chat_text", fake_llm)
+    out = graph.build_graph().invoke({"raw_log": "never seen before", "notes": []})
+    assert (out["classification"], out["suggestion"]) == ("unknown", "filesystem_mount_failure")
+    assert out["severity"] == "medium" and out["route"] == "full"   # never silently dropped
+    rc_prompt = next(p for p in prompts if "root-cause analysis" in p)
+    assert "unknown: the past incidents did not match" in rc_prompt and "unverified" in rc_prompt

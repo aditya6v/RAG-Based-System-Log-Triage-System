@@ -328,15 +328,23 @@ function render(d){
   // verdict
   const verdict = el("div", "verdict sev-" + sev);
   const left = el("div");
-  const h = el("h2", null, d.category_name || nameOf(d.classification));
+  const unknown = d.classification === "unknown";
+  const h = el("h2", null, unknown ? "Category uncertain" : d.category_name || nameOf(d.classification));
   h.title = (CATS[d.classification] || {}).definition || "";
   const why = el("div", "why");
   why.append(el("span", "sevword", sev === "none" ? "no action" : sev + " severity"));
+  const conf = d.confidence != null ? ", confidence " + d.confidence.toFixed(3) : "";
   const how = d.triage_method === "vote"
     ? "decided by the retrieved incidents: " + Math.round((v.share || 0) * 100) + "% agree, best match " + (v.top_score ?? 0).toFixed(3)
-    : d.triage_method === "llm" ? "decided by the LLM (retrieved incidents disagreed or matched weakly)" : "";
+    : d.triage_method === "llm" ? "decided by the LLM (retrieved incidents disagreed or matched weakly)"
+    : unknown ? "no past incident matched closely enough to name a category" + conf : "";
   if (how) why.append(document.createTextNode(", " + how));
   left.append(h, why);
+  if (unknown && d.suggestion){
+    const s = el("div", "why");
+    s.append("LLM suggestion, unverified: ", el("b", null, nameOf(d.suggestion)));
+    left.appendChild(s);
+  }
   const copy = el("button", "tool", "Copy JSON"); copy.type = "button";
   copy.onclick = async () => {
     const ok = await store(() => navigator.clipboard.writeText(JSON.stringify(d, null, 2)).then(() => true), Promise.resolve(false));
@@ -461,7 +469,7 @@ function slimContext(d){
   return {
     raw_log: d.raw_log, text: d.text, cluster_id: d.cluster_id, template: d.template,
     classification: d.classification, category_name: d.category_name, severity: d.severity,
-    triage_method: d.triage_method, vote: d.vote, route: d.route,
+    triage_method: d.triage_method, vote: d.vote, route: d.route, confidence: d.confidence, suggestion: d.suggestion,
     root_cause: d.root_cause, remediation: d.remediation,
     retrieved: (d.retrieved || []).map(r => ({cluster_id: r.cluster_id, score: r.score, label: r.label,
                                              occurrence_count: r.occurrence_count, template: r.template})),

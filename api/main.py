@@ -89,6 +89,8 @@ class DiagnoseResponse(BaseModel):
     notes: list[str] = []
     timings_ms: dict[str, int] = {}
     total_ms: int
+    confidence: float | None = Field(None, description="Best similarity x vote share; below the abstain threshold the category is 'unknown'")
+    suggestion: str | None = Field(None, description="When classification is 'unknown': the LLM's pick, unverified")
     llm_calls: list[LLMCall] = []
     provider: str | None = Field(None, description="Provider that answered the last LLM call, if any")
 
