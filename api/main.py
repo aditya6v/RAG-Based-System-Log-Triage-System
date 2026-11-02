@@ -40,6 +40,17 @@ class DiagnoseRequest(BaseModel):
                                    "R30-M0-N9-C:J16-U01 RAS KERNEL FATAL data TLB error interrupt"])
 
 
+class LLMCall(BaseModel):
+    provider: str
+    model: str | None = None
+    ms: int
+    attempts: int = 1
+    failed_before: int = Field(0, description="Failed attempts on earlier providers or retries before this answer")
+    prompt_tokens: int | None = None
+    completion_tokens: int | None = None
+    redacted: bool = False
+
+
 class Incident(BaseModel):
     cluster_id: str | None = None
     score: float
@@ -78,6 +89,8 @@ class DiagnoseResponse(BaseModel):
     notes: list[str] = []
     timings_ms: dict[str, int] = {}
     total_ms: int
+    llm_calls: list[LLMCall] = []
+    provider: str | None = Field(None, description="Provider that answered the last LLM call, if any")
 
 
 class Category(BaseModel):
@@ -142,12 +155,16 @@ def diagnose(body: DiagnoseRequest, graph=Depends(get_graph)):
     # Plain `def`: FastAPI runs it in a worker thread, so the blocking graph
     # call doesn't stall the event loop.
     t0 = time.perf_counter()
+    from agents.llm import start_recording
+    calls = start_recording()
     state = graph.invoke({"raw_log": body.raw_log, "notes": []})
     cat = categories.get(state.get("classification", "")) or {}
     return DiagnoseResponse(
         **{k: v for k, v in state.items() if k in DiagnoseResponse.model_fields},
         category_name=cat.get("name", state.get("classification", "unknown")),
         total_ms=round((time.perf_counter() - t0) * 1000),
+        llm_calls=calls,
+        provider=calls[-1]["provider"] if calls else None,
     )
 
 

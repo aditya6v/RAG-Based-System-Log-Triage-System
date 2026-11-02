@@ -176,14 +176,49 @@ cut-off of 0.65 is used. This was measured on 5 questions only.
 In a browser, driven over the DevTools protocol, a diagnosis followed by two questions
 completed in 24.5 s, both replies streaming without errors (`docs/img/assistant.png`).
 
-## 6. Earlier baseline (synthetic data)
+## 6. LLM providers and embeddings (2026-11-03)
+
+**Tokens per call**, as reported by Ollama (`llama3.2:3b`), through the running API:
+
+| Request | LLM calls | Prompt tokens | Reply tokens |
+|---|---|---|---|
+| Normal line (`no_action` route) | 0 | 0 | 0 |
+| Full diagnosis, 4 demo lines | 2 | 476–699 | 103–121 |
+| Assistant turn, 3 turns on one diagnosis | 1 | 1,408–1,547 | 52–71 |
+
+Hosted providers count tokens with their own tokenizers, so their numbers will differ
+somewhat. Their free-tier limits will be read from each provider's console when the keys
+are added, and the provider comparison is pending until then.
+
+**Fallback behaviour** is covered by tests with faked HTTP responses (`tests/test_llm.py`):
+- 429 with `Retry-After`, then success
+- `Retry-After` capped at 10 s
+- 5xx three times, then the next provider
+- timeouts
+- 401 not retried
+- everything failing down to Ollama
+- streaming fallback before the first chunk, but not after it
+
+**In-process embeddings** (`scripts/compare_embeddings.py nomic-ai/nomic-embed-text-v1.5 100`):
+
+| Check | Result |
+|---|---|
+| Cosine between fastembed and Ollama vectors, 357 templates | mean 1.0000, minimum 1.0000 |
+| Same top-1 incident in the existing index, 100 test lines | 100/100 |
+| Same top-5 set | 100/100 |
+| Retrieval latency with fastembed, model loaded | 0.24 s (first query 3.4 s, model load) |
+
+So Ollama's `nomic-embed-text` is nomic v1.5, and the in-process copy can be used against
+the existing index. The one-time model download was 523 MB and took about 5 minutes.
+
+## 7. Earlier baseline (synthetic data)
 
 The first version of the project was tested on 10 fabricated OpenStack-style lines that were
 also in its index: accuracy 0.90, weighted F1 0.86, macro F1 0.71 (re-run on 2026-10-26 from the
 `midterm` tag). It is listed only for comparison; those numbers say little because the test
 lines were in the index.
 
-## 7. Reproducing
+## 8. Reproducing
 
 ```
 python -I scripts/sample_bgl.py data/bgl/BGL.log      # optional: regenerate sample and test set

@@ -88,11 +88,21 @@ def test_log_text_stays_in_the_context_not_in_the_conversation():
 def test_stream_reply_events(monkeypatch):
     sent = {}
     monkeypatch.setattr(chat, "retrieve", lambda q, limit: {"retrieved": RELATED})
-    monkeypatch.setattr(chat, "chat_stream", lambda m: sent.setdefault("m", m) and iter(["The mount ", "failed."]))
+    monkeypatch.setattr(chat, "chat_stream", lambda m, record_to=None: sent.setdefault("m", m) and iter(["The mount ", "failed."]))
     events = list(chat.stream_reply([user("q")], DIAGNOSIS))
     assert events[0]["type"] == "context" and events[0]["related"][0]["cluster_id"] == "166"
     assert "".join(e["text"] for e in events if e["type"] == "delta") == "The mount failed."
     assert events[-1] == {"type": "done"}
+
+
+def test_done_event_reports_provider_and_tokens(monkeypatch):
+    def fake_stream(messages, record_to=None):
+        yield "answer"
+        record_to.append({"provider": "groq", "prompt_tokens": 1500, "completion_tokens": 80})
+    monkeypatch.setattr(chat, "retrieve", lambda q, limit: {"retrieved": []})
+    monkeypatch.setattr(chat, "chat_stream", fake_stream)
+    done = list(chat.stream_reply([user("q")], None))[-1]
+    assert done == {"type": "done", "provider": "groq", "prompt_tokens": 1500, "completion_tokens": 80}
 
 
 def test_stream_reply_reports_failures_in_band(monkeypatch):

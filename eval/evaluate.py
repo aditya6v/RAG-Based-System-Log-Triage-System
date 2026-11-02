@@ -58,7 +58,7 @@ def _retry(fn, *args, tries: int = 3):
 
 def run(path: str, limit: int | None, use_llm: bool, resume: str | None = None) -> Path:
     import config
-    from agents import classify
+    from agents import classify, llm
     from agents.retrieval import retrieve
 
     config.require_all()
@@ -96,12 +96,14 @@ def run(path: str, limit: int | None, use_llm: bool, resume: str | None = None) 
             "seconds": {"retrieval": round(t_retrieval, 3)},
         }
         if use_llm:
+            calls = llm.start_recording()
             t0 = time.perf_counter()
             row["pred"]["llm_only"] = _retry(classify.llm_classify, r["text"])
             row["seconds"]["llm_only"] = round(time.perf_counter() - t0, 3)
             t0 = time.perf_counter()
             row["pred"]["llm_rag"] = _retry(classify.llm_classify, r["text"], r["retrieved"])
             row["seconds"]["llm_rag"] = round(time.perf_counter() - t0, 3)
+            row["llm_calls"] = calls  # which provider answered each call, tokens
         rows.append(row)
         with open(partial, "a", encoding="utf-8") as f:
             f.write(json.dumps(row) + "\n")
@@ -114,9 +116,9 @@ def run(path: str, limit: int | None, use_llm: bool, resume: str | None = None) 
             "eval_file": path,
             "n": len(rows),
             "used_llm": use_llm,
-            "llm_provider": config.LLM_PROVIDER,
-            "chat_model": config.OLLAMA_CHAT_MODEL if config.LLM_PROVIDER == "ollama" else config.GEMINI_CHAT_MODEL,
-            "embed_model": config.OLLAMA_EMBED_MODEL if config.LLM_PROVIDER == "ollama" else config.GEMINI_EMBED_MODEL,
+            "llm_provider_chain": llm.provider_chain(),
+            "chat_model": ", ".join(sorted({c["model"] for r in rows for c in r.get("llm_calls", [])})) or None,
+            "embed_model": config.OLLAMA_EMBED_MODEL if config.EMBED_PROVIDER == "ollama" else config.GEMINI_EMBED_MODEL,
             "qdrant_collection": config.QDRANT_COLLECTION,
             "total_seconds": round(sum(sum(r["seconds"].values()) for r in rows), 1),  # summed per example, so resumed runs add up
             "rows": rows,
@@ -213,6 +215,18 @@ def report(results_path: Path) -> str:
         vals = sorted(s[k] for s in secs if k in s)
         if vals:
             md.append(f"- {k}: median {vals[len(vals) // 2]:.2f}, p90 {vals[int(len(vals) * 0.9)]:.2f}, max {vals[-1]:.2f}")
+
+    calls = [c for r in rows for c in r.get("llm_calls", [])]
+    if calls:
+        md += ["", "## LLM calls by provider", "",
+               "| provider | model | calls | after a failed provider | prompt tokens | completion tokens |",
+               "|---|---|---|---|---|---|"]
+        for prov, model in sorted({(c["provider"], c["model"]) for c in calls}, key=str):
+            mine = [c for c in calls if (c["provider"], c["model"]) == (prov, model)]
+            fell = sum(1 for c in mine if c.get("failed_before"))
+            pt = sum(c.get("prompt_tokens") or 0 for c in mine)
+            ct = sum(c.get("completion_tokens") or 0 for c in mine)
+            md.append(f"| {prov} | {model} | {len(mine)} | {fell} | {pt} | {ct} |")
 
     text = "\n".join(md) + "\n"
     results_path.with_suffix(".md").write_text(text, encoding="utf-8")

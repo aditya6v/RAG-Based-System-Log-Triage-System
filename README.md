@@ -28,12 +28,44 @@ flowchart LR
 2. **Triage.** The retrieved incidents vote on one of 8 categories (`bgl/categories.json`).
    If the vote is not confident, the LLM decides instead.
 3. **Router.** The category's severity decides the path. Normal lines stop here with no LLM call.
-4. **Root cause** and **remediation.** Two prompts to `llama3.2:3b` via Ollama. The closest
-   match is passed as primary evidence. Other matches are passed only if they are similar
-   enough and share the same category.
+4. **Root cause** and **remediation.** Two LLM prompts. The closest match is passed as
+   primary evidence. Other matches are passed only if they are similar enough and share
+   the same category.
 
 The index is built offline. A sample of the log is parsed into 357 templates, stored in
 MongoDB and embedded into Qdrant.
+
+### LLM providers
+
+LLM calls go through a chain set by `LLM_PROVIDER_CHAIN`, by default
+`groq,openrouter,ollama`.
+- **Fallback.** 429, 5xx and timeouts are retried twice (honouring `Retry-After`, capped
+  at 10 s), then the next provider is tried. A bad key or unknown model moves on at once.
+- **Offline last resort.** The local Ollama model (`llama3.2:3b`) needs no key or network,
+  so a demo keeps working when the hosted free tiers are exhausted or offline.
+- **Accounting.** Every response says which provider answered, with token counts
+  (`llm_calls`, `provider`).
+
+**Privacy.** Before text goes to a hosted provider, `agents/redact.py` replaces:
+- IP addresses
+- BGL node locations (`R23-M1-N8-I:J18-U01`) and I/O host names (`bglio318`)
+- user names in paths (`/home/<user>`, `/p/gb1/<user>`)
+- hardware serials, e-mail addresses and long tokens
+
+It's pattern matching, so an identifier in an unusual format would get through. Set
+`REDACT_HOSTED=0` to turn it off. Ollama runs locally and always sees the original text.
+
+**Embeddings don't fall back.** The index and the queries must use the same model, so
+embeddings come from one provider only: Ollama's `nomic-embed-text`, or the same model
+in-process with `EMBED_PROVIDER=fastembed` (no Ollama needed). The two were checked against
+each other (`scripts/compare_embeddings.py`):
+- cosine 1.0000 on all 357 templates
+- the same top-5 incidents for 100 of 100 test lines
+
+**Size of calls**, measured on the local model:
+- A full diagnosis makes 2 LLM calls with 476–699 prompt tokens and about 110 reply tokens
+  in total. A normal line makes none.
+- An assistant turn is about 1,400–1,550 prompt tokens.
 
 ### Assistant
 
@@ -149,14 +181,19 @@ All settings are read from `.env` (see `.env.example`).
 | `MONGO_DB_NAME` | set in `.env.example` | Database for this index |
 | `QDRANT_URL`, `QDRANT_API_KEY` | required | Qdrant cluster |
 | `QDRANT_COLLECTION` | set in `.env.example` | Collection for this index |
-| `LLM_PROVIDER` | `ollama` | `ollama` or `gemini` |
-| `OLLAMA_CHAT_MODEL`, `OLLAMA_EMBED_MODEL` | `llama3.2:3b`, `nomic-embed-text` | Models. The embedding model must match the one the index was built with |
+| `LLM_PROVIDER_CHAIN` | `groq,openrouter,ollama` | Chat providers in order; hosted ones without a key are skipped. If unset, the older `LLM_PROVIDER` value is used |
+| `GROQ_API_KEY`, `GROQ_MODEL` | empty, `llama-3.3-70b-versatile` | Groq. Model names on free tiers change; check the console |
+| `OPENROUTER_API_KEY`, `OPENROUTER_MODEL` | empty, `meta-llama/llama-3.3-70b-instruct:free` | OpenRouter |
+| `REDACT_HOSTED` | `1` | Mask identifiers before text goes to a hosted provider |
+| `LLM_TIMEOUT_S` | `30` | Per-request timeout for hosted providers |
+| `OLLAMA_CHAT_MODEL`, `OLLAMA_EMBED_MODEL` | `llama3.2:3b`, `nomic-embed-text` | Local models. The embedding model must match the one the index was built with |
+| `EMBED_PROVIDER` | `ollama` | `ollama` or `fastembed` (same model, in-process) |
 | `OLLAMA_KEEP_ALIVE` | `30m` | How long Ollama keeps models loaded |
 
 ## Tests and evaluation
 
 ```powershell
-python -m pytest -q                                 # 68 tests; no database or LLM needed
+python -m pytest -q                                 # 95 tests; no database, LLM or network needed
 python -m eval.evaluate eval/bgl_eval.jsonl --no-llm   # retrieval-only methods, about 3 min
 python -m eval.evaluate eval/bgl_eval.jsonl         # all methods, about 25 min on CPU
 python scripts/run_samples.py                       # five demo lines through the API

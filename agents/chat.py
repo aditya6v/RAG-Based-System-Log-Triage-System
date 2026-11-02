@@ -173,8 +173,14 @@ def stream_reply(history: list[dict], ctx: dict | None):
         messages = build_messages(history, ctx, related)
         yield {"type": "context", "diagnosis": bool(ctx), "related": [
             {k: r.get(k) for k in ("cluster_id", "score", "label", "template")} for r in related]}
-        for chunk in chat_stream(messages):
+        calls: list[dict] = []
+        for chunk in chat_stream(messages, record_to=calls):
             yield {"type": "delta", "text": chunk}
-        yield {"type": "done"}
+        done = {"type": "done"}
+        if calls:
+            c = calls[-1]
+            done.update(provider=c["provider"], prompt_tokens=c.get("prompt_tokens"),
+                        completion_tokens=c.get("completion_tokens"))
+        yield done
     except Exception as e:  # the stream has already started; report in-band
         yield {"type": "error", "message": f"{type(e).__name__}: {e}"}

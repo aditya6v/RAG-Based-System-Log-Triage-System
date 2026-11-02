@@ -96,6 +96,20 @@ and 5 times labelled KERNPROG. No classifier can separate these, so KERNPROG is 
 10. **The assistant is only spot-checked.** Database facts were answered correctly in the
     checks, but it has treated generated text as evidence (`docs/EVALUATION.md`, section 5).
 
+## LLM providers
+
+| Decision | Reason |
+|---|---|
+| A chain: Groq, then OpenRouter, then local Ollama | Hosted models are larger and faster, but free tiers have small rate limits and go down. Ollama is the last resort that needs no key or network, so a demo can't fail on a quota |
+| Retry 429/5xx/timeouts twice, then move on; don't retry 401/404/400 | Waiting can fix overload, but not a bad key or a retired model name |
+| Honour `Retry-After`, capped at 10 s | Respects the provider's rate limit without stalling a request for minutes |
+| Plain `httpx` against the OpenAI-compatible endpoints | Groq and OpenRouter share one request format, and no extra SDK is needed |
+| Redact before hosted calls, not for Ollama | Log text names nodes, IPs and users. Local inference never leaves the machine |
+| No client-side rate limiter yet | Measured: a full diagnosis is at most about 810 tokens and an assistant turn about 1,600. Whether that fits a free tier depends on its current limits, which will be read from the console. 429s are already retried and fall back |
+| Embeddings never fall back between models | Vectors from different models are not comparable; a silent fallback would corrupt retrieval |
+| fastembed as an in-process option, only after a check | Checked against Ollama: identical vectors (cosine 1.0000) and identical retrieval on 100 lines |
+| Streaming calls record usage into a list passed in, not a context variable | Starlette runs each step of a streaming response in a fresh copy of the request context, so a context variable set in the first step was lost. Found in a live test when the provider was missing from the `done` event |
+
 ## Assistant
 
 A follow-up conversation about a diagnosis, on the same local model (`agents/chat.py`,

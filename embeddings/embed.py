@@ -73,7 +73,7 @@ def run(rebuild: bool = False):
                 "label": majority(doc.get("label_counts")),
             },
         ))
-        if config.LLM_PROVIDER == "gemini":
+        if config.EMBED_PROVIDER == "gemini":
             time.sleep(0.5)  # stay under Gemini free-tier rate limits
         if len(batch) >= BATCH_SIZE or i == len(to_embed):
             client.upsert(collection_name=config.QDRANT_COLLECTION, points=batch)

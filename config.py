@@ -35,6 +35,30 @@ GEMINI_CHAT_MODEL = os.environ.get("GEMINI_CHAT_MODEL", "gemini-2.0-flash")
 GEMINI_EMBED_MODEL = os.environ.get("GEMINI_EMBED_MODEL", "text-embedding-004")
 
 LLM_PROVIDER = os.environ.get("LLM_PROVIDER", "ollama").lower()
+
+# Chat providers, tried in order. Hosted ones without an API key are skipped,
+# so with no keys this is Ollama only. If unset, falls back to LLM_PROVIDER
+# (the older single-provider setting) for existing .env files.
+LLM_PROVIDER_CHAIN = os.environ.get("LLM_PROVIDER_CHAIN") or os.environ.get("LLM_PROVIDER") or "groq,openrouter,ollama"
+# Embeddings never fall back between models: index and queries must use the
+# same one. Default: Ollama (or Gemini, if that was the single provider).
+EMBED_PROVIDER = os.environ.get("EMBED_PROVIDER", "gemini" if LLM_PROVIDER == "gemini" else "ollama").lower()
+# EMBED_PROVIDER=fastembed runs the same nomic model in-process (no Ollama).
+# Verified to give the same vectors as Ollama's nomic-embed-text; see
+# scripts/compare_embeddings.py before changing the model name.
+FASTEMBED_MODEL = os.environ.get("FASTEMBED_MODEL", "nomic-ai/nomic-embed-text-v1.5")
+FASTEMBED_CACHE_DIR = os.environ.get("FASTEMBED_CACHE_DIR", "data/fastembed_cache")
+
+GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
+# Model names on free tiers change; check the provider's model list.
+GROQ_MODEL = os.environ.get("GROQ_MODEL", "llama-3.3-70b-versatile")
+OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
+OPENROUTER_MODEL = os.environ.get("OPENROUTER_MODEL", "meta-llama/llama-3.3-70b-instruct:free")
+LLM_TIMEOUT_S = float(os.environ.get("LLM_TIMEOUT_S", "30"))
+# Mask IPs, node and host names, user names and tokens before text goes to a
+# hosted provider (agents/redact.py). Ollama is local and never redacted.
+REDACT_HOSTED = os.environ.get("REDACT_HOSTED", "1") != "0"
+
 OLLAMA_BASE_URL = os.environ.get("OLLAMA_BASE_URL", "http://localhost:11434")
 OLLAMA_CHAT_MODEL = os.environ.get("OLLAMA_CHAT_MODEL", "llama3.2:3b")
 OLLAMA_EMBED_MODEL = os.environ.get("OLLAMA_EMBED_MODEL", "nomic-embed-text")
@@ -50,7 +74,7 @@ EMBEDDING_DIM = 768
 
 def require_all():
     required = ["MONGO_URI"]
-    if LLM_PROVIDER == "gemini":
+    if EMBED_PROVIDER == "gemini":
         required.append("GEMINI_API_KEY")
     for name in required:
         _require(name)
