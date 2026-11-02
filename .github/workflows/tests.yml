@@ -1,0 +1,29 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # No database, LLM or network: every external service is faked in the tests.
+      - name: Unit and API tests
+        run: python -m pytest -q
+
+      # Rebuilds the evaluation report from saved predictions (no LLM calls) and
+      # fails if the headline numbers drift from the ones quoted in the README.
+      - name: Evaluation report from saved predictions
+        run: python -m eval.check_report eval/results/20261026-153603.json

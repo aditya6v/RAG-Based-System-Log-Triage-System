@@ -1,5 +1,7 @@
 # RAG-Based System Log Triage
 
+[![tests](https://github.com/aditya6v/RAG-Based-System-Log-Triage-System/actions/workflows/tests.yml/badge.svg)](https://github.com/aditya6v/RAG-Based-System-Log-Triage-System/actions/workflows/tests.yml)
+
 Classifies a single system log line, decides whether it needs attention, and for real
 alerts suggests a likely root cause and a fix. Classification is done by retrieving similar
 past log events. A local LLM writes the explanation from those events.
